@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="col-md-12">
+      <!-- Column -->
+      <div class="main-card-profile">
+        <img
+          class="card-img-top"
+          src="https://es.gamewallpapers.com/img_script/wallpaper_dir/img.php?src=wallpaper_league_of_legends_120_2560x1080.jpg&height=506&sharpen"
+          alt="Card image cap"
+        />
+        <div class="card-body little-profile text-center">
+          <div class="pro-img">
+            <div style="width: 150px; height: 150px; margin: 0 auto" *ngIf="loadComponentPhoto">
+              <jhi-file-drop-area-custom
+                class="tooltip-options-profile"
+                title="fotografia"
+                name="fotografia"
+                [images]="true"
+                [endpoint]="'foto-persona'"
+                [maxFileSize]="20"
+                [imageStyle]="{ height: '8.95em', width: '8.99em' }"
+                [hideName]="true"
+                [filesId]="fileFoto && fileFoto.length ? fileFoto : []"
+                [maxFiles]="1"
+              >
+              </jhi-file-drop-area-custom>
+              <div class="navbar-profile-info" *ngIf="isAuthenticated() === true && account" id="profileInfo">
+                <div class="row">
+                  <div class="profile-name" (click)="abrirPerfil()">
+                    <span class="center-items">{{ account.nickName }}</span>
+                  </div>
+                </div>
+                <div class="profile-controls">
+                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                    <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+                    <fa-icon [icon]="'images'"></fa-icon>
+                    <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-new-photo"></span>
+                  </button>
+                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                    <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+                    <fa-icon [icon]="'user'"></fa-icon>
+                    <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-view-photo"></span>
+                  </button>
+                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                    <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+                    <fa-icon [icon]="'cogs'"></fa-icon>
+                    <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-view-options"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="user-details">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="m-b-0" *ngIf="account">{{ account ? account.nickName : '' }}</h3>
+                <p>Web Designer &amp; Developer</p>
+                <button type="button" class="btn btn-primary" data-abc="true">
+                  Seguir
+                  <fa-icon [icon]="'user-plus'" size="1x"></fa-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="row text-center m-t-20">
+              <div class="col-4 m-t-20">
+                <fa-icon [icon]="'globe-americas'" size="1x"></fa-icon>
+                <h3 class="m-b-0 font-light">10434</h3>
+                <small jhiTranslate="damner-user-profile.user-details.user-post"></small>
+              </div>
+              <div class="col-4 m-t-20">
+                <fa-icon [icon]="'users'" size="1x"></fa-icon>
+                <h3 class="m-b-0 font-light">434 k</h3>
+                <small jhiTranslate="damner-user-profile.user-details.user-followers">Followers</small>
+              </div>
+              <div class="col-4 m-t-20">
+                <fa-icon [icon]="'user-friends'" size="1x"></fa-icon>
+                <h3 class="m-b-0 font-light">5454</h3>
+                <small jhiTranslate="damner-user-profile.user-details.user-following">Following</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div><mat-divider></mat-divider></div>
+  </div>
+</div>

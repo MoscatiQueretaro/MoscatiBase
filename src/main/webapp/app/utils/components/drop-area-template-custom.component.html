@@ -1,0 +1,76 @@
+<div
+  class="row"
+  [class]="{ dragging: dragging }"
+  style="text-align: center"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  [style]="{ border: dragging ? '3px dashed' : 'none' }"
+>
+  <div class="col-12">
+    <div [style]="imageStyle" style="margin: 0 auto">
+      <jhi-single-file-template
+        class="m-1"
+        *ngFor="let file of archivos; trackBy: trackId"
+        [file]="file"
+        [imageStyleProfile]="imageStyle"
+        [borderImageType]="borderImage"
+        [view]="_view"
+        [download]="_download"
+        [delete]="_delete"
+        [showName]="!_hideName"
+        (removePress)="eliminarArchivo(file.id)"
+        [endpoint]="_endpoint"
+      >
+      </jhi-single-file-template>
+      <div
+        class="button-container m-1"
+        [style]="imageStyle"
+        *ngIf="addFile && ((this.maxFiles !== undefined && this.archivos && this.archivos.length < this.maxFiles) || !this.maxFiles)"
+      >
+        <button
+          type="button"
+          class="btn btn-success profile-add-photo w-100 h-100"
+          style="border: 2px dashed"
+          (click)="agregarArchivo()"
+          [disabled]="loading || (archivos && _maxFiles && archivos.length >= _maxFiles)"
+        >
+          <fa-icon [icon]="'images'" [spin]="loading" size="2x" [fixedWidth]="true"></fa-icon>
+          <br /><span class="small" style="white-space: pre-line">Haz click aqui o arrastra una imagen</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 text-right">
+    <input
+      class="custom-file-input"
+      type="file"
+      id="file_foto"
+      (change)="handleData($any($event.target).files)"
+      [attr.accept]="typesString"
+      #inputFile
+      [hidden]="true"
+      multiple
+    />
+  </div>
+</div>
+
+<div class="row">
+  <ng-container *ngIf="!archivos.length" class="btn-group d-flex flex-row">
+    <!--    <button-->
+    <!--      [class]="{'btn-fill': addFile === true}"-->
+    <!--      type="button" class="btn flex-grow-1 btn-success"-->
+    <!--      (click)="agregaArchivo()">-->
+    <!--      <fa-icon icon="photo-video"></fa-icon>-->
+    <!--      <span>add</span>-->
+    <!--    </button>-->
+
+    <!--    <button-->
+    <!--      [ngClass]="{'btn-fill': webcamFile === true}"-->
+    <!--      type="button" class="btn flex-grow-1 btn-primary"-->
+    <!--      (click)="tomaFoto()">-->
+    <!--      <fa-icon icon="camera"></fa-icon>-->
+    <!--      <span jhiTranslate="biometricos-solicitud-interesado.tomarFotografia"></span>-->
+    <!--    </button>-->
+  </ng-container>
+</div>

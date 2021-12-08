@@ -1,0 +1,83 @@
+// Creates a container object for a light theme to be given to individual component theme mixins.
+@function create-theme(
+  $filtro,
+  $primary,
+  $secondary,
+  $success,
+  $info,
+  $warning,
+  $danger,
+  $background-main,
+  $background-main-card,
+  $default-border,
+  $default-scrollbar-bg,
+  $default-scrollbar-hover,
+  $default-divider,
+  $default-growl-color,
+  $default-button-color,
+  $default-table-header,
+  $default-table-body,
+  $color-footer,
+  $color-body,
+  $default-navbar,
+  $default-bg-input,
+  $default-bg-item,
+  $default-color-item,
+  $sidebar-bg-color,
+  $wizard-bg-color-header,
+  $bg-input-disabled,
+  $calendar-header-bg,
+  $calendar-body-bg,
+  $card-bg,
+  $color-border-loader,
+  $color-navbar,
+  $input-color,
+  $input-background-focus,
+  $shadow-color
+) {
+  @return (
+    filtro: $filtro,
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    background-main: $background-main,
+    background-main-card: $background-main-card,
+    border-color: $default-border,
+    scrollbar-bg: $default-scrollbar-bg,
+    scrollbar-hover: $default-scrollbar-hover,
+    divider: $default-divider,
+    growl-color: $default-growl-color,
+    button-color: $default-button-color,
+    table-header: $default-table-header,
+    table-body: $default-table-body,
+    color-footer: $color-footer,
+    color-body: $color-body,
+    color-navbar: $default-navbar,
+    color-bg-input: $default-bg-input,
+    color-bg-item: $default-bg-item,
+    color-color-item: $default-color-item,
+    sidebar-bg-color: $sidebar-bg-color,
+    wizard-bg-color-header: $wizard-bg-color-header,
+    bg-input-disabled: $bg-input-disabled,
+    calendar-header-bg: $calendar-header-bg,
+    calendar-body-bg: $calendar-body-bg,
+    card-bg: $card-bg,
+    color-border-loaderbg: $color-border-loader,
+    color-text-navbar: $color-navbar,
+    input-color: $input-color,
+    input-background-focus: $input-background-focus,
+    shadow-color: $shadow-color
+  );
+}
+
+// Creates a container object for a light theme to be given to individual component theme mixins.
+@function create-size-theme($base-size, $btn-vertical-padding, $btn-horizontal-padding) {
+  @return (base-size: $base-size, btn-vertical-padding: $btn-vertical-padding, btn-horizontal-padding: $btn-horizontal-padding);
+}
+
+@function convertEm2Pixels($value) {
+  @return calc(calc(16px / #{1em}) * #{$value});
+}

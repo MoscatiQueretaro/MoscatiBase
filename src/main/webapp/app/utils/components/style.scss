@@ -1,0 +1,370 @@
+@import '~@angular/material/theming';
+
+.files-mini-photo {
+  float: left;
+  position: relative;
+  overflow: visible;
+  width: 140px;
+  height: 130px;
+  border-radius: 5%;
+  margin: 3px;
+  padding-top: 5px;
+
+  .image-photo {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+  }
+  .image-file {
+    width: 100%;
+    height: 120px;
+    object-fit: scale-down;
+  }
+
+  .button-download {
+    width: 25px;
+    height: 25px;
+    border: 0;
+    border-radius: 15px;
+    opacity: 0.75;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    margin-right: 3px;
+    float: right;
+  }
+
+  .loader-container {
+    border: none;
+    .loader-image-container {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      img {
+        height: 120px;
+      }
+    }
+  }
+}
+
+.files-photo-scanner {
+  float: left;
+  position: relative;
+  overflow: visible;
+  width: 80%;
+  height: 190px;
+  border-radius: 5%;
+  margin: 3px;
+  display: flex;
+
+  .image-photo {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+  }
+
+  .icon-selected {
+    position: absolute;
+    display: none;
+    height: 190px;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &.selected {
+    .icon-selected {
+      display: flex;
+    }
+  }
+}
+
+.files-principal {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  width: 180px;
+  height: 180px;
+  border-radius: 5%;
+  border: 1px solid #cfcfcf;
+  margin: 3px;
+  img {
+    width: 100%;
+    position: absolute;
+    bottom: -100%;
+    margin: auto;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+  }
+}
+
+.modal-header-pdf {
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  padding: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  color: white;
+}
+
+.modal-body-documents {
+  height: 100vh;
+  width: 100%;
+  padding: 50px 0 0 0;
+  .documents-container {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img,
+    video {
+      max-width: 100%;
+      max-height: 100%;
+      outline: none;
+    }
+    img {
+      object-fit: contain;
+    }
+  }
+}
+
+.relleno {
+  width: 100%;
+  height: 50px;
+}
+
+.modalPDF {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  overflow: auto;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  pdf-viewer {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+.framePDF {
+  height: inherit;
+  width: calc(100vh - 20px);
+}
+
+.button-pdf {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  color: white;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.control {
+  position: fixed;
+  right: 20px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
+  &.control-plus {
+    bottom: 90px;
+  }
+  &.control-minus {
+    bottom: 20px;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.menu-uploads {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+  .title {
+    font-size: 1.3rem;
+    .button-close-menu {
+      background-color: transparent;
+      height: 1.3rem;
+      border: none;
+      outline: none;
+      float: right;
+    }
+  }
+  .element-file {
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    .files-mini-photo-menu {
+      float: left;
+      position: relative;
+      overflow: visible;
+      width: 30px;
+      height: 30px;
+      border-radius: 5%;
+      margin: 3px;
+
+      .image-photo {
+        width: 100%;
+        height: 30px;
+        object-fit: cover;
+      }
+      .image-file {
+        width: 100%;
+        height: 30px;
+        object-fit: scale-down;
+      }
+
+      .loader-container {
+        border: none;
+        .loader-image-container {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          img {
+            height: 30px;
+          }
+        }
+      }
+    }
+    .name-file {
+      width: calc(100% - 30px);
+    }
+  }
+}
+
+.context-menu-files {
+  position: absolute;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+  z-index: 1;
+  .item {
+    padding: 8px 12px 8px 12px;
+    cursor: pointer;
+    fa-icon {
+      margin: 0 5px 0 5px;
+    }
+  }
+}
+
+//Table loader styles
+@-webkit-keyframes moving-gradient {
+  0% {
+    background-position: -250px 0;
+  }
+  100% {
+    background-position: 250px 0;
+  }
+}
+
+@mixin files-styles-theme($theme) {
+  $success: map-get($theme, success);
+  $info: map-get($theme, info);
+  $danger: map-get($theme, danger);
+  $growl-color: map-get($theme, growl-color);
+  $border-color: map-get($theme, border-color);
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, secondary);
+  $border: map-get($theme, border-color);
+  $main-card-color: map-get($theme, background-main-card);
+
+  .image-container {
+    &:hover {
+      background-color: rgba($primary, 0.1);
+      border: none;
+    }
+    .loader-span {
+      background: linear-gradient(to right, rgba($border, 0.9) 20%, rgba($border, 0.3) 50%, rgba($border, 0.9) 80%);
+    }
+  }
+
+  //.button-delete {
+  //    background: $danger;
+  //    color: $growl-color;
+  //}
+  //
+  //.dragging {
+  //    background-color: rgba($primary, 0.07);
+  //}
+  //
+  //.button-download {
+  //    background: $success;
+  //    color: $growl-color;
+  //}
+  //
+  //.button-view {
+  //    background: $info;
+  //    color: $growl-color;
+  //}
+
+  .menu-uploads {
+    border-color: $primary;
+    background-color: $main-card-color;
+    .title {
+      background-color: $primary;
+      color: $growl-color;
+      .button-close-menu {
+        color: $growl-color;
+      }
+    }
+    .element-file {
+      border-bottom-color: $border;
+    }
+  }
+  .context-menu-files {
+    background-color: $main-card-color;
+    .item {
+      &:hover {
+        background-color: rgb($primary, 0.1);
+        color: $primary;
+      }
+    }
+  }
+}
+
+@mixin files-size-theme($theme) {
+  $base-size: map-get($theme, base-size);
+  $image-container-size: calc(#{$base-size} * 7);
+  $button-image-size: calc(#{$base-size} * 1.1);
+
+  .image-container,
+  .button-container {
+    width: $image-container-size;
+    height: $image-container-size;
+  }
+
+  .image-container {
+    .buttons-container {
+      width: $image-container-size;
+      button {
+        width: $button-image-size;
+        height: $button-image-size;
+      }
+    }
+  }
+}

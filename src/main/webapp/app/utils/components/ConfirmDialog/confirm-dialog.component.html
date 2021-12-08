@@ -1,0 +1,20 @@
+<div *ngIf="data" class="modal" role="dialog" [style]="visible()">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-shadow pl-2 pr-2">
+      <div class="modal-header justify-content-center">
+        <h4 class="modal-title m-0 text-center">{{ data.title }}</h4>
+      </div>
+      <div class="modal-body text-center">
+        <p class="m-0" [innerHTML]="data.message"></p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-fill btn-secondary" data-dismiss="modal" (click)="data.cancel()" *ngIf="!hideCancel">
+          <span class="fa fa-ban"></span>&nbsp;<span>{{ data.textCancel ? data.textCancel : 'Cancelar' }}</span>
+        </button>
+        <button type="submit" class="btn btn-fill btn-primary" (click)="data.accept()" *ngIf="!hideAccept">
+          <span class="fa fa-check"></span>&nbsp;<span>{{ data.textAccept ? data.textAccept : 'Aceptar' }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

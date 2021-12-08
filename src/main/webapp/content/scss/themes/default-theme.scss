@@ -1,0 +1,112 @@
+@import 'functions';
+
+//Imagen del logo
+$filtro: none;
+
+//Colores basicos
+$primary: #2366d1;
+$secondary: #95a5a6;
+$success: #23a938;
+$info: #209cee;
+$warning: #ff4b0a;
+$danger: #ff2832;
+
+//Colores de background y tarjeta principal
+$main-background: #e5e5e5;
+$main-card-background: #ffffff;
+
+//Color por default de el borde de los elementos
+$border-background: #888888;
+
+//Color por default de el shadow de los elementos
+$shadow-color: #888888;
+
+//Colores de scrollbar
+$scrollbar-background: #aaaaaa;
+$scrollbar-background-hover: #999999;
+
+//Color de divisor
+$divider-background: #c3c3c3;
+
+//Color de growl
+$growl-color: #ffffff;
+
+//Colores de tablas
+$table-header-color: #505050;
+$table-body-color: #707070;
+
+//Color del footer
+$footer-background: #dddddd;
+
+//Colores del body
+$body-color: #212529;
+
+//Colores del navbar
+$navbar-background: #fefefe;
+$navbar-color: #212529;
+
+//Colores de input
+$input-background: #fff;
+$input-background-focus: #efefef;
+$input-disabled-background: #f5f5f5;
+$input-color: #212529;
+
+//Color de sidebar
+$sidebar-background: #262626;
+
+//Colores de wizard
+$wizard-header-background: #fff;
+
+//Colores de calendario
+$calendar-header-background: #fff;
+$calendar-body-background: #f5f5f5;
+
+//Colores de tarjetas
+$card-background: #fafafa;
+
+//Colores de loaders
+$table-loader-background: #ccc;
+
+//Colores de dropdown
+$item-background: #cae5ea;
+$item-color: #363636;
+
+//Color de botones
+$button-color: #ffffff;
+
+$default-theme: create-theme(
+  $filtro,
+  $primary,
+  $secondary,
+  $success,
+  $info,
+  $warning,
+  $danger,
+  $main-background,
+  $main-card-background,
+  $border-background,
+  $scrollbar-background,
+  $scrollbar-background-hover,
+  $divider-background,
+  $growl-color,
+  $button-color,
+  $table-header-color,
+  $table-body-color,
+  $footer-background,
+  $body-color,
+  $navbar-background,
+  $input-background,
+  $item-background,
+  $item-color,
+  $sidebar-background,
+  $wizard-header-background,
+  $input-disabled-background,
+  $calendar-header-background,
+  $calendar-body-background,
+  $card-background,
+  $table-loader-background,
+  $navbar-color,
+  $input-color,
+  $input-background-focus,
+  $shadow-color
+);

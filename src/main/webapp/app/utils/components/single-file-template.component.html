@@ -1,0 +1,43 @@
+<div class="image-container d-flex flex-column rounded" *ngIf="file" [style]="imageStyle">
+  <div class="buttons-container" *ngIf="!file.loading">
+    <!--        <button type="button" *ngIf="view && showViewButton()" class="button-view" (click)="verArchivo()"-->
+    <!--        >-->
+    <!--        <fa-icon icon="eye"></fa-icon>-->
+    <!--        </button>-->
+    <!--        <button type="button" *ngIf="download" class="button-download" (click)="downloadFile()"-->
+    <!--        >-->
+    <!--        <fa-icon icon="download"></fa-icon>-->
+    <!--        </button>-->
+    <button type="button" *ngIf="delete" class="button-delete" (click)="removeFile()">
+      <fa-icon icon="sync-alt"></fa-icon>
+    </button>
+  </div>
+  <div
+    class="image"
+    [class]="{
+      'image-with-name': showName,
+      'h-100': !showName,
+      'd-flex': file.loading,
+      'justify-content-center': file.loading,
+      'align-items-center': file.loading
+    }"
+  >
+    <!--        <img class="w-100 h-100" *ngIf="!file.loading" [class]="isImage()" [src]="getImage()" alt="Archivo"/>-->
+    <img
+      *ngIf="!file.loading"
+      [style]="imageStyle"
+      [src]="getImage()"
+      [class]="borderImageType === 'rounded' ? 'rounded-circle' : ''"
+      alt="Archivo"
+    />
+    <div class="loader-span rounded" *ngIf="file.loading"></div>
+  </div>
+  <div
+    class="name text-truncate text-center"
+    *ngIf="showName"
+    [class]="{ 'd-flex': file.loading, 'justify-content-center': file.loading, 'align-items-center': file.loading }"
+  >
+    <span *ngIf="!file.loading">{{ file.nombre }}</span>
+    <div class="loader-span rounded" *ngIf="file.loading"></div>
+  </div>
+</div>

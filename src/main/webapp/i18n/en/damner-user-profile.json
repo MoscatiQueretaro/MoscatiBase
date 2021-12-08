@@ -1,0 +1,22 @@
+{
+  "damner-user-profile": {
+    "title": "user profile",
+    "user-tooltip-menu": {
+      "user-new-photo": "New profile image",
+      "user-view-photo": "View profile Image",
+      "user-view-options": "Profile setings"
+    },
+    "user-details": {
+      "user-followers": "Followers",
+      "user-following": "following",
+      "user-post": "Post"
+    },
+    "modal-new-image": {
+      "title": "Add New Profile Image",
+      "confirm": "OK"
+    },
+    "error": {
+      "error-to-change-photo": "an error occurred when changing the profile photo."
+    }
+  }
+}

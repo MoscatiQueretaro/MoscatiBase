@@ -1,0 +1,53 @@
+<div>
+  <div class="modal-header-pdf">
+    <div class="float-left text-left d-flex align-items-center">
+      <button class="button-pdf" (click)="clear()">
+        <fa-icon icon="arrow-left"></fa-icon>
+      </button>
+      <span *ngIf="archivo && archivo.nombre">{{ getName() }}</span>
+    </div>
+    <button type="button" class="button-pdf float-right" (click)="download()" *ngIf="archivo">
+      <fa-icon icon="download"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body modal-body-documents" *ngIf="archivo">
+    <div class="documents-container" *ngIf="isImage()">
+      <ng-container *ngIf="archivo.archivo && archivo.archivoContentType">
+        <img
+          [src]="getValue()"
+          alt="Imagen"
+          [ngStyle]="{ backgroundColor: archivo.archivoContentType.includes('svg') ? 'white' : 'transparent' }"
+        />
+      </ng-container>
+      <ng-container *ngIf="endpoint && !archivo.archivo">
+        <img [src]="getUrlToFile()" alt="Imagen" />
+      </ng-container>
+    </div>
+    <div class="documents-container" *ngIf="isVideo()">
+      <video controls>
+        <ng-container *ngIf="archivo.archivo">
+          <source [type]="archivo.archivoContentType" [src]="getValue()" />
+        </ng-container>
+        <ng-container *ngIf="endpoint && !archivo.archivo">
+          <source [type]="archivo.archivoContentType" [src]="getUrlToFile()" />
+        </ng-container>
+      </video>
+    </div>
+    <!--<div class="documents-container" *ngIf="isAudio()">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center mb-2">
+                            <img [src]="getImage()" alt="Archivo" style="width: 100px !important; height: auto"/>
+                        </div>
+                        <div class="col-12">
+                            <ngx-audio-player [playlist]="playList" [displayRepeatControls]="false" [pageSizeOptions]="[1]" [displayPlaylist]="false" [autoPlay]="false"
+                                              [expanded]="false" [displayDuration]="true" [displayTitle]="false" [displayArtist]="false"
+                            ></ngx-audio-player>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+  </div>
+</div>
