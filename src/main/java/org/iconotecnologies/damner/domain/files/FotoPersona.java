@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "DAMNER_PHOTO_USER")
+@Table(name = "MOSCATI_PHOTO_USER")
 public class FotoPersona extends FileModel implements Serializable {
 
     private static final String ENTITY_NAME = "archivoFotoPersona";

@@ -1,7 +1,7 @@
 package org.iconotecnologies.damner.service.dto;
 
 import java.io.Serializable;
-import org.iconotecnologies.damner.domain.DamnerRol;
+import org.iconotecnologies.damner.domain.MoscatiRol;
 
 public class DamnerUserRolDTO implements Serializable {
 
@@ -9,7 +9,7 @@ public class DamnerUserRolDTO implements Serializable {
 
     protected String damnerUserId;
 
-    protected DamnerRol damnerRol;
+    protected MoscatiRol moscatiRol;
 
     public Integer getId() {
         return id;
@@ -27,16 +27,16 @@ public class DamnerUserRolDTO implements Serializable {
         this.damnerUserId = damnerUserId;
     }
 
-    public DamnerRol getDamnerRol() {
-        return damnerRol;
+    public MoscatiRol getDamnerRol() {
+        return moscatiRol;
     }
 
-    public void setDamnerRol(DamnerRol damnerRol) {
-        this.damnerRol = damnerRol;
+    public void setDamnerRol(MoscatiRol moscatiRol) {
+        this.moscatiRol = moscatiRol;
     }
 
     @Override
     public String toString() {
-        return "DamnerUserRolDTO{" + "id=" + id + ", damnerUserId='" + damnerUserId + '\'' + ", damnerRol=" + damnerRol + '}';
+        return "DamnerUserRolDTO{" + "id=" + id + ", damnerUserId='" + damnerUserId + '\'' + ", damnerRol=" + moscatiRol + '}';
     }
 }

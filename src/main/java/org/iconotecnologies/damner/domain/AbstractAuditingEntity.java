@@ -17,15 +17,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * last modified by attributes.
  */
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @CreatedBy
-    @Column(name = "created_by", nullable = false, length = 70, updatable = false)
+    @Column(name = "created_by", length = 70, updatable = false)
     @JsonIgnore
-    private String createdBy;
+    private String createdBy = "new_user";
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)

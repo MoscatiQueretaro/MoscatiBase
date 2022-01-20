@@ -3,12 +3,12 @@ package org.iconotecnologies.damner.security;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.iconotecnologies.damner.domain.Authority;
-import org.iconotecnologies.damner.domain.DamnerAuthorities;
-import org.iconotecnologies.damner.domain.DamnerUser;
-import org.iconotecnologies.damner.domain.DamnerUserRol;
+import org.iconotecnologies.damner.domain.MoscatiAuthorities;
+import org.iconotecnologies.damner.domain.MoscatiUser;
+import org.iconotecnologies.damner.domain.MoscatiUserRol;
 import org.iconotecnologies.damner.repository.DamnerRolAuthoritiesRepository;
-import org.iconotecnologies.damner.repository.DamnerUserRepository;
 import org.iconotecnologies.damner.repository.DamnerUserRolRepository;
+import org.iconotecnologies.damner.repository.MoscatiUserRepository;
 import org.iconotecnologies.damner.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,18 +27,18 @@ public class DomainUserDetailsService implements UserDetailsService {
     private final Logger log = LoggerFactory.getLogger(DomainUserDetailsService.class);
 
     private final UserRepository userRepository;
-    private final DamnerUserRepository damnerUserRepository;
+    private final MoscatiUserRepository moscatiUserRepository;
     private final DamnerUserRolRepository damnerUserRolRepository;
     private final DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository;
 
     public DomainUserDetailsService(
         UserRepository userRepository,
-        DamnerUserRepository damnerUserRepository,
+        MoscatiUserRepository moscatiUserRepository,
         DamnerUserRolRepository damnerUserRolRepository,
         DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository
     ) {
         this.userRepository = userRepository;
-        this.damnerUserRepository = damnerUserRepository;
+        this.moscatiUserRepository = moscatiUserRepository;
         this.damnerUserRolRepository = damnerUserRolRepository;
         this.damnerRolAuthoritiesRepository = damnerRolAuthoritiesRepository;
     }
@@ -49,7 +49,7 @@ public class DomainUserDetailsService implements UserDetailsService {
         log.debug("Authenticating {}", login);
         System.out.println(login);
         String lowercaseLogin = login;
-        Optional<DamnerUser> userFromDatabase = damnerUserRepository.findOneByNickName(lowercaseLogin);
+        Optional<MoscatiUser> userFromDatabase = moscatiUserRepository.findOneByNickNameOrMail(lowercaseLogin, lowercaseLogin);
         return userFromDatabase
             .map(
                 user -> {
@@ -57,15 +57,15 @@ public class DomainUserDetailsService implements UserDetailsService {
                         throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
                     }
 
-                    DamnerUserRol roleUser = damnerUserRolRepository.findFirstByDamnerUserId(user.getId());
+                    MoscatiUserRol roleUser = damnerUserRolRepository.findFirstByDamnerUserId(user.getId());
                     if (roleUser != null) {
                         user.setRole(roleUser.getDamnerRol().getNombre());
                         Set<Authority> authorities = damnerRolAuthoritiesRepository
-                            .findAllByDamnerRol_Id(roleUser.getDamnerRol().getId())
+                            .findAllByMoscatiRol_Id(roleUser.getDamnerRol().getId())
                             .stream()
                             .map(
                                 auth -> {
-                                    DamnerAuthorities accion = auth.getDamnerAuthirities();
+                                    MoscatiAuthorities accion = auth.getDamnerAuthirities();
                                     Authority authority = new Authority();
                                     authority.setName("ROLE_" + accion.getAccion());
                                     log.debug(accion.toString());

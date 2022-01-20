@@ -1,74 +1,27 @@
-package org.iconotecnologies.damner.domain;
+package org.iconotecnologies.damner.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.Size;
-import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name = "DAMNER_USER")
-public class DamnerUser extends AbstractAuditingEntity implements Serializable {
+public class MoscatiUserDTO implements Serializable {
 
-    public static final String ENTITY_NAME = "damner-user-profile";
-
-    @Transient
     private String role;
 
-    @Transient
-    private Set<Authority> authorities;
+    private Set<String> authorities;
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "DAMNER_NICKNAME")
-    @Size(min = 1, max = 70)
     private String nickName;
-
-    @Column(name = "DAMNER_EMAIL")
-    @Size(min = 1, max = 150)
     private String mail;
-
-    @Column(name = "DAMNER_PASSWORD")
-    @Size(min = 1, max = 100)
     private String password;
-
-    @Column(name = "DAMNER_PASSWORD_KEY")
-    @Size(min = 1, max = 100)
     private String passwordKey;
-
-    @Column(name = "DAMNER_THEME")
     private String theme;
-
-    @Column(name = "DAMNER_NAME")
     private String name;
-
-    @Column(name = "DAMNER_FIRST_NAME")
     private String firstName;
-
-    @Column(name = "DAMNER_LAST_NAME")
     private String lastName;
-
-    @Column(name = "DAMNER_LANGUAGE")
     private String language;
-
-    @Column(name = "DAMNER_IMAGE_PROFILE_ID")
     private String imageProfile;
-
-    @Column(name = "DAMNER_ACTIVATION_KEY", length = 36)
-    @JsonIgnore
-    private String activationKey;
-
-    @Column(name = "DAMNER_ACTIVATION", length = 3)
-    @JsonIgnore
-    private String activation;
-
-    @Column(name = "DAMNER_ESTATUS")
     private String estatus;
+    private String activation;
 
     public String getRole() {
         return role;
@@ -78,11 +31,11 @@ public class DamnerUser extends AbstractAuditingEntity implements Serializable {
         this.role = role;
     }
 
-    public Set<Authority> getAuthorities() {
+    public Set<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
 
@@ -142,14 +95,6 @@ public class DamnerUser extends AbstractAuditingEntity implements Serializable {
         this.name = name;
     }
 
-    public String getImageProfile() {
-        return imageProfile;
-    }
-
-    public void setImageProfile(String imageProfile) {
-        this.imageProfile = imageProfile;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -174,20 +119,20 @@ public class DamnerUser extends AbstractAuditingEntity implements Serializable {
         this.language = language;
     }
 
+    public String getImageProfile() {
+        return imageProfile;
+    }
+
+    public void setImageProfile(String imageProfile) {
+        this.imageProfile = imageProfile;
+    }
+
     public String getEstatus() {
         return estatus;
     }
 
     public void setEstatus(String estatus) {
         this.estatus = estatus;
-    }
-
-    public String getActivationKey() {
-        return activationKey;
-    }
-
-    public void setActivationKey(String activationKey) {
-        this.activationKey = activationKey;
     }
 
     public String getActivation() {

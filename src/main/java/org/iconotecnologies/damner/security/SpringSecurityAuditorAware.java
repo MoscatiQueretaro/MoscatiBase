@@ -13,6 +13,6 @@ public class SpringSecurityAuditorAware implements AuditorAware<Serializable> {
 
     @Override
     public Optional<Serializable> getCurrentAuditor() {
-        return Optional.of(SecurityUtils.getCurrentUserId().orElse(null));
+        return Optional.of(SecurityUtils.getCurrentUserId().orElse("system"));
     }
 }

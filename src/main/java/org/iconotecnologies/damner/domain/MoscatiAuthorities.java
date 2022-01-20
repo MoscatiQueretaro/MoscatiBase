@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DAMNER_AUTHORITIES")
-public class DamnerAuthorities implements Serializable {
+@Table(name = "MOSCATI_AUTHORITIES")
+public class MoscatiAuthorities implements Serializable {
 
     public static final String ENTITY_NAME = "damner-Authorities";
 

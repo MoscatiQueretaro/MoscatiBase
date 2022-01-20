@@ -1,27 +1,23 @@
 package org.iconotecnologies.damner.web.rest;
 
 import io.micrometer.core.annotation.Timed;
-import java.net.URISyntaxException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
-import org.iconotecnologies.damner.domain.DamnerUser;
 import org.iconotecnologies.damner.domain.DamnerUserDetails;
-import org.iconotecnologies.damner.domain.User;
+import org.iconotecnologies.damner.domain.MoscatiUser;
 import org.iconotecnologies.damner.domain.files.PhotoUserAlbum;
-import org.iconotecnologies.damner.repository.DamnerUserRepository;
+import org.iconotecnologies.damner.repository.MoscatiUserRepository;
 import org.iconotecnologies.damner.repository.UserRepository;
 import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.service.MailService;
 import org.iconotecnologies.damner.service.UserService;
-import org.iconotecnologies.damner.service.dto.AdminUserDTO;
-import org.iconotecnologies.damner.service.dto.DamnerUserDTO;
+import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.iconotecnologies.damner.service.dto.PasswordChangeDTO;
 import org.iconotecnologies.damner.service.dto.files.PhotoUserAlbumDTO;
 import org.iconotecnologies.damner.web.rest.errors.*;
 import org.iconotecnologies.damner.web.rest.util.HeaderUtil;
-import org.iconotecnologies.damner.web.rest.vm.KeyAndPasswordVM;
 import org.iconotecnologies.damner.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +42,7 @@ public class AccountResource {
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
 
     private final UserRepository userRepository;
-    private final DamnerUserRepository damnerUserRepository;
+    private final MoscatiUserRepository moscatiUserRepository;
 
     private final UserService userService;
 
@@ -54,12 +50,12 @@ public class AccountResource {
 
     public AccountResource(
         UserRepository userRepository,
-        DamnerUserRepository damnerUserRepository,
+        MoscatiUserRepository moscatiUserRepository,
         UserService userService,
         MailService mailService
     ) {
         this.userRepository = userRepository;
-        this.damnerUserRepository = damnerUserRepository;
+        this.moscatiUserRepository = moscatiUserRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -84,17 +80,18 @@ public class AccountResource {
 
     @PostMapping("/register")
     @Timed
-    public ResponseEntity<DamnerUserDTO> create(@RequestBody DamnerUserDTO damnerUserDto) {
-        damnerUserDto.setEstatus("A");
-        if (damnerUserDto.getId() != null) throw new BadRequestAlertException(
+    public ResponseEntity<MoscatiUserDTO> create(@RequestBody MoscatiUserDTO moscatiUserDto) {
+        moscatiUserDto.setEstatus("A");
+        System.out.println("Request-body:" + moscatiUserDto);
+        if (moscatiUserDto.getId() != null) throw new BadRequestAlertException(
             "El nuevo medio de solicitud no puede tener id",
-            DamnerUser.ENTITY_NAME,
+            MoscatiUser.ENTITY_NAME,
             "idNull"
         );
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityCreationAlert(DamnerUser.ENTITY_NAME, null))
-            .body(userService.registerUser(damnerUserDto));
+            .headers(HeaderUtil.createEntityCreationAlert(MoscatiUser.ENTITY_NAME, null))
+            .body(userService.registerUser(moscatiUserDto));
     }
 
     /**
@@ -131,7 +128,7 @@ public class AccountResource {
      */
     @GetMapping("/account")
     @Timed
-    public ResponseEntity<DamnerUserDTO> getAccount(HttpServletRequest request) {
+    public ResponseEntity<MoscatiUserDTO> getAccount(HttpServletRequest request) {
         return Optional
             .ofNullable(userService.getUserWithAuthorities())
             .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
@@ -146,15 +143,15 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user login wasn't found.
      */
     @PostMapping("/account")
-    public void saveAccount(@Valid @RequestBody DamnerUserDTO userDTO) {
+    public void saveAccount(@Valid @RequestBody MoscatiUserDTO userDTO) {
         DamnerUserDetails userLogin = SecurityUtils
             .getCurrentUserLogin()
             .orElseThrow(() -> new AccountResourceException("Current user login not found"));
-        DamnerUser existingUser = damnerUserRepository.findFirstByMail(userDTO.getMail());
+        MoscatiUser existingUser = moscatiUserRepository.findFirstByMail(userDTO.getMail());
         if (existingUser != null) {
             throw new EmailAlreadyUsedException();
         }
-        DamnerUser user = damnerUserRepository.findOneById(userLogin.getId()).orElse(null);
+        MoscatiUser user = moscatiUserRepository.findOneById(userLogin.getId()).orElse(null);
         if (user != null) {
             throw new AccountResourceException("User could not be found");
         }

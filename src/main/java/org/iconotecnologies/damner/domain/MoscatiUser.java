@@ -1,27 +1,74 @@
-package org.iconotecnologies.damner.service.dto;
+package org.iconotecnologies.damner.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import org.hibernate.annotations.GenericGenerator;
 
-public class DamnerUserDTO implements Serializable {
+@Entity
+@Table(name = "moscati_user")
+public class MoscatiUser extends AbstractAuditingEntity implements Serializable {
 
+    public static final String ENTITY_NAME = "moscati-user-profile";
+
+    @Transient
     private String role;
 
-    private Set<String> authorities;
+    @Transient
+    private Set<Authority> authorities;
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "MOSCATI_NICKNAME")
+    @Size(min = 1, max = 150)
     private String nickName;
+
+    @Column(name = "MOSCATI_EMAIL")
+    @Size(min = 1, max = 150)
     private String mail;
+
+    @Column(name = "MOSCATI_PASSWORD")
+    @Size(min = 1, max = 100)
     private String password;
+
+    @Column(name = "MOSCATI_PASSWORD_KEY")
+    @Size(min = 1, max = 100)
     private String passwordKey;
+
+    @Column(name = "MOSCATI_THEME")
     private String theme;
+
+    @Column(name = "MOSCATI_NAME")
     private String name;
+
+    @Column(name = "MOSCATI_FIRST_NAME")
     private String firstName;
+
+    @Column(name = "MOSCATI_LAST_NAME")
     private String lastName;
+
+    @Column(name = "MOSCATI_LANGUAGE")
     private String language;
+
+    @Column(name = "MOSCATI_IMAGE_PROFILE_ID")
     private String imageProfile;
-    private String estatus;
+
+    @Column(name = "MOSCATI_ACTIVATION_KEY", length = 36)
+    @JsonIgnore
+    private String activationKey;
+
+    @Column(name = "MOSCATI_ACTIVATION", length = 3)
+    @JsonIgnore
     private String activation;
+
+    @Column(name = "MOSCATI_ESTATUS")
+    private String estatus;
 
     public String getRole() {
         return role;
@@ -31,11 +78,11 @@ public class DamnerUserDTO implements Serializable {
         this.role = role;
     }
 
-    public Set<String> getAuthorities() {
+    public Set<Authority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<String> authorities) {
+    public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
 
@@ -95,6 +142,14 @@ public class DamnerUserDTO implements Serializable {
         this.name = name;
     }
 
+    public String getImageProfile() {
+        return imageProfile;
+    }
+
+    public void setImageProfile(String imageProfile) {
+        this.imageProfile = imageProfile;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -119,20 +174,20 @@ public class DamnerUserDTO implements Serializable {
         this.language = language;
     }
 
-    public String getImageProfile() {
-        return imageProfile;
-    }
-
-    public void setImageProfile(String imageProfile) {
-        this.imageProfile = imageProfile;
-    }
-
     public String getEstatus() {
         return estatus;
     }
 
     public void setEstatus(String estatus) {
         this.estatus = estatus;
+    }
+
+    public String getActivationKey() {
+        return activationKey;
+    }
+
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
     }
 
     public String getActivation() {

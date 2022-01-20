@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DAMNER_USER_ROL")
-public class DamnerUserRol implements Serializable {
+@Table(name = "MOSCATI_USER_ROL")
+public class MoscatiUserRol implements Serializable {
 
     public static final String ENTITY_NAME = "damner-Rol-User-Authorities";
 
@@ -13,12 +13,12 @@ public class DamnerUserRol implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @Column(name = "DAMNER_USER_ID")
+    @Column(name = "MOSCATI_USER_ID")
     protected Long damnerUserId;
 
-    @JoinColumn(name = "DAMNER_ROL_ID")
+    @JoinColumn(name = "MOSCATI_ROL_ID")
     @ManyToOne
-    protected DamnerRol damnerRol;
+    protected MoscatiRol moscatiRol;
 
     public Integer getId() {
         return id;
@@ -36,11 +36,11 @@ public class DamnerUserRol implements Serializable {
         this.damnerUserId = damnerUserId;
     }
 
-    public DamnerRol getDamnerRol() {
-        return damnerRol;
+    public MoscatiRol getDamnerRol() {
+        return moscatiRol;
     }
 
-    public void setDamnerRol(DamnerRol damnerRol) {
-        this.damnerRol = damnerRol;
+    public void setDamnerRol(MoscatiRol moscatiRol) {
+        this.moscatiRol = moscatiRol;
     }
 }

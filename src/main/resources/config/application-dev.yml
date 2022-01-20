@@ -32,7 +32,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/damner
+    url: jdbc:mysql://localhost:3306/moscati
     username: icono
     password: UELWshgKU/fouBq@
     hikari:

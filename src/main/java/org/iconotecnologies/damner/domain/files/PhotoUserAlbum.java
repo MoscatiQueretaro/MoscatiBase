@@ -5,7 +5,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "DAMNER_PHOTO_USER_ALBUM")
+@Table(name = "MOSCATI_PHOTO_USER_ALBUM")
 public class PhotoUserAlbum implements Serializable {
 
     public static final String ENTITY_NAME = "damner-user-profile";
@@ -15,13 +15,13 @@ public class PhotoUserAlbum implements Serializable {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @Column(name = "DAMNER_USER_ID")
-    private Long UserId;
+    @Column(name = "MOSCATI_USER_ID")
+    private Long userId;
 
-    @Column(name = "DAMNER_PHOTO_USER_ID")
+    @Column(name = "MOSCATI_PHOTO_USER_ID")
     private String fotoPersonaId;
 
-    @Column(name = "DAMNER_ALBUM_TYPE_ID")
+    @Column(name = "MOSCATI_ALBUM_TYPE_ID")
     private Integer albumTypeId;
 
     @Column(name = "ESTATUS")
@@ -36,11 +36,11 @@ public class PhotoUserAlbum implements Serializable {
     }
 
     public Long getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Long userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getFotoPersonaId() {

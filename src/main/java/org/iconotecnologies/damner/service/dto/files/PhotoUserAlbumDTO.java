@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PhotoUserAlbumDTO implements Serializable {
 
     private String id;
-    private Long UserId;
+    private Long userId;
     private String fotoPersonaId;
     private Integer albumTypeId;
     private String estatus;
@@ -19,11 +19,11 @@ public class PhotoUserAlbumDTO implements Serializable {
     }
 
     public Long getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Long userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getFotoPersonaId() {

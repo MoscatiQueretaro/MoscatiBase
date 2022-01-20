@@ -7,19 +7,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class DamnerUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private DamnerUser user;
+    private MoscatiUser user;
 
-    public DamnerUser getUser() {
+    public MoscatiUser getUser() {
         return user;
     }
 
-    public void setUser(DamnerUser user) {
+    public void setUser(MoscatiUser user) {
         this.user = user;
     }
 
     public DamnerUserDetails() {}
 
-    public DamnerUserDetails(DamnerUser user) {
+    public DamnerUserDetails(MoscatiUser user) {
         this.user = user;
     }
 
@@ -66,7 +66,7 @@ public class DamnerUserDetails implements org.springframework.security.core.user
         return true;
     }
 
-    public DamnerUser getDamnerUserDetails() {
+    public MoscatiUser getMoscatiUserDetails() {
         return user;
     }
 }

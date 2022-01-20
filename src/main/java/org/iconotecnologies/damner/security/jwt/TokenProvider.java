@@ -8,9 +8,9 @@ import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
-import org.iconotecnologies.damner.domain.DamnerUser;
 import org.iconotecnologies.damner.domain.DamnerUserDetails;
-import org.iconotecnologies.damner.repository.DamnerUserRepository;
+import org.iconotecnologies.damner.domain.MoscatiUser;
+import org.iconotecnologies.damner.repository.MoscatiUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -35,12 +35,12 @@ public class TokenProvider implements InitializingBean {
     private long tokenValidityInMillisecondsForRememberMe;
 
     private final JHipsterProperties jHipsterProperties;
-    private final DamnerUserRepository damnerUserRepository;
+    private final MoscatiUserRepository moscatiUserRepository;
 
-    public TokenProvider(JHipsterProperties jHipsterProperties, DamnerUserRepository damnerUserRepository) {
+    public TokenProvider(JHipsterProperties jHipsterProperties, MoscatiUserRepository moscatiUserRepository) {
         this.jHipsterProperties = jHipsterProperties;
 
-        this.damnerUserRepository = damnerUserRepository;
+        this.moscatiUserRepository = moscatiUserRepository;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class TokenProvider implements InitializingBean {
         org.iconotecnologies.damner.domain.DamnerUserDetails principal = new org.iconotecnologies.damner.domain.DamnerUserDetails();
         if (claims.getSubject().length() > 0) {
             String lowercaseLogin = claims.getSubject();
-            DamnerUser user = damnerUserRepository.findFirstByNickName(lowercaseLogin);
+            MoscatiUser user = moscatiUserRepository.findFirstByNickNameOrMail(lowercaseLogin, lowercaseLogin);
 
             principal = new DamnerUserDetails(user);
         }

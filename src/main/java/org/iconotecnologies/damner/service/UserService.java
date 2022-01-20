@@ -6,13 +6,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.iconotecnologies.damner.config.Constants;
 import org.iconotecnologies.damner.domain.*;
-import org.iconotecnologies.damner.domain.files.PhotoUserAlbum;
 import org.iconotecnologies.damner.repository.*;
 import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.service.dto.AdminUserDTO;
-import org.iconotecnologies.damner.service.dto.DamnerUserDTO;
+import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.iconotecnologies.damner.service.dto.UserDTO;
-import org.iconotecnologies.damner.service.mapper.DamnerUserMapper;
+import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +40,8 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
     private final DamnerUserRolRepository damnerUserRolRepository;
     private final CacheManager cacheManager;
-    private final DamnerUserRepository damnerUserRepository;
-    private final DamnerUserMapper damnerUserMapper;
+    private final MoscatiUserRepository moscatiUserRepository;
+    private final MoscatiUserMapper moscatiUserMapper;
     private final DamnerRolRepository damnerRolRepository;
     private final DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository;
 
@@ -52,8 +51,8 @@ public class UserService {
         AuthorityRepository authorityRepository,
         DamnerUserRolRepository damnerUserRolRepository,
         CacheManager cacheManager,
-        DamnerUserRepository damnerUserRepository,
-        DamnerUserMapper damnerUserMapper,
+        MoscatiUserRepository moscatiUserRepository,
+        MoscatiUserMapper moscatiUserMapper,
         DamnerRolRepository damnerRolRepository,
         DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository
     ) {
@@ -62,8 +61,8 @@ public class UserService {
         this.authorityRepository = authorityRepository;
         this.damnerUserRolRepository = damnerUserRolRepository;
         this.cacheManager = cacheManager;
-        this.damnerUserRepository = damnerUserRepository;
-        this.damnerUserMapper = damnerUserMapper;
+        this.moscatiUserRepository = moscatiUserRepository;
+        this.moscatiUserMapper = moscatiUserMapper;
         this.damnerRolRepository = damnerRolRepository;
         this.damnerRolAuthoritiesRepository = damnerRolAuthoritiesRepository;
     }
@@ -113,31 +112,32 @@ public class UserService {
     //                }
     //            );
     //    }
+
     @Transactional
-    public DamnerUserDTO registerUser(DamnerUserDTO damnerUserDTO) {
-        DamnerUser newUser = new DamnerUser();
-        String encryptedPassword = passwordEncoder.encode(damnerUserDTO.getPassword());
+    public MoscatiUserDTO registerUser(MoscatiUserDTO moscatiUserDTO) {
+        MoscatiUser newUser = new MoscatiUser();
+        String encryptedPassword = passwordEncoder.encode(moscatiUserDTO.getPassword());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
-        newUser.setNickName(damnerUserDTO.getNickName());
-        if (damnerUserDTO.getMail() != null) {
-            newUser.setMail(damnerUserDTO.getMail().toLowerCase());
+        newUser.setNickName(moscatiUserDTO.getNickName());
+        if (moscatiUserDTO.getMail() != null) {
+            newUser.setMail(moscatiUserDTO.getMail().toLowerCase());
         }
-        newUser.setLanguage(damnerUserDTO.getLanguage());
+        newUser.setLanguage(moscatiUserDTO.getLanguage());
         // new user is not active
         newUser.setActivation(Constants.DEFAULT_ACTIVATION_STATUS);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
-        DamnerUserDTO newDamnerUser = this.damnerUserMapper.toDto(damnerUserRepository.save(newUser));
+        MoscatiUserDTO newMoscatiUser = this.moscatiUserMapper.toDto(moscatiUserRepository.save(newUser));
 
-        if (newDamnerUser.getId() != null) {
-            DamnerUserRol userRol = new DamnerUserRol();
-            userRol.setDamnerUserId(newDamnerUser.getId());
-            DamnerRol rol = this.damnerRolRepository.findFirstByNombre(Constants.DEFAULT_USER_ROL);
+        if (newMoscatiUser.getId() != null) {
+            MoscatiUserRol userRol = new MoscatiUserRol();
+            userRol.setDamnerUserId(newMoscatiUser.getId());
+            MoscatiRol rol = this.damnerRolRepository.findFirstByNombre(Constants.DEFAULT_USER_ROL);
             userRol.setDamnerRol(rol);
             this.damnerUserRolRepository.save(userRol);
         }
-        return newDamnerUser;
+        return newMoscatiUser;
     }
 
     //    private boolean removeNonActivatedUser(User existingUser) {
@@ -250,9 +250,9 @@ public class UserService {
         SecurityUtils
             .getCurrentUserLogin()
             .map(
-                damnerUserLogin ->
-                    damnerUserRepository
-                        .findOneByNickName(damnerUserLogin.getUsername())
+                moscatiUserLogin ->
+                    moscatiUserRepository
+                        .findOneByNickNameOrMail(moscatiUserLogin.getUsername(), moscatiUserLogin.getUsername())
                         .map(
                             user -> {
                                 user.setFirstName(firstName);
@@ -274,12 +274,12 @@ public class UserService {
     @Transactional(noRollbackFor = Exception.class)
     public void changePhotoProfile(Long id, String photoUserId) {
         try {
-            DamnerUser user = this.damnerUserRepository.getOne(id);
+            MoscatiUser user = this.moscatiUserRepository.getOne(id);
             if (user == null) {
                 throw new BadRequestAlertException("error user not found", "change photo pfofile error", "error");
             }
 
-            this.damnerUserRepository.updatePhotoUser(id, photoUserId, Instant.now());
+            this.moscatiUserRepository.updatePhotoUser(id, photoUserId, Instant.now());
         } catch (Error error) {
             throw new BadRequestAlertException("error user not found", "change photo pfofile error", "error");
         }
@@ -290,9 +290,9 @@ public class UserService {
         SecurityUtils
             .getCurrentUserLogin()
             .map(
-                damnerUserLogin ->
-                    damnerUserRepository
-                        .findOneByNickName(damnerUserLogin.getUsername())
+                moscatiUserLogin ->
+                    moscatiUserRepository
+                        .findOneByNickNameOrMail(moscatiUserLogin.getUsername(), moscatiUserLogin.getUsername())
                         .map(
                             user -> {
                                 String currentEncryptedPassword = user.getPassword();
@@ -329,21 +329,21 @@ public class UserService {
     //    }
 
     @Transactional
-    public DamnerUserDTO getUserWithAuthorities() {
+    public MoscatiUserDTO getUserWithAuthorities() {
         return SecurityUtils
             .getCurrentUserLogin()
             .map(
-                damnerUserLogin ->
-                    damnerUserRepository
-                        .findOneByNickName(damnerUserLogin.getUsername())
+                moscatiUserLogin ->
+                    moscatiUserRepository
+                        .findOneByNickNameOrMail(moscatiUserLogin.getUsername(), moscatiUserLogin.getUsername())
                         .map(
                             usuario -> {
-                                DamnerUserDTO damnerUser = damnerUserMapper.toDto(usuario);
-                                DamnerUserRol roleUser = damnerUserRolRepository.findFirstByDamnerUserId(usuario.getId());
+                                MoscatiUserDTO damnerUser = moscatiUserMapper.toDto(usuario);
+                                MoscatiUserRol roleUser = damnerUserRolRepository.findFirstByDamnerUserId(usuario.getId());
                                 if (roleUser != null) {
                                     damnerUser.setRole(roleUser.getDamnerRol().getNombre());
                                     Set<String> authorities = damnerRolAuthoritiesRepository
-                                        .findAllByDamnerRol_Id(roleUser.getDamnerRol().getId())
+                                        .findAllByMoscatiRol_Id(roleUser.getDamnerRol().getId())
                                         .stream()
                                         .map(auth -> ("ROLE_" + auth.getDamnerAuthirities().getAccion()))
                                         .collect(Collectors.toSet());
@@ -365,11 +365,11 @@ public class UserService {
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
-        damnerUserRepository
+        moscatiUserRepository
             .findAllByActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
             .forEach(
                 user -> {
-                    damnerUserRepository.delete(user);
+                    moscatiUserRepository.delete(user);
                     this.clearUserCaches(user);
                 }
             );
@@ -384,7 +384,7 @@ public class UserService {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
 
-    private void clearUserCaches(DamnerUser user) {
+    private void clearUserCaches(MoscatiUser user) {
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getNickName());
         if (user.getMail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getMail());
