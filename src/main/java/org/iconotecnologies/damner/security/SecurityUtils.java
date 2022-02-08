@@ -59,6 +59,17 @@ public final class SecurityUtils {
             );
     }
 
+    public static boolean isCurrentUserInRole(String authority) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return Optional
+            .ofNullable(securityContext.getAuthentication())
+            .map(
+                authentication ->
+                    authentication.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(authority))
+            )
+            .orElse(false);
+    }
+
     private static String extractPrincipal(Authentication authentication) {
         if (authentication == null) {
             return null;

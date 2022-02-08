@@ -11,7 +11,10 @@ import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.service.dto.AdminUserDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.iconotecnologies.damner.service.dto.UserDTO;
+import org.iconotecnologies.damner.service.dto.files.PhotoUserAlbumDTO;
+import org.iconotecnologies.damner.service.files.PhotoUserAlbumService;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
+import org.iconotecnologies.damner.service.mapper.PhotoUserAlbumMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +47,8 @@ public class UserService {
     private final MoscatiUserMapper moscatiUserMapper;
     private final DamnerRolRepository damnerRolRepository;
     private final DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository;
+    private final PhotoUserAlbumService photoUserAlbumService;
+    private final PhotoUserAlbumMapper photoUserAlbumMapper;
 
     public UserService(
         UserRepository userRepository,
@@ -54,7 +59,9 @@ public class UserService {
         MoscatiUserRepository moscatiUserRepository,
         MoscatiUserMapper moscatiUserMapper,
         DamnerRolRepository damnerRolRepository,
-        DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository
+        DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository,
+        PhotoUserAlbumService photoUserAlbumService,
+        PhotoUserAlbumMapper photoUserAlbumMapper
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -65,6 +72,8 @@ public class UserService {
         this.moscatiUserMapper = moscatiUserMapper;
         this.damnerRolRepository = damnerRolRepository;
         this.damnerRolAuthoritiesRepository = damnerRolAuthoritiesRepository;
+        this.photoUserAlbumService = photoUserAlbumService;
+        this.photoUserAlbumMapper = photoUserAlbumMapper;
     }
 
     //    public Optional<User> activateRegistration(String key) {
@@ -272,7 +281,7 @@ public class UserService {
     }
 
     @Transactional(noRollbackFor = Exception.class)
-    public void changePhotoProfile(Long id, String photoUserId) {
+    public PhotoUserAlbumDTO changePhotoProfile(Long id, String photoUserId) {
         try {
             MoscatiUser user = this.moscatiUserRepository.getOne(id);
             if (user == null) {
@@ -280,6 +289,17 @@ public class UserService {
             }
 
             this.moscatiUserRepository.updatePhotoUser(id, photoUserId, Instant.now());
+            PhotoUserAlbumDTO photoUserAlbumdt = new PhotoUserAlbumDTO();
+            photoUserAlbumdt.setUserId(id);
+            photoUserAlbumdt.setFotoPersonaId(photoUserId);
+            PhotoUserAlbumDTO photoUserAlbumDTO = photoUserAlbumService.save(photoUserAlbumdt);
+            if (photoUserAlbumDTO.getId() == null) throw new BadRequestAlertException(
+                "error user not found",
+                "change photo pfofile error",
+                "error"
+            );
+
+            return photoUserAlbumDTO;
         } catch (Error error) {
             throw new BadRequestAlertException("error user not found", "change photo pfofile error", "error");
         }

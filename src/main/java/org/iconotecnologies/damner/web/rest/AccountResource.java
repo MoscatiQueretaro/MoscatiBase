@@ -197,8 +197,9 @@ public class AccountResource {
                 "error-to-change-photo"
             );
         }
-        this.userService.changePhotoProfile(photoUserAlbumDTO.getUserId(), photoUserAlbumDTO.getFotoPersonaId());
-        return ResponseEntity.ok(photoUserAlbumDTO);
+        PhotoUserAlbumDTO photoUserAlbum;
+        photoUserAlbum = this.userService.changePhotoProfile(photoUserAlbumDTO.getUserId(), photoUserAlbumDTO.getFotoPersonaId());
+        return ResponseEntity.ok(photoUserAlbum);
     }
 
     //    @PostMapping(path = "/account/reset-password/init")
