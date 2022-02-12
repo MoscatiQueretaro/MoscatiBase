@@ -82,6 +82,7 @@ public class AccountResource {
     @Timed
     public ResponseEntity<MoscatiUserDTO> create(@RequestBody MoscatiUserDTO moscatiUserDto) {
         moscatiUserDto.setEstatus("A");
+        moscatiUserDto.setLanguage("es");
         System.out.println("Request-body:" + moscatiUserDto);
         if (moscatiUserDto.getId() != null) throw new BadRequestAlertException(
             "El nuevo medio de solicitud no puede tener id",

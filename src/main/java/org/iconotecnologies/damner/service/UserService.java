@@ -132,6 +132,16 @@ public class UserService {
         if (moscatiUserDTO.getMail() != null) {
             newUser.setMail(moscatiUserDTO.getMail().toLowerCase());
         }
+        if(moscatiUserDTO.getName() != null){
+            newUser.setName(moscatiUserDTO.getName());
+        }
+
+        if(moscatiUserDTO.getFirstName() != null){
+            newUser.setFirstName(moscatiUserDTO.getFirstName());
+        }
+        if(moscatiUserDTO.getLastName() != null){
+            newUser.setLastName(moscatiUserDTO.getLastName());
+        }
         newUser.setLanguage(moscatiUserDTO.getLanguage());
         // new user is not active
         newUser.setActivation(Constants.DEFAULT_ACTIVATION_STATUS);
