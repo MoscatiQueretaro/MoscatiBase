@@ -11,10 +11,13 @@ import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.service.dto.AdminUserDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.iconotecnologies.damner.service.dto.UserDTO;
+import org.iconotecnologies.damner.service.dto.files.FotoPersonaDTO;
 import org.iconotecnologies.damner.service.dto.files.PhotoUserAlbumDTO;
+import org.iconotecnologies.damner.service.files.FotoPersonaService;
 import org.iconotecnologies.damner.service.files.PhotoUserAlbumService;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
 import org.iconotecnologies.damner.service.mapper.PhotoUserAlbumMapper;
+import org.iconotecnologies.damner.service.mapper.files.FotoPersonaMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +52,8 @@ public class UserService {
     private final DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository;
     private final PhotoUserAlbumService photoUserAlbumService;
     private final PhotoUserAlbumMapper photoUserAlbumMapper;
+    private final FotoPersonaService fotoPersonaService;
+    private final FotoPersonaMapper fotoPersonaMapper;
 
     public UserService(
         UserRepository userRepository,
@@ -61,7 +66,9 @@ public class UserService {
         DamnerRolRepository damnerRolRepository,
         DamnerRolAuthoritiesRepository damnerRolAuthoritiesRepository,
         PhotoUserAlbumService photoUserAlbumService,
-        PhotoUserAlbumMapper photoUserAlbumMapper
+        PhotoUserAlbumMapper photoUserAlbumMapper,
+        FotoPersonaService fotoPersonaService,
+        FotoPersonaMapper fotoPersonaMapper
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -74,6 +81,8 @@ public class UserService {
         this.damnerRolAuthoritiesRepository = damnerRolAuthoritiesRepository;
         this.photoUserAlbumService = photoUserAlbumService;
         this.photoUserAlbumMapper = photoUserAlbumMapper;
+        this.fotoPersonaService = fotoPersonaService;
+        this.fotoPersonaMapper = fotoPersonaMapper;
     }
 
     //    public Optional<User> activateRegistration(String key) {
@@ -368,6 +377,11 @@ public class UserService {
                                         .map(auth -> ("ROLE_" + auth.getDamnerAuthirities().getAccion()))
                                         .collect(Collectors.toSet());
                                     damnerUser.setAuthorities(authorities);
+                                }
+                                if (damnerUser.getImageProfile() != null) {
+                                    FotoPersonaDTO fotoPersonaDTO =
+                                        this.fotoPersonaMapper.toDto(this.fotoPersonaService.findOne(damnerUser.getImageProfile()));
+                                    damnerUser.setFotoPersona(fotoPersonaDTO);
                                 }
                                 //            damnerUser.setNotifications(notificacionService.notificacionesPorUsuario().intValue());
                                 return damnerUser;
