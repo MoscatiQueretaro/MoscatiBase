@@ -2,6 +2,7 @@ package org.iconotecnologies.damner.service.dto;
 
 import java.io.Serializable;
 import java.util.Set;
+import org.iconotecnologies.damner.service.dto.files.FotoPersonaDTO;
 
 public class MoscatiUserDTO implements Serializable {
 
@@ -22,6 +23,7 @@ public class MoscatiUserDTO implements Serializable {
     private String imageProfile;
     private String estatus;
     private String activation;
+    private FotoPersonaDTO fotoPersona;
 
     public String getRole() {
         return role;
@@ -141,5 +143,13 @@ public class MoscatiUserDTO implements Serializable {
 
     public void setActivation(String activation) {
         this.activation = activation;
+    }
+
+    public FotoPersonaDTO getFotoPersona() {
+        return fotoPersona;
+    }
+
+    public void setFotoPersona(FotoPersonaDTO fotoPersona) {
+        this.fotoPersona = fotoPersona;
     }
 }
