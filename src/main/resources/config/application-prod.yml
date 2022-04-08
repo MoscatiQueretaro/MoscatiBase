@@ -128,3 +128,22 @@ jhipster:
 # ===================================================================
 
 # application:
+rkmedicalsuite:
+  datasource:
+    url: jdbc:sqlserver://192.168.3.250:1433;databaseName=KH_SJM_PROD
+    username: sa
+    password: B1Admin
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    pool-size: 30
+    test-on-borrow: true
+    validation-query: SELECT 1
+    #        validation-query: SELECT 1 FROM DUAL
+    max-idle: 5
+    min-idle: 1
+    max-wait-millis: 10000
+  hibernate:
+    dialect: org.hibernate.dialect.SQLServer2008Dialect
+    show_sql: true
+#        dialect: org.hibernate.dialect.Oracle12cDialect
+#        default_schema: SSC_RH_IMAGENES
+#**********************************************************************************************************************

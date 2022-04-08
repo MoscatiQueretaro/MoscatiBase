@@ -24,6 +24,9 @@ public class MoscatiUserDTO implements Serializable {
     private String estatus;
     private String activation;
     private FotoPersonaDTO fotoPersona;
+    private String tipo;
+    private String cedula;
+    private String especialidad;
 
     public String getRole() {
         return role;
@@ -151,5 +154,29 @@ public class MoscatiUserDTO implements Serializable {
 
     public void setFotoPersona(FotoPersonaDTO fotoPersona) {
         this.fotoPersona = fotoPersona;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 }

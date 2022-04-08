@@ -42,24 +42,6 @@ public class MoscatiNotificationsUserService {
     public List<MoscatiNotificationsUserDTO> findAllNotificationsByUser(Long id) {
         List<MoscatiNotificationsUser> moscatiNotifications = this.repository.findAllByUserId_Id(id);
         List<MoscatiNotificationsUserDTO> notificationsDTO = this.mapper.toDto(moscatiNotifications);
-        if (notificationsDTO.size() > 0) {
-            notificationsDTO.forEach(
-                notification -> {
-                    if (notification.getNotificacion().getAutor() != null) {
-                        FotoPersonaDTO fotoPersonaDTO =
-                            this.fotoPersonaMapper.toDto(
-                                    this.fotoPersonaService.findOne(notification.getNotificacion().getAutor().getImageProfile())
-                                );
-                        notification.getNotificacion().getAutor().setFotoPersona(fotoPersonaDTO);
-                    }
-                    if (notification.getUserId() != null) {
-                        FotoPersonaDTO fotoPersonaDTO =
-                            this.fotoPersonaMapper.toDto(this.fotoPersonaService.findOne(notification.getUserId().getImageProfile()));
-                        notification.getUserId().setFotoPersona(fotoPersonaDTO);
-                    }
-                }
-            );
-        }
         return notificationsDTO;
     }
 }

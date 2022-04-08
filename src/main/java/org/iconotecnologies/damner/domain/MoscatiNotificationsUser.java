@@ -5,6 +5,16 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 
+/**
+ *     iCoNo Estuvo Aqui
+ * ......   (\_/)
+ * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
+ * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
+ * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
+ *                                          trabajando    sorprendido      cagado     despues
+ *
+ */
 @Entity
 @Table(name = "MOSCATI_NOTIFICATION_USER")
 public class MoscatiNotificationsUser {

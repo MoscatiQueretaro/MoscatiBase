@@ -3,6 +3,16 @@ package org.iconotecnologies.damner.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/**
+ *     iCoNo Estuvo Aqui
+ * ......   (\_/)
+ * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
+ * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
+ * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
+ *                                          trabajando    sorprendido      cagado     despues
+ *
+ */
 @Entity
 @Table(name = "MOSCATI_USER_ROL")
 public class MoscatiUserRol implements Serializable {

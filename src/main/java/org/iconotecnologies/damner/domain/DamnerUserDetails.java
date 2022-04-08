@@ -5,6 +5,16 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+/**
+ *     iCoNo Estuvo Aqui
+ * ......   (\_/)
+ * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
+ * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
+ * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
+ *                                          trabajando    sorprendido      cagado     despues
+ *
+ */
 public class DamnerUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private MoscatiUser user;

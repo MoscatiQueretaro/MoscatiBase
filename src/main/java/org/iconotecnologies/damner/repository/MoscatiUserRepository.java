@@ -13,8 +13,9 @@ public interface MoscatiUserRepository extends JpaRepository<MoscatiUser, Long> 
     Optional<MoscatiUser> findOneById(Long id);
 
     Optional<MoscatiUser> findOneByNickNameOrMail(String username, String mail);
-    List<MoscatiUser> findAllByActivationKeyIsNotNullAndCreatedDateBefore(Instant minus);
-    MoscatiUser findFirstByNickNameOrMail(String username, String mail);
+    MoscatiUser findFirstByNickName(String nickName);
+    List<MoscatiUser> findAllByActivationKeyIsNotNullAndActivationIsAndCreatedDateBefore(String activation, Instant minus);
+    Optional<MoscatiUser> findFirstByNickNameOrMail(String username, String mail);
     MoscatiUser findFirstByMail(String eMail);
 
     @Modifying(clearAutomatically = true)

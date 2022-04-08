@@ -95,7 +95,7 @@ public class TokenProvider implements InitializingBean {
         org.iconotecnologies.damner.domain.DamnerUserDetails principal = new org.iconotecnologies.damner.domain.DamnerUserDetails();
         if (claims.getSubject().length() > 0) {
             String lowercaseLogin = claims.getSubject();
-            MoscatiUser user = moscatiUserRepository.findFirstByNickNameOrMail(lowercaseLogin, lowercaseLogin);
+            MoscatiUser user = moscatiUserRepository.findFirstByNickNameOrMail(lowercaseLogin, lowercaseLogin).orElse(null);
 
             principal = new DamnerUserDetails(user);
         }

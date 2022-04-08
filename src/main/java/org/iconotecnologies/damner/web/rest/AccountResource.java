@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing the current user's account.
@@ -134,6 +135,20 @@ public class AccountResource {
             .ofNullable(userService.getUserWithAuthorities())
             .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @GetMapping("/account/byuserid/{userId}")
+    @Timed
+    public ResponseEntity<MoscatiUserDTO> findAllByUserId(@PathVariable Long userId) {
+        MoscatiUserDTO dto = this.userService.getUserById(userId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
+    }
+
+    @GetMapping("/account/byNickname/{nickName}")
+    @Timed
+    public ResponseEntity<MoscatiUserDTO> findAllByNickName(@PathVariable String nickName) {
+        MoscatiUserDTO dto = this.userService.getUserByNickName(nickName);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
     }
 
     /**

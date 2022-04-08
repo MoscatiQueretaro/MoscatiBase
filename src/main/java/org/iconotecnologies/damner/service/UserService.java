@@ -141,15 +141,15 @@ public class UserService {
         if (moscatiUserDTO.getMail() != null) {
             newUser.setMail(moscatiUserDTO.getMail().toLowerCase());
         }
-        if(moscatiUserDTO.getName() != null){
-            newUser.setName(moscatiUserDTO.getName());
+        if (moscatiUserDTO.getName() != null) {
+            newUser.setName(moscatiUserDTO.getName().toUpperCase());
         }
 
-        if(moscatiUserDTO.getFirstName() != null){
-            newUser.setFirstName(moscatiUserDTO.getFirstName());
+        if (moscatiUserDTO.getFirstName() != null) {
+            newUser.setFirstName(moscatiUserDTO.getFirstName().toUpperCase());
         }
-        if(moscatiUserDTO.getLastName() != null){
-            newUser.setLastName(moscatiUserDTO.getLastName());
+        if (moscatiUserDTO.getLastName() != null) {
+            newUser.setLastName(moscatiUserDTO.getLastName().toUpperCase());
         }
         newUser.setLanguage(moscatiUserDTO.getLanguage());
         // new user is not active
@@ -374,7 +374,7 @@ public class UserService {
             .map(
                 moscatiUserLogin ->
                     moscatiUserRepository
-                        .findOneByNickNameOrMail(moscatiUserLogin.getUsername(), moscatiUserLogin.getUsername())
+                        .findFirstByNickNameOrMail(moscatiUserLogin.getUsername(), moscatiUserLogin.getUsername())
                         .map(
                             usuario -> {
                                 MoscatiUserDTO damnerUser = moscatiUserMapper.toDto(usuario);
@@ -388,11 +388,11 @@ public class UserService {
                                         .collect(Collectors.toSet());
                                     damnerUser.setAuthorities(authorities);
                                 }
-                                if (damnerUser.getImageProfile() != null) {
-                                    FotoPersonaDTO fotoPersonaDTO =
-                                        this.fotoPersonaMapper.toDto(this.fotoPersonaService.findOne(damnerUser.getImageProfile()));
-                                    damnerUser.setFotoPersona(fotoPersonaDTO);
-                                }
+                                //                                if (damnerUser.getImageProfile() != null) {
+                                //                                    FotoPersonaDTO fotoPersonaDTO =
+                                //                                        this.fotoPersonaMapper.toDto(this.fotoPersonaService.findOne(damnerUser.getImageProfile()));
+                                //                                    damnerUser.setFotoPersona(fotoPersonaDTO);
+                                //                                }
                                 //            damnerUser.setNotifications(notificacionService.notificacionesPorUsuario().intValue());
                                 return damnerUser;
                             }
@@ -410,13 +410,25 @@ public class UserService {
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         moscatiUserRepository
-            .findAllByActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
+            .findAllByActivationKeyIsNotNullAndActivationIsAndCreatedDateBefore("NO", Instant.now().minus(15, ChronoUnit.DAYS))
             .forEach(
                 user -> {
                     moscatiUserRepository.delete(user);
                     this.clearUserCaches(user);
                 }
             );
+    }
+
+    @Transactional
+    public MoscatiUserDTO getUserById(Long id) {
+        MoscatiUserDTO dto = moscatiUserMapper.toDto(moscatiUserRepository.getOne(id));
+        return dto;
+    }
+
+    @Transactional
+    public MoscatiUserDTO getUserByNickName(String nickName) {
+        MoscatiUserDTO dto = moscatiUserMapper.toDto(moscatiUserRepository.findFirstByNickName(nickName));
+        return dto;
     }
 
     /**

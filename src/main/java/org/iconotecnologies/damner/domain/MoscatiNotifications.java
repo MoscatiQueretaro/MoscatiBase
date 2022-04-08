@@ -6,6 +6,16 @@ import org.hibernate.annotations.GenericGenerator;
 import org.iconotecnologies.damner.domain.catalogos.MoscatiAccionNotification;
 import org.springframework.data.annotation.CreatedBy;
 
+/**
+ *     iCoNo Estuvo Aqui
+ * ......   (\_/)
+ * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
+ * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
+ * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
+ *                                          trabajando    sorprendido      cagado     despues
+ *
+ */
 @Entity
 @Table(name = "MOSCATI_NOTIFICATION")
 public class MoscatiNotifications {

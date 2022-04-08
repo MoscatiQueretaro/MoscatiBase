@@ -12,7 +12,7 @@ export const UserProfileRoutes: Routes = [
     },
     data: {
       pageTitle: 'user-profile.home.title',
-      authorities: ['ROLE_ADMIN'],
+      authorities: ['ROLE_ADMIN', 'ROLE_USER'],
     },
     canActivate: [UserRouteAccessService],
   },

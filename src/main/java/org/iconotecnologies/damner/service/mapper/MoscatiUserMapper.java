@@ -5,8 +5,9 @@ import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { GetImagePersonaMapper.class })
 public interface MoscatiUserMapper extends EntityMapper<MoscatiUserDTO, MoscatiUser> {
+    @Mapping(source = "imageProfile", target = "fotoPersona", qualifiedByName = "getImagePersona")
     @Mapping(target = "authorities", ignore = true)
     MoscatiUserDTO toDto(MoscatiUser entity);
 
