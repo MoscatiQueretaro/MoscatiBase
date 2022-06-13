@@ -40,12 +40,7 @@ export class NewImageProfileFormComponent implements OnInit {
   /* eslint-disable */
   save(): void {
     if (this.entity && this.entity.fotoPersonaId && this.entity.userId) {
-      this.newImageProfileService.updatePhotoUser(this.entity).subscribe((res: HttpResponse<PhotoUserAlbumModel>) => {
-        console.warn('se ejecuto udate de foto', res.body);
-        if (res.body) {
-          this.subscribeToSaveResponse(this.newImageProfileService.create(this.entity!));
-        }
-      });
+      this.subscribeToSaveResponse(this.newImageProfileService.updatePhotoUser(this.entity));
     }
   }
   getFiles(files: any): void {
@@ -53,6 +48,7 @@ export class NewImageProfileFormComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<PhotoUserAlbumModel>>): void {
+    console.warn('entra suscribe:', result);
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -60,12 +56,14 @@ export class NewImageProfileFormComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
+    console.warn('exito al guardar');
     this.savedPhotho = true;
     this.fileFoto = [];
     this.eventManager.broadcast('user-profile-reload');
   }
 
   protected onSaveError(): void {
+    console.warn('error al guardar');
     this.savedPhotho = false;
   }
 } // class

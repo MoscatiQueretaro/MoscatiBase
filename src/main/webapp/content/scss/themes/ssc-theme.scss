@@ -11,6 +11,8 @@ $info: #9933cc;
 $warning: #ff8800;
 $danger: #cc0000;
 
+$image-url: url('../../../content/images/icono-moscati-white.png') no-repeat center center;
+
 //Colores de background y tarjeta principal
 $main-background: #222222;
 $main-card-background: #303030;
@@ -82,6 +84,7 @@ $ssc-theme: create-theme(
   $info,
   $warning,
   $danger,
+  $image-url,
   $main-background,
   $main-card-background,
   $border-background,

@@ -1,0 +1,31 @@
+<div [@fadeInOut] *ngIf="_show">
+  <div class="table-loader" *ngIf="type === 'table'" [ngStyle]="styleTable">
+    <div class="tr-loader" *ngFor="let row of _rows">
+      <div class="td-space" *ngIf="space"><span></span></div>
+      <div class="td-image" *ngIf="image"><span></span></div>
+      <div class="td-gradient" [ngStyle]="styleGradient"><span></span></div>
+      <div class="td-buttons" *ngIf="buttons" [ngStyle]="styleButtons"><span></span></div>
+    </div>
+  </div>
+</div>
+<div class="ssc-loader-container" [@fadeInOut] *ngIf="_show && type === 'loader'" [ngStyle]="styleLoader" [ngClass]="containerClass">
+  <div class="ssc-loader" *ngIf="showAnimation">
+    <div class="loader--dot"></div>
+    <div class="loader--dot"></div>
+    <div class="loader--dot"></div>
+    <div class="loader--dot"></div>
+    <div class="loader--dot"></div>
+    <div class="loader--dot"></div>
+  </div>
+  <div class="loader--text" *ngIf="!showError" [attr.data-text]="_textToShow" [ngStyle]="styleText"></div>
+  <div class="ssc-loader--error-text" *ngIf="showError" [ngStyle]="styleText">{{ errortextToShow }}</div>
+</div>
+<div class="ssc-loader-container" [@fadeInOut] *ngIf="_show && type === 'lottie'" [ngStyle]="styleLoader" [ngClass]="containerClass">
+  <lottie-animation-view *ngIf="showAnimation" [options]="lottieConfig" [width]="200" [height]="200" (animCreated)="getAnimation($event)">
+  </lottie-animation-view>
+  <div class="loader--text" *ngIf="!showError" [attr.data-text]="_textToShow" [ngStyle]="styleText"></div>
+  <div class="ssc-loader--error-text" *ngIf="showError" [ngStyle]="styleText">{{ errortextToShow }}</div>
+</div>
+<ng-container *ngIf="showContent" [@fadeInOutContent]>
+  <ng-content></ng-content>
+</ng-container>

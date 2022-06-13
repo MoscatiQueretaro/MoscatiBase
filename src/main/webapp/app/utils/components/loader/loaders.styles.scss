@@ -1,0 +1,291 @@
+@import '~@angular/material/theming';
+$loader--width: 250px;
+$loader-dot--size: 20px;
+
+//Table loader styles
+@-webkit-keyframes moving-gradient {
+  0% {
+    background-position: -250px 0;
+  }
+  100% {
+    background-position: 250px 0;
+  }
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}
+
+.table-loader {
+  width: calc(100% - 30px);
+  position: relative;
+  z-index: 2;
+  .tr-loader {
+    display: flex;
+    div {
+      height: 70px;
+      vertical-align: middle;
+      padding: 8px;
+      span {
+        display: block;
+      }
+      &.td-space {
+        width: 20px;
+        span {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      &.td-image {
+        width: 70px;
+        span {
+          width: 100%;
+          height: 100%;
+          animation-duration: 3s;
+          animation-fill-mode: forwards;
+          animation-iteration-count: infinite;
+          animation-name: placeHolderShimmer;
+          animation-timing-function: linear;
+        }
+      }
+      &.td-gradient {
+        width: calc(calc(100% - 80px) * 0.8);
+        // padding-right: 100px;
+        span {
+          height: 40px;
+          margin-top: 11px;
+          background-size: 500px 100px;
+          animation-duration: 3s;
+          animation-fill-mode: forwards;
+          animation-iteration-count: infinite;
+          animation-name: placeHolderShimmer;
+          animation-timing-function: linear;
+        }
+      }
+      &.td-buttons {
+        width: calc(calc(100% - 70px) * 0.2);
+        span {
+          width: 100%;
+          max-width: 200px;
+          height: 30px;
+          border-radius: 4px;
+          margin-top: 12px;
+          background-size: 500px 100px;
+          animation-name: moving-gradient;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+}
+
+/*End table loader styles*/
+
+// loader styles
+
+.ssc-loader-container {
+  width: 250px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2em;
+  left: -100%;
+  right: -100%;
+  margin: auto;
+  .ssc-loader {
+    height: 20px;
+    width: 100%;
+  }
+}
+
+.ssc-loader-container-fixed {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  display: inline-grid;
+  align-content: center;
+  z-index: 2;
+  .ssc-loader {
+    justify-self: center;
+    height: 20px;
+    width: 250px;
+  }
+}
+
+.ssc-loader-container-absolute {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  display: inline-grid;
+  align-content: center;
+  z-index: 2;
+  .ssc-loader {
+    justify-self: center;
+    height: 20px;
+    width: 250px;
+  }
+}
+
+.loader--dot {
+  animation-name: ssc-loader;
+  animation-timing-function: ease-in-out;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: black;
+  position: absolute;
+}
+.loader--dot:first-child {
+  animation-delay: 0.5s;
+}
+.loader--dot:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.loader--dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.loader--dot:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.loader--dot:nth-child(5) {
+  animation-delay: 0.1s;
+}
+.loader--dot:nth-child(6) {
+  animation-delay: 0s;
+}
+
+.loader--text {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.loader--text:after {
+  content: attr(data-text);
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.ssc-loader--error-text {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.ssc-loader--error-text:after {
+  font-weight: bold;
+}
+
+@keyframes ssc-loader {
+  15% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(230px);
+  }
+  65% {
+    transform: translateX(230px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
+@keyframes loading-text {
+  0% {
+    content: attr(data-text);
+  }
+  25% {
+    content: attr(data-text) '.';
+  }
+  50% {
+    content: attr(data-text) '..';
+  }
+  75% {
+    content: attr(data-text)'...';
+  }
+}
+
+@mixin loaders-styles-theme($theme) {
+  $background-item: map-get($theme, color-item-loader);
+  $background-gradient: map-get($theme, color-border-loaderbg);
+  $border: map-get($theme, border-color);
+  $background-main-card: map-get($theme, background-main-card);
+  $primary: map-get($theme, primary);
+  .table-loader {
+    background: $background-main-card;
+    .tr-loader {
+      border-bottom: 1px solid $border;
+      div {
+        &.td-image {
+          width: 70px;
+          span {
+            background-color: $background-gradient;
+          }
+        }
+        &.td-gradient {
+          span {
+            background: linear-gradient(
+              to right,
+              rgba($background-gradient, 1) 20%,
+              rgba($background-gradient, 0.3) 50%,
+              rgba($background-gradient, 1) 80%
+            );
+          }
+        }
+        &.td-buttons {
+          span {
+            background: linear-gradient(
+              to right,
+              rgba($background-gradient, 1) 20%,
+              rgba($background-gradient, 0.3) 50%,
+              rgba($background-gradient, 1) 80%
+            );
+          }
+        }
+      }
+    }
+  }
+  .ssc-loader-container-fixed {
+    background: $background-main-card;
+  }
+
+  .ssc-loader-container-absolute {
+    background: $background-main-card;
+  }
+
+  .loader--dot:first-child {
+    background-color: rgba($primary, 0.5);
+  }
+  .loader--dot:nth-child(2) {
+    background-color: rgba($primary, 0.6);
+  }
+  .loader--dot:nth-child(3) {
+    background-color: rgba($primary, 0.7);
+  }
+  .loader--dot:nth-child(4) {
+    background-color: rgba($primary, 0.8);
+  }
+  .loader--dot:nth-child(5) {
+    background-color: rgba($primary, 0.9);
+  }
+  .loader--dot:nth-child(6) {
+    background-color: rgba($primary, 1);
+  }
+
+  lottie-animation-view {
+    path {
+      fill: $primary !important;
+    }
+  }
+}

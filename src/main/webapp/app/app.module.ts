@@ -30,11 +30,13 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { BaseCoreModule } from './core/core.module';
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     HomeModule,
+    BaseCoreModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     EntityRoutingModule,
     AppRoutingModule,

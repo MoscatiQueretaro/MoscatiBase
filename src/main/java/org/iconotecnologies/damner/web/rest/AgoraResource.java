@@ -49,7 +49,7 @@ public class AgoraResource {
         if (result != null && result != "") {
             agora.setToken(result);
         }
-        System.out.print("token:" + result + " /fin");
+        System.out.print("Agora token[" + result + "]fin");
 
         return ResponseEntity.ok(agora);
     }

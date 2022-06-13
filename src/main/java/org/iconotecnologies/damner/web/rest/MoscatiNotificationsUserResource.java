@@ -3,6 +3,7 @@ package org.iconotecnologies.damner.web.rest;
 import io.micrometer.core.annotation.Timed;
 import java.util.List;
 import org.iconotecnologies.damner.service.MoscatiNotificationsUserService;
+import org.iconotecnologies.damner.service.dto.MessageAndNotificationsDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiNotificationsDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiNotificationsUserDTO;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,13 @@ public class MoscatiNotificationsUserResource {
     @Timed
     public ResponseEntity<List<MoscatiNotificationsUserDTO>> getAllById(@PathVariable Long id) {
         List<MoscatiNotificationsUserDTO> dto = this.service.findAllNotificationsByUser(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/messageAndNotificationsNumber/{id}")
+    @Timed
+    public ResponseEntity<MessageAndNotificationsDTO> getMessageAndNotificationsNumber(@PathVariable Long id) {
+        MessageAndNotificationsDTO dto = this.service.findAllNotificationsAndMessagesByUser(id);
         return ResponseEntity.ok(dto);
     }
 }

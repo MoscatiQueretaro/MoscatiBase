@@ -1,0 +1,52 @@
+<div
+  [ngClass]="{ containerClass: true, 'form_group-autocomplete': !legacyStyle, 'form-group': legacyStyle }"
+  class="form-group-autocomplete"
+  #container
+>
+  <label class="form_label-autocomplete" *ngIf="legacyStyle">{{ placeHolderLabel }}</label>
+  <input
+    #input
+    type="text"
+    class="form_field_autocomplete float-left"
+    jhiUppercase
+    placeholder="{{ placeHolder }}"
+    autocomplete="off"
+    [ngClass]="overlayVisible ? 'show-panel-input' : ''"
+    [(ngModel)]="inputVal"
+    (keydown)="onKeyDown($event)"
+    (blur)="onBlur()"
+    [disabled]="_disabled || this.principalArray.length == 0"
+  />
+  <label class="form_label-autocomplete" *ngIf="!legacyStyle">{{ placeHolderLabel }}</label>
+  <button
+    type="button"
+    class="float-left"
+    name="{{ placeHolderLabel }}"
+    tabindex="-1"
+    (click)="onDropdownClick()"
+    [disabled]="_disabled || this.principalArray.length == 0"
+    [ngClass]="{ 'show-panel-button': overlayVisible, 'button-dropdown': !buttonLegacy, 'button-dropdown-legacy': buttonLegacy }"
+    (mouseenter)="overPanel = true"
+    (mouseleave)="overPanel = false"
+  >
+    <fa-icon [icon]="_loading ? 'spinner' : 'caret-down'" [spin]="_loading" [transform]="{ rotate: overlayVisible ? 180 : 0 }"></fa-icon>
+  </button>
+  <div *ngIf="overlayVisible" class="panel-autocomplete scrollStyle" (mouseenter)="overPanel = true" (mouseleave)="overPanel = false">
+    <div class="autocomplete-items" *ngIf="filteredArray.length > 0; else emptyBlock">
+      <div
+        *ngFor="let option of filteredArray"
+        class="item"
+        [ngClass]="_selectedValue === option ? 'active-item' : ''"
+        (mouseenter)="_selectedValue = option"
+        (mouseleave)="_selectedValue = undefined"
+        (click)="setValue(option)"
+      >
+        <span class="item-selected"></span>
+        <span class="item-text">{{ field ? '🩺' + option.descripcion : option }}</span>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyBlock>
+    <p class="text-muted text-center m-1 small">No hay elementos 😴</p>
+  </ng-template>
+</div>

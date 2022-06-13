@@ -1,25 +1,22 @@
 package org.iconotecnologies.damner.service;
 
-import java.text.SimpleDateFormat;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 import org.iconotecnologies.damner.config.Constants;
 import org.iconotecnologies.damner.domain.MoscatiUserCitas;
-import org.iconotecnologies.damner.domain.catalogos.MoscatiEspecialidades;
+import org.iconotecnologies.damner.domain.firebase.Note;
 import org.iconotecnologies.damner.repository.MoscatiUserCitasRepository;
 import org.iconotecnologies.damner.service.criteria.MoscatiUserCitasCriteria;
 import org.iconotecnologies.damner.service.dto.MoscatiNotificationsDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiNotificationsUserDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
-import org.iconotecnologies.damner.service.dto.catalogos.MoscatiEspecialidadesDTO;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserCitasMapper;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
@@ -37,23 +34,26 @@ public class MoscatiUserCitasService {
     private final MoscatiUserMapper userMapper;
     private final MoscatiNotificationsUserService notificationsUserService;
     private final MoscatiNotificationsService notificationsService;
+    private final FirebaseMessagingService firebaseMessagingService;
 
     public MoscatiUserCitasService(
         MoscatiUserCitasRepository repository,
         MoscatiUserCitasMapper mapper,
         MoscatiUserMapper userMapper,
         MoscatiNotificationsUserService notificationsUserService,
-        MoscatiNotificationsService notificationsService
+        MoscatiNotificationsService notificationsService,
+        FirebaseMessagingService firebaseMessagingService
     ) {
         this.repository = repository;
         this.mapper = mapper;
         this.userMapper = userMapper;
         this.notificationsUserService = notificationsUserService;
         this.notificationsService = notificationsService;
+        this.firebaseMessagingService = firebaseMessagingService;
     }
 
     @Transactional
-    public MoscatiUserCitasDTO save(MoscatiUserCitasDTO moscatiUserCitasDTO) {
+    public MoscatiUserCitasDTO save(MoscatiUserCitasDTO moscatiUserCitasDTO) throws FirebaseMessagingException {
         if (moscatiUserCitasDTO.getId() == null && moscatiUserCitasDTO.getEtapaCita().getDescripcion().equals(Constants.ETAPA_SOLICITUD)) {
             if (
                 this.repository.findFirstByFechaHoraSolicitudEqualsOrFechaHoraCitaEqualsAndDoctor_Id(
@@ -67,7 +67,7 @@ public class MoscatiUserCitasService {
                 throw new BadRequestAlertException(
                     "ya existe una Cita para esta fecha y hora, intenta agendar otra hora",
                     "moscatiUserCitasService",
-                    ""
+                    "moscatiUserCitasError"
                 );
             }
 
@@ -134,6 +134,33 @@ public class MoscatiUserCitasService {
                 notificationUser.setNotificacion(notificationautor);
                 notificationUser.setVista(false);
                 this.notificationsUserService.save(notificationUser);
+                //*********************************************************************************************************
+                //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
+                //*********************************************************************************************************
+                Note FireBaseNotification = new Note();
+                FireBaseNotification.setSubject(Constants.DEFAULT_SOLICITUD_CITA_TITLE_ES);
+                FireBaseNotification.setContent(
+                    moscatiUserCitas.getUser().getName() +
+                    " " +
+                    moscatiUserCitas.getUser().getFirstName() +
+                    " " +
+                    moscatiUserCitas.getUser().getLastName() +
+                    " " +
+                    Constants.DEFAULT_SOLICITUD_CITA_ES +
+                    " " +
+                    fechahraSolicitud
+                );
+                FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                Map<String, String> data = new HashMap<>();
+                data.put("id", "2");
+                data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                data.put("status", "Crime_And_Safety");
+                FireBaseNotification.setData(data);
+                try {
+                    firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getDoctor().getFirebaseToken());
+                } catch (Exception e) {
+                    System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                }
             }
         }
 
@@ -163,6 +190,34 @@ public class MoscatiUserCitasService {
                 notificationUser.setNotificacion(notificationautor);
                 notificationUser.setVista(false);
                 this.notificationsUserService.save(notificationUser);
+
+                //*********************************************************************************************************
+                //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
+                //*********************************************************************************************************
+                Note FireBaseNotification = new Note();
+                FireBaseNotification.setSubject(Constants.DEFAULT_CITA_TITLE_ES);
+                FireBaseNotification.setContent(
+                    moscatiUserCitas.getDoctor().getName() +
+                    " " +
+                    moscatiUserCitas.getDoctor().getFirstName() +
+                    " " +
+                    moscatiUserCitas.getDoctor().getLastName() +
+                    " " +
+                    Constants.DEFAULT_CITA_ES +
+                    " " +
+                    fechahraSolicitud
+                );
+                FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                Map<String, String> data = new HashMap<>();
+                data.put("id", "2");
+                data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                data.put("status", "Crime_And_Safety");
+                FireBaseNotification.setData(data);
+                try {
+                    firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getUser().getFirebaseToken());
+                } catch (Exception e) {
+                    System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                }
             }
         }
 

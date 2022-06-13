@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
-import { Account, DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 import { LANGUAGES } from 'app/config/language.constants';
 
 @Component({
@@ -11,7 +11,7 @@ import { LANGUAGES } from 'app/config/language.constants';
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {
-  account!: DamnerUserModel;
+  account!: MoscatiUserModel;
   success = false;
   languages = LANGUAGES;
   settingsForm = this.fb.group({

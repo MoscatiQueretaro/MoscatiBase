@@ -44,8 +44,8 @@ public class PhotoUserAlbumResource {
 
         PhotoUserAlbumDTO dto = this.service.save(photoUserAlbumDTO);
         return ResponseEntity
-            .created(new URI("/api/photo-user-album/" + dto.getId().toString()))
-            .headers(HeaderUtil.createEntityCreationAlert(PhotoUserAlbum.ENTITY_NAME, dto.getId().toString()))
+            .created(new URI("/api/photo-user-album/" + dto.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(PhotoUserAlbum.ENTITY_NAME, dto.getId()))
             .body(dto);
     }
 

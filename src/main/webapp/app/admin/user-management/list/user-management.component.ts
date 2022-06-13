@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
-import { Account, DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 import { UserManagementService } from '../service/user-management.service';
 import { User } from '../user-management.model';
 import { UserManagementDeleteDialogComponent } from '../delete/user-management-delete-dialog.component';
@@ -16,7 +16,7 @@ import { UserManagementDeleteDialogComponent } from '../delete/user-management-d
   templateUrl: './user-management.component.html',
 })
 export class UserManagementComponent implements OnInit {
-  currentAccount: DamnerUserModel | null = null;
+  currentAccount: MoscatiUserModel | null = null;
   users: User[] | null = null;
   isLoading = false;
   totalItems = 0;

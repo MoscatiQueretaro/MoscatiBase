@@ -6,6 +6,16 @@ import javax.persistence.*;
 import org.iconotecnologies.damner.domain.catalogos.MoscatiEtapaCita;
 import org.iconotecnologies.damner.domain.catalogos.MoscatiTipoCita;
 
+/**
+ *     iCoNo Estuvo Aqui
+ * ......   (\_/)
+ * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
+ * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
+ * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
+ *                                          trabajando    sorprendido      cagado     despues
+ *
+ */
 @Entity
 @Table(name = "moscati_user_citas")
 public class MoscatiUserCitas implements Serializable {

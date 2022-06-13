@@ -28,7 +28,7 @@ export class SingleFileTemplateComponent {
   }
 
   @Input()
-  showName = true;
+  showName = false;
 
   @Input()
   view = true;

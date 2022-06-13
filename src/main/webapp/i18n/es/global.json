@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "Damner",
+    "title": "Telemedicina Moscati",
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=es\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "theme": "tema",
@@ -34,16 +34,8 @@
       "language": "Idioma"
     },
     "form": {
-      "username.label": "Usuario",
-      "username.placeholder": "Nombre de usuario",
       "currentpassword.label": "Contraseña actual",
-      "currentpassword.placeholder": "Contraseña actual",
-      "newpassword.label": "Nueva contraseña",
-      "newpassword.placeholder": "Nueva contraseña",
-      "confirmpassword.label": "Confirmación de la nueva contraseña",
-      "confirmpassword.placeholder": "Confirmación de la nueva contraseña",
-      "email.label": "Correo electrónico",
-      "email.placeholder": "Su correo electrónico"
+      "currentpassword.placeholder": "Contraseña actual"
     },
     "messages": {
       "info": {
@@ -59,25 +51,6 @@
       },
       "error": {
         "dontmatch": "¡La contraseña y la confirmación de contraseña no coinciden!"
-      },
-      "validate": {
-        "newpassword": {
-          "required": "Se requiere que ingrese una contraseña.",
-          "minlength": "Se requiere que su contraseña tenga por lo menos 4 caracteres",
-          "maxlength": "Su contraseña no puede tener más de 50 caracteres",
-          "strength": "Seguridad de la contraseña:"
-        },
-        "confirmpassword": {
-          "required": "Se requiere que confirme la contraseña.",
-          "minlength": "Se requiere que su contraseña de confirmación tenga por lo menos 4 caracteres",
-          "maxlength": "Su contraseña de confirmación no puede tener más de 50 caracteres"
-        },
-        "email": {
-          "required": "Se requiere un correo electrónico.",
-          "invalid": "Su correo electrónico no es válido.",
-          "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
-          "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"
-        }
       }
     },
     "field": {

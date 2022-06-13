@@ -1,0 +1,71 @@
+<div class="row" *ngIf="notificationsUserModelList && notificationsUserModelList.length > 0">
+  <div class="col-md-12">
+    <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="4">
+      <div *ngIf="notificationsUserModelList.length > 0; else emptyBlock">
+        <div class="col-md-12 py-4" *ngFor="let notification of notificationsUserModelList">
+          <mat-card class="main-card-login" *ngIf="notification && notification.notificacion && notification.notificacion.autor">
+            <mat-card-title style="text-align: left">
+              <strong>{{ notification.notificacion.titulo ? notification.notificacion.titulo : '' }}</strong>
+              <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon [icon]="'check-double'"></fa-icon></span>
+            </mat-card-title>
+            <mat-card-subtitle style="text-align: left">{{
+              notification.notificacion.autor.name
+                ? notification.notificacion.autor.name +
+                  ' ' +
+                  notification.notificacion.autor.firstName +
+                  ' ' +
+                  notification.notificacion.autor.lastName
+                : ''
+            }}</mat-card-subtitle>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-2 pl-0 pr-0" style="display: flex; justify-content: center">
+                  <div style="width: 100px; height: 100px">
+                    <jhi-single-file-template
+                      *ngIf="notification.notificacion.autor.imageProfile"
+                      class="tooltip-options-profile"
+                      [file]="notification.notificacion.autor.fotoPersona"
+                      [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                      [borderImageType]="'rounded'"
+                      [endpoint]="'file'"
+                      [delete]="false"
+                    ></jhi-single-file-template>
+                  </div>
+                </div>
+                <div class="col-md-10" style="display: flex; justify-content: center; padding: 10px">
+                  <div class="text-notification-badge">
+                    <p>
+                      <span>{{ notification.notificacion.descripcion ? notification.notificacion.descripcion : '' }}</span>
+                    </p>
+                    <span style="font-size: 15px; position: absolute; bottom: 0; right: 20px">{{
+                      notification.notificacion.fecha ? (notification.notificacion.fecha | date: 'MMMM d, y, h:mm a ') : ''
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="col-md-12" style="display: flex; justify-content: center">
+                <div style="width: 150px; height: 45px">
+                  <div [class]="'btn-new-query'"><span class="text-options-menu">Ver mas</span></div>
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <ng-template #emptyBlock>
+        <div class="row mt-2">
+          <div class="col-12">
+            <h1 class="w-100 text-center text-muted">
+              <fa-icon [icon]="['far', 'frown']" size="1x"></fa-icon>
+            </h1>
+          </div>
+          <div class="col-12 text-center">
+            <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
+          </div>
+        </div>
+      </ng-template>
+    </jhi-loaders>
+  </div>
+</div>

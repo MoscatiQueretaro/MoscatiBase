@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { Registration } from './register.model';
 import { SERVER_API_URL } from '../../app.constants';
-import { DamnerUserModel } from '../../core/auth/account.model';
-type EntityResponseType = HttpResponse<DamnerUserModel>;
+import { MoscatiUserModel } from '../../core/auth/account.model';
+type EntityResponseType = HttpResponse<MoscatiUserModel>;
 
 @Injectable({ providedIn: 'root' })
 export class RegisterService {
@@ -18,7 +18,7 @@ export class RegisterService {
     return this.http.post(this.applicationConfigService.getEndpointFor('api/register'), registration);
   }
 
-  create(user: DamnerUserModel): Observable<EntityResponseType> {
-    return this.http.post<DamnerUserModel>(this.API_URL, user, { observe: 'response' });
+  create(user: MoscatiUserModel): Observable<EntityResponseType> {
+    return this.http.post<MoscatiUserModel>(this.API_URL, user, { observe: 'response' });
   }
 }

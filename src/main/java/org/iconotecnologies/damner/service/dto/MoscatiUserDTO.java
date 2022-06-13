@@ -20,6 +20,7 @@ public class MoscatiUserDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String language;
+    private String firebaseToken;
     private String imageProfile;
     private String estatus;
     private String activation;
@@ -122,6 +123,14 @@ public class MoscatiUserDTO implements Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 
     public String getImageProfile() {

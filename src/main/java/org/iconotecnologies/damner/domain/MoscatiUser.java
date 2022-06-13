@@ -67,6 +67,9 @@ public class MoscatiUser extends AbstractAuditingEntity implements Serializable 
     @Column(name = "MOSCATI_LANGUAGE")
     private String language;
 
+    @Column(name = "MOSCATI_FIREBASE_TOKEN")
+    private String firebaseToken;
+
     @Column(name = "MOSCATI_IMAGE_PROFILE_ID")
     private String imageProfile;
 
@@ -183,6 +186,14 @@ public class MoscatiUser extends AbstractAuditingEntity implements Serializable 
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 
     public String getEstatus() {

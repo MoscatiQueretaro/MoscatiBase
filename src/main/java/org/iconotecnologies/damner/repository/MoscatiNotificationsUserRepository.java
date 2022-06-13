@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface MoscatiNotificationsUserRepository
     extends JpaRepository<MoscatiNotificationsUser, String>, JpaSpecificationExecutor<MoscatiNotificationsUser> {
     List<MoscatiNotificationsUser> findAllByUserId_Id(Long id);
+    Integer countAllByUserId_Id(Long id);
 }

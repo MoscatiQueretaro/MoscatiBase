@@ -20,6 +20,7 @@ export class PagingView {
     protected eventManager: JhiEventManager,
     protected defaultSort: string
   ) {
+    /* eslint-disable */
     this.eventManager.subscribe('paginInterception', this.interceptorHandler.bind(this));
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -49,7 +50,7 @@ export class PagingView {
       this.transition();
     }
   }
-
+  /* eslint-disable */
   sort(): string[] {
     const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
     return result;

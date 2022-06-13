@@ -10,12 +10,22 @@ import { SharedModule } from '../../shared/shared.module';
 import { NewImageProfilePopupService } from './new-profile-image/new-image-profile-popup.service';
 import { NewImageProfileFormComponent } from './new-profile-image/new-image-profile-form.component';
 import { NewImageProfileService } from './new-profile-image/new-image-profile.service';
-import {MatDividerModule} from "@angular/material/divider";
+import { MatDividerModule } from '@angular/material/divider';
+import { UserNotificationsModule } from '../user-notifications/user-notifications.module';
 
 const ROUTES = [...UserProfileRoutes];
 
 @NgModule({
-    imports: [SharedModule, RouterModule.forChild(ROUTES), MatTabsModule, CommonModule, FilesModule, FontAwesomeModule, MatDividerModule],
+  imports: [
+    SharedModule,
+    RouterModule.forChild(ROUTES),
+    MatTabsModule,
+    UserNotificationsModule,
+    CommonModule,
+    FilesModule,
+    FontAwesomeModule,
+    MatDividerModule,
+  ],
   declarations: [UserProfileComponent, NewImageProfileFormComponent],
   entryComponents: [UserProfileComponent, NewImageProfileFormComponent],
   providers: [NewImageProfilePopupService, NewImageProfileService],

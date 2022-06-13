@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { LANGUAGES } from 'app/config/language.constants';
-import { Account, DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   openAPIEnabled?: boolean;
   version = '';
-  account: DamnerUserModel | null = null;
+  account: MoscatiUserModel | null = null;
   adminItems = false;
   constructor(
     private loginService: LoginService,

@@ -1,19 +1,16 @@
 package org.iconotecnologies.damner.web.rest;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
 import io.micrometer.core.annotation.Timed;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import org.iconotecnologies.damner.domain.MoscatiDirectorioMedico;
 import org.iconotecnologies.damner.domain.MoscatiUserCitas;
 import org.iconotecnologies.damner.domain.files.PhotoUserAlbum;
 import org.iconotecnologies.damner.service.MoscatiUserCitasService;
-import org.iconotecnologies.damner.service.criteria.MoscatiDirectorioMedicoCriteria;
 import org.iconotecnologies.damner.service.criteria.MoscatiUserCitasCriteria;
-import org.iconotecnologies.damner.service.dto.MoscatiDirectorioMedicoDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
-import org.iconotecnologies.damner.service.dto.files.PhotoUserAlbumDTO;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.iconotecnologies.damner.web.rest.util.HeaderUtil;
 import org.iconotecnologies.damner.web.rest.util.PaginationUtil;
@@ -35,7 +32,8 @@ public class MoscatiUserCitasResource {
 
     @PostMapping("")
     @Timed
-    public ResponseEntity<MoscatiUserCitasDTO> create(@RequestBody MoscatiUserCitasDTO moscatiUserCitasDTO) throws URISyntaxException {
+    public ResponseEntity<MoscatiUserCitasDTO> create(@RequestBody MoscatiUserCitasDTO moscatiUserCitasDTO)
+        throws URISyntaxException, FirebaseMessagingException {
         if (moscatiUserCitasDTO.getId() != null) {
             throw new BadRequestAlertException(
                 "Surgió un error al momento de guardar el directorio Medico",
@@ -52,7 +50,8 @@ public class MoscatiUserCitasResource {
 
     @PutMapping("")
     @Timed
-    public ResponseEntity<MoscatiUserCitasDTO> update(@RequestBody MoscatiUserCitasDTO moscatiUserCitasDTO) throws URISyntaxException {
+    public ResponseEntity<MoscatiUserCitasDTO> update(@RequestBody MoscatiUserCitasDTO moscatiUserCitasDTO)
+        throws URISyntaxException, FirebaseMessagingException {
         if (moscatiUserCitasDTO.getId() == null) {
             this.create(moscatiUserCitasDTO);
         }

@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
-import { DamnerUserModel } from '../../core/auth/account.model';
+import { MoscatiUserModel } from '../../core/auth/account.model';
 import { AccountService } from '../../core/auth/account.service';
 import { ThemeModel } from '../../layouts/navbar/theme.model';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { NewImageProfilePopupService } from './new-profile-image/new-image-profile-popup.service';
+import { FileModel } from '../../utils/components/file.model';
+import { SyncFilesService } from '../../utils/components/sync-files.service';
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-user-profile',
@@ -12,16 +16,20 @@ import { NewImageProfilePopupService } from './new-profile-image/new-image-profi
 })
 export class UserProfileComponent implements OnInit {
   @ViewChild(MatMenuTrigger) matMenuTriggerFor?: MatMenuTrigger;
-  account?: DamnerUserModel;
+  account?: MoscatiUserModel;
+  fileModel?: FileModel;
   loading = false;
   fileFoto?: string[];
   fotografia = '';
+  optionButton = 1;
   loadComponentPhoto?: boolean;
   private _theme: ThemeModel;
 
   constructor(
     private eventManager: JhiEventManager,
     private imagePopupService: NewImageProfilePopupService,
+    private syncFileService: SyncFilesService,
+    private router: Router,
     private accountService: AccountService
   ) {
     this.eventManager.subscribe('user-profile-reload', () => {
@@ -33,7 +41,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.account = new DamnerUserModel();
+    this.account = new MoscatiUserModel();
     this.fileFoto = [];
     console.warn('entro perfil', this.fileFoto);
     if (this.isAuthenticated()) {
@@ -50,6 +58,7 @@ export class UserProfileComponent implements OnInit {
           if (this.account.imageProfile) {
             this.fileFoto!.push(this.account.imageProfile);
           }
+          this.getImageUrl();
         }
         this.loading = false;
       });
@@ -58,6 +67,35 @@ export class UserProfileComponent implements OnInit {
 
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
+  }
+  getImageUrl(): void {
+    this.syncFileService.find('foto-persona', this.accountService.getImageUrl()).subscribe((res: HttpResponse<FileModel>) => {
+      if (res.body) {
+        this.fileModel = res.body;
+      }
+    });
+  }
+  changeButtonOptions(value: number): void {
+    switch (value) {
+      case 1:
+        this.optionButton = 1;
+        break;
+      case 2:
+        this.optionButton = 2;
+        break;
+      case 3:
+        this.optionButton = 3;
+        break;
+      case 4:
+        this.optionButton = 4;
+        break;
+      default:
+        this.optionButton = 1;
+    }
+  }
+
+  nuevaCita(): void {
+    this.router.navigate(['/directorio-medico']);
   }
 
   /* eslint-disable */

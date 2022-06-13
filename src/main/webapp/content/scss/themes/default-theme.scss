@@ -11,6 +11,7 @@ $info: #209cee;
 $warning: #ff4b0a;
 $danger: #ff2832;
 
+$image-url: url('../../../content/images/moscati-little-icon.png') no-repeat center center;
 //Colores de background y tarjeta principal
 $main-background: #e5e5e5;
 $main-card-background: #ffffff;
@@ -82,6 +83,7 @@ $default-theme: create-theme(
   $info,
   $warning,
   $danger,
+  $image-url,
   $main-background,
   $main-card-background,
   $border-background,

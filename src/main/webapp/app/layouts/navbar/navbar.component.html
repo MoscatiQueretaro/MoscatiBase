@@ -1,8 +1,7 @@
 <nav class="navbar navbar-dark navbar-expand-md">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <span jhiTranslate="global.title" class="navbar-title">Damner</span>
-    <span class="navbar-version">{{ version }}</span>
+    <span jhiTranslate="global.title" class="navbar-title">Telemedicina Moscati</span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -80,11 +79,11 @@
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
           <span *ngIf="!getImageUrl()" class="black-hover">
             <fa-icon icon="user"></fa-icon>
-            <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
+            <span jhiTranslate="global.menu.account.main"> MoscatiUserModel </span>
           </span>
           <span *ngIf="getImageUrl()" class="black-hover">
             <img [src]="getImageUrl()" class="nav-profile-image rounded-circle" alt="Avatar" />
-            <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
+            <span jhiTranslate="global.menu.account.main"> MoscatiUserModel </span>
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">

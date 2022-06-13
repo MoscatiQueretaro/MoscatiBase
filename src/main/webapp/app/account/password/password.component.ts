@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
-import { DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 import { PasswordService } from './password.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class PasswordComponent implements OnInit {
   doNotMatch = false;
   error = false;
   success = false;
-  account$?: Observable<DamnerUserModel | null>;
+  account$?: Observable<MoscatiUserModel | null>;
   passwordForm = this.fb.group({
     currentPassword: ['', [Validators.required]],
     newPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],

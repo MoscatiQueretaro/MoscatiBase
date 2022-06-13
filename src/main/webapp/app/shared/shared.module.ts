@@ -12,7 +12,6 @@ import { FormatMediumDatePipe } from './date/format-medium-date.pipe';
 import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
-
 // Es importante importar este modulo en los demas modulos de la palicacion contiene
 // la importacion de las directivas de lenguaje, errores, alertas y demas propiedades globales
 

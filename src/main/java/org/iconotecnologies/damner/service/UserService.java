@@ -151,6 +151,9 @@ public class UserService {
         if (moscatiUserDTO.getLastName() != null) {
             newUser.setLastName(moscatiUserDTO.getLastName().toUpperCase());
         }
+        if (moscatiUserDTO.getFirebaseToken() != null) {
+            newUser.setFirebaseToken(moscatiUserDTO.getFirebaseToken());
+        }
         newUser.setLanguage(moscatiUserDTO.getLanguage());
         // new user is not active
         newUser.setActivation(Constants.DEFAULT_ACTIVATION_STATUS);

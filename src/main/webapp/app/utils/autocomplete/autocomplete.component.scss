@@ -1,0 +1,271 @@
+@import '~@angular/material/theming';
+@mixin autocomplete-styles-theme($theme) {
+  $primary: map-get($theme, primary);
+  $border: map-get($theme, border-color);
+  $background-main-card: map-get($theme, background-main-card);
+  $input-background-focus: map-get($theme, input-background-focus);
+  $input-color: map-get($theme, input-color);
+  $color-bg-input: map-get($theme, color-bg-input);
+  $danger: map-get($theme, danger);
+  $bg-input-disabled: map-get($theme, bg-input-disabled);
+  $color-body: map-get($theme, color-body);
+  $primary: map-get($theme, primary);
+  $info: map-get($theme, info);
+
+  .form_label-autocomplete {
+    background-color: $background-main-card;
+    color: $color-body;
+  }
+  .form_field_autocomplete:focus {
+    ~ .form_label-autocomplete {
+      position: absolute;
+      top: 0;
+      display: block;
+      background-color: $background-main-card;
+      color: $color-body;
+      transition: 0.2s;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    padding-bottom: 6px;
+    font-weight: 700;
+    color: $color-body;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $primary, $info);
+    border-image-slice: 1;
+  }
+  .form_field_autocomplete {
+    color: $color-body;
+    &:placeholder-shown ~ .form_label-autocomplete {
+      background-color: $background-main-card;
+      color: $color-body;
+    }
+  }
+  .form-group-autocomplete {
+    .button-dropdown {
+      background: $color-bg-input;
+      color: rgba($input-color, 0.6);
+      border: 2px solid $border;
+      &:disabled,
+      &[disabled] {
+        background: $bg-input-disabled;
+      }
+    }
+
+    .button-dropdown-legacy {
+      background: $primary;
+      color: white;
+      border: 3px solid $primary;
+      &:disabled,
+      &[disabled] {
+        border-color: rgba($primary, 0.75);
+        background-color: rgba($primary, 0.75);
+        color: white;
+      }
+    }
+
+    .panel-autocomplete {
+      background: $background-main-card;
+      border: 2px solid $border;
+      border-top: 0;
+      .autocomplete-items {
+        .item {
+          &.item-square:hover {
+            transform: scale(1.2);
+          }
+
+          .item-selected {
+            background: $primary;
+          }
+
+          .item-selected-border {
+            border: 1px solid $primary;
+            transform: scale(1.2);
+          }
+          &:hover {
+            background: rgba($primary, 0.1);
+          }
+        }
+        .active-item {
+          background: rgba($primary, 0.1);
+        }
+      }
+    }
+
+    &:focus-within,
+    &.focused {
+      .button-dropdown {
+        background: linear-gradient(to right, $info, $primary);
+        color: rgba($input-color, 0.6);
+        border: 3px;
+        &:disabled,
+        &[disabled] {
+          background: $bg-input-disabled;
+        }
+      }
+      .button-dropdown-legacy {
+        background: $background-main-card;
+        color: $color-body;
+        border-top: 1px;
+        border-image: linear-gradient(to right, $primary, $info);
+      }
+      .panel-autocomplete {
+        background: $background-main-card;
+        border-color: $primary;
+      }
+    }
+  }
+}
+
+@mixin autocomplete-size-theme($theme) {
+  $base-size: map-get($theme, base-size);
+  $input-size: calc(#{$base-size} * 2);
+  .form-group-autocomplete {
+    input,
+    .form-control {
+      width: calc(100% - #{$input-size});
+    }
+
+    .button-dropdown,
+    .button-dropdown-legacy {
+      width: $input-size;
+      height: $input-size;
+    }
+    .panel-autocomplete {
+      .autocomplete-items {
+        .item {
+          .item-text {
+            font-size: $base-size;
+            line-height: $base-size;
+          }
+        }
+      }
+    }
+  }
+}
+
+.form_group-autocomplete {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form_label-autocomplete {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #7e7e7e;
+}
+
+.form_field_autocomplete {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #7e7e7e;
+  border-top: 2px solid #7e7e7e;
+  border-left: 2px solid #7e7e7e;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: #939393;
+  }
+
+  &:placeholder-shown ~ .form_label-autocomplete {
+    font-size: 1.1rem;
+    cursor: text;
+    top: 0px;
+  }
+}
+
+.form_field_autocomplete:focus {
+  ~ .form_label-autocomplete {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image-slice: 1;
+}
+
+.form-group-autocomplete {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+
+  .show-panel-input {
+    border-radius: 4px 0 0 0;
+    border-bottom: 0;
+  }
+
+  .button-dropdown,
+  .button-dropdown-legacy {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    &:disabled,
+    &[disabled] {
+      cursor: not-allowed;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .show-panel-button {
+    border-radius: 0 4px 0 0;
+    border-bottom: 2px;
+  }
+
+  .panel-autocomplete {
+    width: 98%;
+    position: absolute;
+    overflow: auto;
+    margin-top: 45px;
+    border-radius: 0 0 4px 4px;
+    z-index: 1000;
+    .autocomplete-items {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+      .item {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        .item-selected {
+          display: none;
+          width: 3px;
+          border-radius: 0 3px 3px 0;
+          flex-shrink: 0;
+        }
+
+        .item-text {
+          padding-left: 12px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+        }
+      }
+      .active-item {
+        .item-selected {
+          display: block;
+        }
+        .item-text {
+          padding-left: 9px;
+        }
+      }
+    }
+  }
+}

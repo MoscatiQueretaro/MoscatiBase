@@ -8,13 +8,13 @@ import { shareReplay, tap, catchError } from 'rxjs/operators';
 
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 import { ApplicationConfigService } from '../config/application-config.service';
-import { DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private userIdentity: DamnerUserModel | null = null;
-  private authenticationState = new ReplaySubject<DamnerUserModel | null>(1);
-  private accountCache$?: Observable<DamnerUserModel | null>;
+  private userIdentity: MoscatiUserModel | null = null;
+  private authenticationState = new ReplaySubject<MoscatiUserModel | null>(1);
+  private accountCache$?: Observable<MoscatiUserModel | null>;
 
   constructor(
     private translateService: TranslateService,
@@ -25,11 +25,11 @@ export class AccountService {
     private applicationConfigService: ApplicationConfigService
   ) {}
 
-  save(account: DamnerUserModel): Observable<{}> {
+  save(account: MoscatiUserModel): Observable<{}> {
     return this.http.post(this.applicationConfigService.getEndpointFor('api/account'), account);
   }
 
-  authenticate(identity: DamnerUserModel | null): void {
+  authenticate(identity: MoscatiUserModel | null): void {
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
   }
@@ -48,11 +48,11 @@ export class AccountService {
     return this.userIdentity ? this.userIdentity.imageProfile! : '';
   }
 
-  identity(force?: boolean): Observable<DamnerUserModel | null> {
+  identity(force?: boolean): Observable<MoscatiUserModel | null> {
     if (!this.accountCache$ || force || !this.isAuthenticated()) {
       this.accountCache$ = this.fetch().pipe(
         catchError(() => of(null)),
-        tap((account: DamnerUserModel | null) => {
+        tap((account: MoscatiUserModel | null) => {
           this.authenticate(account);
 
           // After retrieve the account info, the language will be changed to
@@ -76,12 +76,12 @@ export class AccountService {
     return this.userIdentity !== null;
   }
 
-  getAuthenticationState(): Observable<DamnerUserModel | null> {
+  getAuthenticationState(): Observable<MoscatiUserModel | null> {
     return this.authenticationState.asObservable();
   }
 
-  private fetch(): Observable<DamnerUserModel> {
-    return this.http.get<DamnerUserModel>(this.applicationConfigService.getEndpointFor('api/account'));
+  private fetch(): Observable<MoscatiUserModel> {
+    return this.http.get<MoscatiUserModel>(this.applicationConfigService.getEndpointFor('api/account'));
   }
 
   private navigateToStoredUrl(): void {

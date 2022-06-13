@@ -2,15 +2,74 @@
   "register": {
     "title": "Registration",
     "form": {
-      "button": "Register"
+      "name": {
+        "label": "Name",
+        "placeholder": "Name"
+      },
+      "firstName": {
+        "label": "First last name",
+        "placeholder": "First last name"
+      },
+      "lastName": {
+        "label": "Second last name",
+        "placeholder": "Second last name"
+      },
+      "nickname": {
+        "label": "NickName",
+        "placeholder": "Create a NickName, example: AdrianSG91"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "button": "Register",
+      "newpassword.label": "New password",
+      "newpassword.placeholder": "new password",
+      "confirmpassword.label": "Confirmation of the new password",
+      "confirmpassword.placeholder": "Example: Eevnw32mn"
     },
     "messages": {
       "validate": {
-        "login": {
+        "username": {
           "required": "Your username is required.",
           "minlength": "Your username is required to be at least 1 character.",
           "maxlength": "Your username cannot be longer than 50 characters.",
           "pattern": "Your username is invalid."
+        },
+        "nickname": {
+          "required": "Your nickname is required.",
+          "minlength": "your nickname is required to be at least 1 character.",
+          "maxlength": "your nickname cannot be longer than 50 characters.",
+          "pattern": "your nickname is invalid."
+        },
+        "firstName": {
+          "required": "Your last name is required.",
+          "minlength": "Your last name is required to be at least 1 character.",
+          "maxlength": " Your last name cannot be longer than 100 characters.",
+          "pattern": "your last name is invalid."
+        },
+        "lastName": {
+          "required": "Your second last name is required.",
+          "minlength": "Your second last name is required to be at least 1 character.",
+          "maxlength": " Your second last name cannot be longer than 100 characters.",
+          "pattern": "your second last name is invalid."
+        },
+        "newpassword": {
+          "required": "You are required to enter a password.",
+          "minlength": "Your password is required to have at least 4 characters",
+          "maxlength": "Your password cannot be longer than 50 characters",
+          "strength": "Password security:"
+        },
+        "confirmpassword": {
+          "required": "You are required to confirm the password.",
+          "minlength": "Your confirmation password is required to have at least 4 characters",
+          "maxlength": "Your confirmation password cannot be longer than 50 characters"
+        },
+        "email": {
+          "required": "email is required.",
+          "invalid": "Su correo electrónico no es válido.",
+          "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
+          "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"
         }
       },
       "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",

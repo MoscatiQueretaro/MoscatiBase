@@ -17,6 +17,19 @@ Navbar
   $info: map-get($theme, info);
   $warning: map-get($theme, warning);
   $danger: map-get($theme, danger);
+  $image-url: map-get($theme, image-url);
+
+  .logo-img {
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    vertical-align: middle;
+    background: $image-url;
+    background-size: contain;
+  }
+  .navbar-title {
+    color: $color;
+  }
 
   .navbar {
     background-color: $background-main-card;
@@ -89,6 +102,7 @@ Navbar
   top: 0;
   width: 100%;
   box-shadow: 0 10px 20px rgba(40, 40, 40, 0.25), 0 7px 7px rgba(31, 31, 31, 0.22);
+  z-index: 2;
   ul.navbar-nav {
     .nav-item {
       margin-left: 0.5em;
@@ -112,10 +126,12 @@ Logo styles
   width: 45px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/jhipster_family_member_3_head-512.png') no-repeat center center;
   background-size: contain;
 }
-
+.navbar-title {
+  color: #363636;
+}
 @media (min-width: 320px) and (max-width: 680px) {
   .navbar {
     width: 100%;

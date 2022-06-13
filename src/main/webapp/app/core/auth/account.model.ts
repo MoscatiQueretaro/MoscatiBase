@@ -1,3 +1,5 @@
+import { FileModel } from '../../utils/components/file.model';
+
 export class Account {
   constructor(
     public activated: boolean,
@@ -11,7 +13,7 @@ export class Account {
   ) {}
 }
 
-export class DamnerUserModel {
+export class MoscatiUserModel {
   constructor(
     public id?: number,
     public nickName?: string | null,
@@ -25,6 +27,7 @@ export class DamnerUserModel {
     public lastName?: string | null,
     public language?: string | null,
     public imageProfile?: string | null,
+    public fotoPersona?: FileModel | null,
     public estatus?: string | null,
     public activation?: string | null
   ) {}

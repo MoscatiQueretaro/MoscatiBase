@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
-import { Account, DamnerUserModel } from 'app/core/auth/account.model';
+import { Account, MoscatiUserModel } from 'app/core/auth/account.model';
 
 import { HasAnyAuthorityDirective } from './has-any-authority.directive';
 
@@ -20,7 +20,7 @@ class TestHasAnyAuthorityDirectiveComponent {
 
 describe('HasAnyAuthorityDirective tests', () => {
   let mockAccountService: AccountService;
-  const authenticationState = new Subject<DamnerUserModel | null>();
+  const authenticationState = new Subject<MoscatiUserModel | null>();
 
   beforeEach(
     waitForAsync(() => {

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
-import { DamnerUserModel } from 'app/core/auth/account.model';
+import { MoscatiUserModel } from 'app/core/auth/account.model';
 
 import { HomeComponent } from './home.component';
 
@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<HomeComponent>;
     let mockAccountService: AccountService;
     let mockRouter: Router;
-    const account: DamnerUserModel = {
+    const account: MoscatiUserModel = {
       activation: '',
       authorities: [],
       mail: '',
@@ -49,7 +49,7 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should synchronize account variable with current account', () => {
         // GIVEN
-        const authenticationState = new Subject<DamnerUserModel | null>();
+        const authenticationState = new Subject<MoscatiUserModel | null>();
         mockAccountService.getAuthenticationState = jest.fn(() => authenticationState.asObservable());
 
         // WHEN
@@ -85,7 +85,7 @@ describe('Component Tests', () => {
     describe('ngOnDestroy', () => {
       it('Should destroy authentication state subscription on component destroy', () => {
         // GIVEN
-        const authenticationState = new Subject<DamnerUserModel | null>();
+        const authenticationState = new Subject<MoscatiUserModel | null>();
         mockAccountService.getAuthenticationState = jest.fn(() => authenticationState.asObservable());
 
         // WHEN
