@@ -3,113 +3,111 @@
   <div class="col-md-8">
     <div class="col-md-12">
       <!-- Column -->
-      <div class="main-card-profile">
-        <h1>Directorio Medico</h1>
-        <div class="col-md-12">
-          <jhi-especialidades-autocomplete
-            name="especialidad"
-            [placeHolder]="'Selecciona tu especialidad'"
-            [placeHolderLabel]="'Especialidades'"
-            [(ngModel)]="especialidadFilter"
-            (ngModelChange)="applyFilters()"
-            required
-          ></jhi-especialidades-autocomplete>
-        </div>
-        <div class="col-md-12" *ngIf="directorioMedicoList && directorioMedicoList.length > 0">
-          <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="8">
-            <div class="row" *ngIf="directorioMedicoList.length > 0; else emptyBlock">
-              <div class="col-md-6 py-4" *ngFor="let medico of directorioMedicoList">
-                <mat-card class="main-card-login" *ngIf="medico && medico.especialidad && medico.user">
-                  <mat-card-title style="text-align: left">
-                    <strong>{{ 'Medico Moscati' }}</strong>
-                    <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"
-                      ><fa-icon [icon]="'check-double'"></fa-icon
-                    ></span>
-                  </mat-card-title>
-                  <mat-card-subtitle style="text-align: left">{{
-                    medico.user ? medico.user.name + ' ' + medico.user.firstName + ' ' + medico.user.lastName : ''
-                  }}</mat-card-subtitle>
-                  <mat-card-content>
-                    <div class="row">
-                      <div class="col-md-3 pl-0 pr-0" style="display: flex; justify-content: center">
-                        <div style="width: 100px; height: 100px">
-                          <jhi-single-file-template
-                            *ngIf="medico.user.imageProfile"
-                            class="tooltip-options-profile"
-                            [file]="medico.user.fotoPersona"
-                            [imageStyleProfile]="{ height: '100%', width: '100%' }"
-                            [borderImageType]="'rounded'"
-                            [endpoint]="'file'"
-                            [delete]="false"
-                          ></jhi-single-file-template>
-                        </div>
+      <h1>Directorio Medico</h1>
+      <div class="col-md-12">
+        <jhi-especialidades-autocomplete
+          name="especialidad"
+          [placeHolder]="'Selecciona tu especialidad'"
+          [placeHolderLabel]="'Especialidades'"
+          [(ngModel)]="especialidadFilter"
+          (ngModelChange)="applyFilters()"
+          required
+        ></jhi-especialidades-autocomplete>
+      </div>
+      <div class="col-md-12" *ngIf="directorioMedicoList && directorioMedicoList.length > 0">
+        <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="8">
+          <div class="row" *ngIf="directorioMedicoList.length > 0; else emptyBlock">
+            <div class="col-md-6 py-4" *ngFor="let medico of directorioMedicoList">
+              <mat-card class="main-card-login" *ngIf="medico && medico.especialidad && medico.user">
+                <mat-card-title style="text-align: left">
+                  <strong>{{ 'Medico Moscati' }}</strong>
+                  <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"
+                    ><fa-icon [icon]="'check-double'"></fa-icon
+                  ></span>
+                </mat-card-title>
+                <mat-card-subtitle style="text-align: left">{{
+                  medico.user ? medico.user.name + ' ' + medico.user.firstName + ' ' + medico.user.lastName : ''
+                }}</mat-card-subtitle>
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3 pl-0 pr-0" style="display: flex; justify-content: center">
+                      <div style="width: 100px; height: 100px">
+                        <jhi-single-file-template
+                          *ngIf="medico.user.imageProfile"
+                          class="tooltip-options-profile"
+                          [file]="medico.user.fotoPersona"
+                          [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                          [borderImageType]="'rounded'"
+                          [endpoint]="'file'"
+                          [delete]="false"
+                        ></jhi-single-file-template>
                       </div>
-                      <div class="col-md-9" style="display: flex; justify-content: center; padding: 10px">
-                        <div class="row" style="width: 100%">
-                          <div class="col-md-auto">
-                            <h3>Calificación</h3>
-                            <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
-                            <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
-                            <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
-                            <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
-                            <span class="raiting-full"><fa-icon [icon]="'star-half-alt'"></fa-icon></span>
-                            <br /><span>Exelente</span>
-                          </div>
-                          <div class="col-md-auto">
-                            <div class="row">
-                              <div class="col-md-auto">
-                                <span
-                                  >{{ '' }}<strong>Especialidad: &nbsp;</strong
-                                  ><span>{{ medico.especialidad.descripcion ? medico.especialidad.descripcion : '' }}</span></span
-                                >
-                              </div>
-                              <div class="col-md-auto">
-                                <span
-                                  >{{ '' }}<strong>Disponibilidad: &nbsp;</strong><span>{{ 'Citas virtuales y presenciales.' }}</span></span
-                                >
-                              </div>
-                              <div class="col-md-auto">
-                                <span
-                                  >{{ '' }}<strong>Costo: &nbsp;</strong><span>{{ '1300$' }}</span></span
-                                >
-                              </div>
-                              <div class="col-md-auto">
-                                <span
-                                  >{{ '' }}<strong>Duracion: &nbsp;</strong><span>{{ '30 Min. ' }}</span></span
-                                >
-                              </div>
+                    </div>
+                    <div class="col-md-9" style="display: flex; justify-content: center; padding: 10px">
+                      <div class="row" style="width: 100%">
+                        <div class="col-md-auto">
+                          <h3>Calificación</h3>
+                          <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
+                          <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
+                          <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
+                          <span class="raiting-full"><fa-icon [icon]="'star'"></fa-icon></span>
+                          <span class="raiting-full"><fa-icon [icon]="'star-half-alt'"></fa-icon></span>
+                          <br /><span>Exelente</span>
+                        </div>
+                        <div class="col-md-auto">
+                          <div class="row">
+                            <div class="col-md-auto">
+                              <span
+                                >{{ '' }}<strong>Especialidad: &nbsp;</strong
+                                ><span>{{ medico.especialidad.descripcion ? medico.especialidad.descripcion : '' }}</span></span
+                              >
+                            </div>
+                            <div class="col-md-auto">
+                              <span
+                                >{{ '' }}<strong>Disponibilidad: &nbsp;</strong><span>{{ 'Citas virtuales y presenciales.' }}</span></span
+                              >
+                            </div>
+                            <div class="col-md-auto">
+                              <span
+                                >{{ '' }}<strong>Costo: &nbsp;</strong><span>{{ '1300$' }}</span></span
+                              >
+                            </div>
+                            <div class="col-md-auto">
+                              <span
+                                >{{ '' }}<strong>Duracion: &nbsp;</strong><span>{{ '30 Min. ' }}</span></span
+                              >
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </mat-card-content>
-                  <mat-card-actions>
-                    <div class="col-md-12" style="display: flex; justify-content: center">
-                      <div>
-                        <div class="btn-new-query">
-                          <span class="text-options-menu">Agendar cita &nbsp; <fa-icon [icon]="'video'"></fa-icon></span>
-                        </div>
+                  </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <div class="col-md-12" style="display: flex; justify-content: center">
+                    <div>
+                      <div class="btn-new-query">
+                        <span class="text-options-menu">Agendar cita &nbsp; <fa-icon [icon]="'video'"></fa-icon></span>
                       </div>
                     </div>
-                  </mat-card-actions>
-                </mat-card>
-              </div>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
             </div>
-            <ng-template #emptyBlock>
-              <div class="row mt-2">
-                <div class="col-12">
-                  <h1 class="w-100 text-center text-muted">
-                    <fa-icon [icon]="['far', 'frown']" size="1x"></fa-icon>
-                  </h1>
-                </div>
-                <div class="col-12 text-center">
-                  <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
-                </div>
-              </div>
-            </ng-template>
-          </jhi-loaders>
-        </div>
+          </div>
+        </jhi-loaders>
+        <ng-template #emptyBlock>
+          <div class="row mt-2">
+            <div class="col-12">
+              <h1 class="w-100 text-center text-muted">
+                <fa-icon [icon]="['far', 'frown']" size="1x"></fa-icon>
+              </h1>
+            </div>
+            <div class="col-12 text-center">
+              <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

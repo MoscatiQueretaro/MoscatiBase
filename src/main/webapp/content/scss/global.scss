@@ -320,7 +320,7 @@ Generic styles
   margin-top: 4%;
   min-height: calc(100vh - 10px);
   background: rgb(155, 34, 195);
-  background: linear-gradient(0deg, #9b22c3 17%, #030049 100%);
+  background: linear-gradient(0deg, rgba(0, 37, 84, 0.8) 17%, #002554 100%);
   color: #bbbbbb;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -366,7 +366,7 @@ Generic styles
   color: white;
   font-weight: 700;
   background: rgb(0, 5, 255);
-  background: linear-gradient(90deg, rgba(0, 5, 255, 1) 0%, rgba(9, 30, 121, 1) 0%, rgba(173, 45, 168, 1) 72%);
+  background: linear-gradient(0deg, rgba(0, 37, 84, 0.8) 17%, #002554 100%);
   transition: background 5s ease-in-out;
   border: 0px;
   cursor: pointer;
@@ -375,7 +375,7 @@ Generic styles
 .register-button:hover {
   background-position: 0 0;
   background: rgb(0, 5, 255);
-  background: linear-gradient(90deg, rgba(0, 5, 255, 1) 0%, rgba(173, 45, 168, 1) 0%, rgba(9, 30, 121, 1) 100%);
+  background: linear-gradient(90deg, rgba(0, 37, 84, 0.8) 17%, #002554 100%);
   color: white;
 }
 
