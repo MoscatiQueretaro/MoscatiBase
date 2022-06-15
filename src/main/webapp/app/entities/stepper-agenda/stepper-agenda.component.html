@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <form action="#" class="form-stepper mt-4 mb-4">
+      <h1 class="text-center">Agenda tu consulta virtual</h1>
+      <!--PROGRESS BAR-->
+      <div class="progressbar">
+        <div class="progress" id="progress"></div>
+        <div class="progress-step progress-step-active" data-title="Tus datos"></div>
+        <div class="progress-step" data-title="Tu medico"></div>
+        <div class="progress-step" data-title="Pago"></div>
+        <div class="progress-step" data-title="Resumen"></div>
+      </div>
+      <!--END PROGRESS BAR-->
+      <!--STEPS-->
+      <div class="form-step form-step-active">
+        <jhi-directorio-medico> </jhi-directorio-medico>
+        <div class="btns-group justify-content-end">
+          <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="phone">Phone</label>
+          <input type="text" name="phone" id="phone" />
+        </div>
+        <div class="input-group">
+          <label for="">Email</label>
+          <input type="text" name="" id="" />
+        </div>
+        <div class="btns-group">
+          <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
+          <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" id="dob" />
+        </div>
+        <div class="input-group">
+          <label for="ID">National ID</label>
+          <input type="number" name="ID" id="ID" />
+        </div>
+        <div class="btns-group">
+          <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
+          <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required />
+        </div>
+        <div class="btns-group">
+          <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
+          <button type="submit" class="btn btn-light-blue w-25">Agendar</button>
+        </div>
+      </div>
+      <!--END STEPS-->
+    </form>
+  </div>
+</div>

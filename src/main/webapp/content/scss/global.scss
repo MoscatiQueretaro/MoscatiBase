@@ -27,6 +27,9 @@
     background: $color-navbar;
     color: $color-body;
   }
+  .btn-secondary {
+    background: $secondary;
+  }
 
   .main-card {
     background: $background-main-card;
@@ -269,6 +272,11 @@ Generic styles
 .tooltip-options-profile:hover + .navbar-profile-info,
 .navbar-profile-info:hover {
   display: block;
+}
+
+.card-title {
+  margin-top: 0;
+  font-size: 34px;
 }
 
 .navbar-profile-info {

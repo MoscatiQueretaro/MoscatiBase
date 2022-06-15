@@ -2,6 +2,8 @@
   "login": {
     "title": "Sign in",
     "form": {
+      "label-username": "user",
+      "username": "user",
       "password": "Password",
       "password.placeholder": "Your password",
       "rememberme": "Remember me",

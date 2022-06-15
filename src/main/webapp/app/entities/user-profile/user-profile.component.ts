@@ -95,7 +95,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   nuevaCita(): void {
-    this.router.navigate(['/directorio-medico']);
+    this.router.navigate(['/stepper-agenda']);
   }
 
   /* eslint-disable */

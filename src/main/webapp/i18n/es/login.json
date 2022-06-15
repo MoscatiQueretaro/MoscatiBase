@@ -2,6 +2,8 @@
   "login": {
     "title": "Iniciar la sesión",
     "form": {
+      "label-username": "usuario",
+      "username": "usuario",
       "password": "Contraseña",
       "password.placeholder": "Su contraseña",
       "rememberme": "Iniciar la sesión automáticamente",
