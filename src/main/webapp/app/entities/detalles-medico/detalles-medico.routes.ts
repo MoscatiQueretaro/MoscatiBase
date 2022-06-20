@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { UserRouteAccessService } from '../../core/auth/user-route-access.service';
 import { PagingParamsResolver } from '../../utils/pagination/PagingParamsResolver';
-import { DirectorioMedicoComponent } from './directorio-medico.component';
+import { DetallesMedicoComponent } from './detalles-medico.component';
 
-export const DirectorioMedicoRoutes: Routes = [
+export const DetallesMedicoRoutes: Routes = [
   {
     path: '',
-    component: DirectorioMedicoComponent,
+    component: DetallesMedicoComponent,
     resolve: {
       pagingParams: PagingParamsResolver,
     },

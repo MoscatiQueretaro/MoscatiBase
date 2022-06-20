@@ -125,7 +125,11 @@ spring:
   output:
     ansi:
       console-available: true
-
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+      enabled: true
 server:
   servlet:
     session:

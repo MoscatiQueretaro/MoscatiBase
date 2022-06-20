@@ -347,7 +347,7 @@ Generic styles
   width: 100%;
   height: 100%;
   background: rgb(0, 5, 255);
-  background: linear-gradient(90deg, rgba(0, 5, 255, 1) 0%, rgba(9, 30, 121, 1) 0%, rgba(173, 45, 168, 1) 72%);
+  background: linear-gradient(0deg, rgba(0, 37, 84, 0.8) 17%, #002554 100%);
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
@@ -755,7 +755,7 @@ Generic styles
   word-break: break-all;
 }
 .raiting-full {
-  color: #e8c40a;
+  color: #eec008;
 }
 .readonly {
   background-color: #eee;
@@ -969,7 +969,7 @@ entity detail page css
     cursor: pointer;
     position: relative;
     text-decoration: none;
-    width: 120px;
+    width: 150px;
     z-index: 2;
   }
 

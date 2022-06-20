@@ -90,18 +90,18 @@
           </mat-card>
         </div>
       </div>
+      <ng-template #emptyBlock>
+        <div class="row mt-2">
+          <div class="col-12">
+            <h1 class="w-100 text-center text-muted">
+              <fa-icon icon="farm" size="1x"></fa-icon>
+            </h1>
+          </div>
+          <div class="col-12 text-center">
+            <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
+          </div>
+        </div>
+      </ng-template>
     </jhi-loaders>
-    <ng-template #emptyBlock>
-      <div class="row mt-2">
-        <div class="col-12">
-          <h1 class="w-100 text-center text-muted">
-            <fa-icon [icon]="['far', 'frown']" size="1x"></fa-icon>
-          </h1>
-        </div>
-        <div class="col-12 text-center">
-          <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
-        </div>
-      </div>
-    </ng-template>
   </div>
 </ng-container>
