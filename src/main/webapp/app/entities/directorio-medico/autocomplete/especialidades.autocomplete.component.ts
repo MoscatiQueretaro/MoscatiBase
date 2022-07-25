@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, forwardRef, OnInit, Renderer2 } from '@angular/core';
 import { AutocompleteAnimations, AutocompleteComponent } from 'app/utils/autocomplete/autocomplete.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomHandler } from 'app/utils/dom/domhandler';

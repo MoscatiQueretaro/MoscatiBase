@@ -1,5 +1,5 @@
-import { MoscatiUserModel } from '../../core/auth/account.model';
-import { EspecialidadesModel } from '../catalogos/especialidades/especialidades.model';
+import { MoscatiUserModel } from '../../../core/auth/account.model';
+import { EspecialidadesModel } from '../../catalogos/especialidades/especialidades.model';
 
 export class DetallesMedicoModel {
   constructor(

@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { BaseEntity } from '../models/base-damner-entity';

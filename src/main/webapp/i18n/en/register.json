@@ -23,6 +23,7 @@
         "placeholder": "Email"
       },
       "button": "Register",
+      "button-succes": "Log in",
       "newpassword.label": "New password",
       "newpassword.placeholder": "new password",
       "confirmpassword.label": "Confirmation of the new password",

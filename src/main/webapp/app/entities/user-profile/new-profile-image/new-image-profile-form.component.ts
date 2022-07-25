@@ -48,7 +48,6 @@ export class NewImageProfileFormComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<PhotoUserAlbumModel>>): void {
-    console.warn('entra suscribe:', result);
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -56,7 +55,6 @@ export class NewImageProfileFormComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    console.warn('exito al guardar');
     this.savedPhotho = true;
     this.fileFoto = [];
     this.eventManager.broadcast('user-profile-reload');

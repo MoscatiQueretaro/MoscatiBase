@@ -15,11 +15,10 @@ import {
 } from 'ng-jhipster';
 import locale from '@angular/common/locales/es';
 
-import { NgbDateAdapter, NgbDatepickerConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { DomHandler } from 'app/utils/dom/domhandler';
 
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ErrorHandlerInterceptor } from './interceptor/error-handler.interceptor';
 import { AuthExpiredInterceptor } from './interceptor/auth-expired.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';

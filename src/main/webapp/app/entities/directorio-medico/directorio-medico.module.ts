@@ -1,7 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DirectorioMedicoRoutes } from './directorio-medico.routes';
 import { CommonModule } from '@angular/common';
 import { FilesModule } from '../../utils/components/files.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

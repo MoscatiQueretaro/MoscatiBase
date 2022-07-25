@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
 import { SyncFilesService } from '../../utils/components/sync-files.service';
 import { HttpResponse } from '@angular/common/http';

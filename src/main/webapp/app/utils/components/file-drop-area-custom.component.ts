@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { HttpResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -22,9 +22,8 @@ export class FileDropAreaCustomComponent extends DropAreaTemplate<FileModel> imp
     protected changeDetector: ChangeDetectorRef,
     protected actionsService: FileActionsService,
     private archivosService: SyncFilesService,
-    private confirmDialogService: ConfirmDialogService
-  ) // private dialogService: DocumentPopupService,
-  // private webcamDialogService: WebcamDialogService,
+    private confirmDialogService: ConfirmDialogService // private dialogService: DocumentPopupService,
+  ) // private webcamDialogService: WebcamDialogService,
   {
     super(sanitizer, eventManager, changeDetector, actionsService);
   }

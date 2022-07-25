@@ -23,6 +23,7 @@
         "placeholder": "Email"
       },
       "button": "Crear la cuenta",
+      "button-succes": "Ingresar",
       "newpassword.label": "Nueva contraseña",
       "newpassword.placeholder": "Nueva contraseña",
       "confirmpassword.label": "Confirmación de la nueva contraseña",

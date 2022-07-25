@@ -24,6 +24,11 @@ public interface MoscatiUserCitasRepository extends JpaRepository<MoscatiUserCit
         ZonedDateTime fechaSolicitud,
         ZonedDateTime fechaHoraEnd
     );
+    List<MoscatiUserCitas> findAllByDoctor_IdAndFechaHoraCitaBetween(
+        Long doctorId,
+        ZonedDateTime fechaSolicitud,
+        ZonedDateTime fechaHoraEnd
+    );
     List<MoscatiUserCitas> findAllByDoctor_IdAndFechaHoraFinBetween(
         Long doctorId,
         ZonedDateTime fechaSolicitud,

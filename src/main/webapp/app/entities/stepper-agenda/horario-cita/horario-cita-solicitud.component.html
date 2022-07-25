@@ -1,0 +1,116 @@
+<!-- Column -->
+<ng-container>
+  <h3>Selecciona tu horario</h3>
+  <div class="row" style="height: 100%">
+    <div class="col-md-7">
+      <jhi-date-picker
+        name="fechaHoraSolicitud"
+        #fechaHoraSolicitud="ngModel"
+        [(ngModel)]="fechaHora"
+        [monthNavigator]="true"
+        [yearNavigator]="true"
+        [dateTimeMode]="true"
+        [hourFormat]="'12'"
+        [showTime]="true"
+        [stepMinute]="30"
+        [defaultDate]="defaultDateTime"
+        [readonlyInput]="true"
+        [disabledDays]="[2, 4]"
+        [yearRange]="now.getFullYear() + ':' + (now.getFullYear() + 10)"
+        [minDate]="now"
+        [placeHolderLabel]="'fecha solicitud'"
+        (ngModelChange)="consultarDisponibilidad()"
+      >
+      </jhi-date-picker>
+    </div>
+    <div class="col-md-5 py-4">
+      <div class="col-md-12 py-4">
+        <mat-card class="main-card-login" *ngIf="horarioCitaSolicitud && horarioCitaSolicitud.doctor">
+          <mat-card-title style="text-align: left">
+            <strong>{{
+              horarioCitaSolicitud.doctor.name + ' ' + horarioCitaSolicitud.doctor.firstName + ' ' + horarioCitaSolicitud.doctor.lastName
+            }}</strong>
+            <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon [icon]="'clock'"></fa-icon></span>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <div class="row" *ngIf="horariosList && horariosList.length > 0">
+              <div class="col-md-3" style="text-align: left">
+                {{ 'horario disponible:' }}
+                <div style="height: 10px; width: 10px; background: linear-gradient(0deg, rgba(90, 245, 74, 0.8) 17%, #64e88a 100%)"></div>
+              </div>
+              <div class="col-md-3" style="text-align: left">
+                {{ 'horario ocupado:' }}
+                <div style="height: 10px; width: 10px; background: linear-gradient(0deg, rgba(246, 16, 7, 0.8) 17%, #f85712 100%)"></div>
+              </div>
+            </div>
+          </mat-card-subtitle>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-3 pl-0 pr-0" style="display: flex; justify-content: center">
+                <div style="width: 100px; height: 100px">
+                  <jhi-single-file-template
+                    *ngIf="horarioCitaSolicitud.doctor.imageProfile"
+                    class="tooltip-options-profile"
+                    [file]="horarioCitaSolicitud.doctor.fotoPersona"
+                    [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                    [borderImageType]="'rounded'"
+                    [endpoint]="'file'"
+                    [delete]="false"
+                  ></jhi-single-file-template>
+                </div>
+              </div>
+              <div class="col-md-9" style="display: flex; justify-content: center; padding: 10px">
+                <div class="row" *ngIf="!horariosList">
+                  <div class="col-md-12 text-notification-badge">
+                    <div class="row">
+                      <div class="col-md-12" style="text-align: center">
+                        <span style="font-size: 24px">⌚ sugerencia de horarios</span>
+                      </div>
+                      <div class="col-md-12" style="text-align: center">
+                        <span>si el horario que elegiste se encuentra ocupado te daremos otras opciones para agendar tu cita.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="width: 100%" *ngIf="horariosList">
+                  <div class="col-md-12" style="text-align: center">
+                    <span style="font-size: 24px" *ngIf="horariosList.length > 0">⌚sugerencia de horarios</span>
+                  </div>
+                  <jhi-loaders
+                    [show]="loading"
+                    [showAnimation]="true"
+                    [space]="true"
+                    [image]="true"
+                    [type]="'table'"
+                    [buttons]="true"
+                    [rows]="3"
+                  >
+                    <div class="row" *ngIf="horariosList.length > 0; else emptyBlock">
+                      <div class="col-md-4 py-2" *ngFor="let horarios of horariosList">
+                        <div [class]="horarios.estatus === 'DISPONIBLE' ? 'btn-hora-disponible' : 'btn-hora-ocupada'">
+                          <span>{{ horarios.horarioSolicitud | date: 'h:mm a' }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #emptyBlock>
+                      <div class="row mt-2">
+                        <div class="col-12">
+                          <h1 class="w-100 text-center text-muted">
+                            <span style="font-size: 30px; color: #05ec47"><fa-icon [icon]="'check'"></fa-icon></span>
+                          </h1>
+                        </div>
+                        <div class="col-12 text-center">
+                          <p class="text-center 2rem">{{ (fechaHora | date: 'MMMM d, y, h:mm a ') + ' \n Horario disponible.' }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </jhi-loaders>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</ng-container>

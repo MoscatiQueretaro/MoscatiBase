@@ -1,0 +1,502 @@
+@import '~@angular/material/theming';
+@mixin calendar-styles-theme($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, secondary);
+  $growl-color: map-get($theme, growl-color);
+  $background-main-card: map-get($theme, background-main-card);
+  $info: map-get($theme, info);
+  $border: map-get($theme, border-color);
+  $input-background-focus: map-get($theme, input-background-focus);
+  $input-color: map-get($theme, input-color);
+  $color-bg-input: map-get($theme, color-bg-input);
+  $danger: map-get($theme, danger);
+  $bg-input-disabled: map-get($theme, bg-input-disabled);
+  $color-body: map-get($theme, color-body);
+
+  .day-default:hover {
+    background-color: rgba($secondary, 0.3);
+    color: $secondary;
+  }
+
+  .form-label-calendar {
+    background-color: $background-main-card;
+    color: $color-body;
+  }
+
+  .enabled-day {
+    background-color: $background-main-card;
+  }
+  .disable-day {
+    background-color: $background-main-card;
+  }
+
+  .form-group-calendar {
+    display: flex;
+    input,
+    .form-control {
+      background: $background-main-card;
+      color: $input-color;
+      border: 1px solid $border;
+    }
+
+    .button-dropdown {
+      background: $color-bg-input;
+      color: $border;
+      border: 1px solid $border;
+      &:disabled,
+      &[disabled] {
+        background: $bg-input-disabled;
+        cursor: not-allowed;
+      }
+    }
+
+    .panel-calendar {
+      background: $background-main-card;
+      border: 1px solid $border;
+      border-top: 0;
+    }
+
+    .panel-calendar-inline {
+      background: $background-main-card;
+      border: 1px solid $border;
+    }
+
+    .panel-calendar,
+    .panel-calendar-inline {
+      .calendar-header {
+        border-bottom: 1px solid $border;
+
+        .calendar-icon {
+          color: $secondary;
+          &:hover {
+            color: $info;
+          }
+        }
+
+        .calendar-title {
+          select {
+            background: $color-bg-input;
+          }
+        }
+      }
+
+      .calendar-container {
+        table {
+          tbody {
+            tr {
+              td {
+                .day-default:hover {
+                  background-color: rgba($secondary, 0.3);
+                  color: $color-body;
+                }
+                .today-day {
+                  background: rgba($info, 0.3);
+                  color: $info;
+                }
+                .selected-day {
+                  background: rgba($primary, 0.3);
+                  color: $primary;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .calendar-time {
+        .calendar-picker {
+          .fa {
+            color: $secondary;
+            &:hover {
+              color: $info;
+            }
+          }
+        }
+      }
+    }
+
+    &:focus-within {
+      input,
+      .form-control {
+        background: $background-main-card;
+        border-color: $primary;
+      }
+      .button-dropdown {
+        background: $background-main-card;
+        color: $primary;
+        border-color: $primary;
+      }
+
+      .panel-calendar {
+        background: $background-main-card;
+        border-color: $primary;
+      }
+
+      .panel-calendar-inline {
+        background: $background-main-card;
+        border-color: $primary;
+      }
+    }
+  }
+
+  .error {
+    jhi-date-picker {
+      .form-group-calendar.error:not(:focus-within) {
+        label {
+          color: $danger !important;
+        }
+
+        input,
+        .form-control {
+          border-color: $danger !important;
+        }
+
+        .button-dropdown {
+          color: $danger !important;
+          border-color: $danger !important;
+        }
+
+        .panel-calendar {
+          border-color: $danger !important;
+        }
+
+        .panel-calendar-inline {
+          border-color: $danger !important;
+        }
+      }
+    }
+  }
+
+  .ng-touched.ng-invalid {
+    > .form-group-calendar:not(:focus-within) {
+      label {
+        color: $danger !important;
+      }
+
+      input,
+      .form-control {
+        border-color: $danger !important;
+      }
+
+      .button-dropdown {
+        color: $danger !important;
+        border-color: $danger !important;
+      }
+
+      .panel-calendar {
+        border-color: $danger !important;
+      }
+
+      .panel-calendar-inline {
+        border-color: $danger !important;
+      }
+    }
+  }
+
+  .form-group-calendar.error:not(:focus-within) {
+    label {
+      color: $danger !important;
+    }
+
+    input,
+    .form-control {
+      border-color: $danger !important;
+    }
+
+    .button-dropdown {
+      color: $danger !important;
+      border-color: $danger !important;
+    }
+
+    .panel-calendar {
+      border-color: $danger !important;
+    }
+
+    .panel-calendar-inline {
+      border-color: $danger !important;
+    }
+  }
+}
+
+@mixin calendar-size-theme($theme) {
+  $input-size: map-get($theme, input-size);
+  $input-text-size: map-get($theme, input-text-size);
+  .form-group-calendar {
+    .button-dropdown {
+      width: $input-size;
+      height: $input-size;
+    }
+    .panel-calendar {
+      top: $input-size !important; // cambie $input-size
+    }
+  }
+}
+
+.form-group-calendar {
+  margin-top: 1rem;
+  position: relative;
+  .show-panel-input {
+    border-radius: 4px 0 0 0;
+    border-bottom: 0;
+  }
+
+  .show-panel-button {
+    border-radius: 0 4px 0 0;
+    border-bottom: 0;
+  }
+
+  .panel-calendar {
+    margin-top: 26px;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    border-bottom: 2px solid #7e7e7e;
+    border-top: 2px solid #7e7e7e;
+    border-left: 2px solid #7e7e7e;
+    border-right: 2px solid #7e7e7e;
+    position: absolute; //Se cambia de absoluute
+  }
+
+  .panel-calendar-inline {
+    border-radius: 4px 4px 4px 4px;
+  }
+
+  .panel-calendar,
+  .panel-calendar-inline {
+    .calendar-header {
+      padding: 0 0;
+      position: relative;
+      border: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-bottom: 5px;
+
+      .calendar-icon {
+        position: absolute;
+        width: 1.8em;
+        height: 1.8em;
+        line-height: 1.8em;
+        justify-content: center;
+        align-items: center;
+        color: #0f2554;
+        cursor: pointer;
+        background: none !important;
+        display: flex;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-indent: 0 !important;
+        text-align: center;
+        -moz-transition: color 0.3s;
+        -o-transition: color 0.3s;
+        -webkit-transition: color 0.3s;
+        transition: color 0.3s;
+      }
+
+      .calendar-prev {
+        left: 0.125em;
+      }
+
+      .calendar-next {
+        right: 0.125em;
+      }
+
+      .calendar-title {
+        margin: 0 2.3em;
+        height: 1.8em;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        //width: calc(100% - #{$input-size});
+        // Se le asigna un with
+        span {
+          height: 1.8em;
+          line-height: 1.8em;
+        }
+        .month-view {
+          margin-right: 5px;
+        }
+        select {
+          font-size: 1em;
+          margin: 0.125em 0;
+          vertical-align: middle;
+        }
+        .select-month {
+          width: 60%;
+          margin-right: 5px;
+        }
+        .select-year {
+          width: calc(40% - 5px);
+        }
+      }
+    }
+
+    .calendar-container {
+      table {
+        width: 100%;
+        table-layout: fixed;
+        font-size: 0.9em;
+        border-collapse: collapse;
+        margin: 0 0 0.4em;
+        thead {
+          tr {
+            th {
+              padding: 0.5em;
+              text-align: center;
+              font-weight: bold;
+              border: 0;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              padding: 0.1em;
+              text-align: center;
+              .day-default {
+                width: 2em;
+                height: 2em;
+                margin: auto;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: 0.2s ease all;
+                -moz-transition: 0.2s ease all;
+                -webkit-transition: 0.2s ease all;
+                span {
+                  text-align: center;
+                  line-height: 2em;
+                }
+              }
+              .disabled-day {
+                width: 2em;
+                height: 2em;
+                margin: auto;
+                border-radius: 50%;
+                cursor: not-allowed;
+                transition: 0.2s ease all;
+                -moz-transition: 0.2s ease all;
+                -webkit-transition: 0.2s ease all;
+                span {
+                  text-align: center;
+                  line-height: 2em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .calendar-time {
+      padding: 0.5em 0;
+      display: flex;
+      justify-content: center;
+      .calendar-picker {
+        display: grid;
+        width: 28px;
+        align-content: center;
+        align-items: center;
+      }
+      .calendar-separator {
+        display: grid;
+        width: 18px;
+        align-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.day-item:hover {
+  background: #0e517a;
+}
+
+.enabled-day {
+  cursor: pointer;
+}
+.disable-day {
+  cursor: no-drop;
+}
+
+.form_field_calendar {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #7e7e7e;
+  border-top: 2px solid #7e7e7e;
+  border-left: 2px solid #7e7e7e;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: #939393;
+  }
+
+  &:placeholder-shown ~ .form_label-autocomplete {
+    font-size: 1.1rem;
+    cursor: text;
+    top: 0px;
+  }
+}
+
+.form_field_claendar:focus {
+  ~ .form_label-autocomplete {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image-slice: 1;
+}
+
+.form-label-calendar {
+  position: absolute;
+  top: 5px;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #7e7e7e;
+}
+.form_group-datepicker {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form-group-datepicker {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+
+  .button-dropdown,
+  .button-dropdown-legacy {
+    color: white;
+    background: var(--bs-dark-blue-8);
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    &:disabled,
+    &[disabled] {
+      cursor: not-allowed;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .show-panel-button {
+    border-radius: 0 4px 0 0;
+    border-bottom: 2px;
+  }
+}

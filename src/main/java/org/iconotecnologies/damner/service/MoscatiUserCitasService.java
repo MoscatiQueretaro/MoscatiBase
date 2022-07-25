@@ -1,22 +1,18 @@
 package org.iconotecnologies.damner.service;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
 import java.util.*;
 import org.iconotecnologies.damner.config.Constants;
+import org.iconotecnologies.damner.domain.MoscatiHorariosMedicos;
 import org.iconotecnologies.damner.domain.MoscatiUserCitas;
 import org.iconotecnologies.damner.domain.firebase.Note;
 import org.iconotecnologies.damner.repository.MoscatiUserCitasRepository;
 import org.iconotecnologies.damner.service.criteria.MoscatiUserCitasCriteria;
-import org.iconotecnologies.damner.service.dto.MoscatiNotificationsDTO;
-import org.iconotecnologies.damner.service.dto.MoscatiNotificationsUserDTO;
-import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
-import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
+import org.iconotecnologies.damner.service.dto.*;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserCitasMapper;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
@@ -35,6 +31,7 @@ public class MoscatiUserCitasService {
     private final MoscatiNotificationsUserService notificationsUserService;
     private final MoscatiNotificationsService notificationsService;
     private final FirebaseMessagingService firebaseMessagingService;
+    private final MoscatiHorariosMedicosService horariosMedicosService;
 
     public MoscatiUserCitasService(
         MoscatiUserCitasRepository repository,
@@ -42,7 +39,8 @@ public class MoscatiUserCitasService {
         MoscatiUserMapper userMapper,
         MoscatiNotificationsUserService notificationsUserService,
         MoscatiNotificationsService notificationsService,
-        FirebaseMessagingService firebaseMessagingService
+        FirebaseMessagingService firebaseMessagingService,
+        MoscatiHorariosMedicosService horariosMedicosService
     ) {
         this.repository = repository;
         this.mapper = mapper;
@@ -50,6 +48,7 @@ public class MoscatiUserCitasService {
         this.notificationsUserService = notificationsUserService;
         this.notificationsService = notificationsService;
         this.firebaseMessagingService = firebaseMessagingService;
+        this.horariosMedicosService = horariosMedicosService;
     }
 
     @Transactional
@@ -137,29 +136,31 @@ public class MoscatiUserCitasService {
                 //*********************************************************************************************************
                 //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
                 //*********************************************************************************************************
-                Note FireBaseNotification = new Note();
-                FireBaseNotification.setSubject(Constants.DEFAULT_SOLICITUD_CITA_TITLE_ES);
-                FireBaseNotification.setContent(
-                    moscatiUserCitas.getUser().getName() +
-                    " " +
-                    moscatiUserCitas.getUser().getFirstName() +
-                    " " +
-                    moscatiUserCitas.getUser().getLastName() +
-                    " " +
-                    Constants.DEFAULT_SOLICITUD_CITA_ES +
-                    " " +
-                    fechahraSolicitud
-                );
-                FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
-                Map<String, String> data = new HashMap<>();
-                data.put("id", "2");
-                data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
-                data.put("status", "Crime_And_Safety");
-                FireBaseNotification.setData(data);
-                try {
-                    firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getDoctor().getFirebaseToken());
-                } catch (Exception e) {
-                    System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                if (moscatiUserCitasDTO.getDoctor().getFirebaseToken() != null) {
+                    Note FireBaseNotification = new Note();
+                    FireBaseNotification.setSubject(Constants.DEFAULT_SOLICITUD_CITA_TITLE_ES);
+                    FireBaseNotification.setContent(
+                        moscatiUserCitas.getUser().getName() +
+                        " " +
+                        moscatiUserCitas.getUser().getFirstName() +
+                        " " +
+                        moscatiUserCitas.getUser().getLastName() +
+                        " " +
+                        Constants.DEFAULT_SOLICITUD_CITA_ES +
+                        " " +
+                        fechahraSolicitud
+                    );
+                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                    Map<String, String> data = new HashMap<>();
+                    data.put("id", "2");
+                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                    data.put("status", "Crime_And_Safety");
+                    FireBaseNotification.setData(data);
+                    try {
+                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getDoctor().getFirebaseToken());
+                    } catch (Exception e) {
+                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                    }
                 }
             }
         }
@@ -194,29 +195,31 @@ public class MoscatiUserCitasService {
                 //*********************************************************************************************************
                 //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
                 //*********************************************************************************************************
-                Note FireBaseNotification = new Note();
-                FireBaseNotification.setSubject(Constants.DEFAULT_CITA_TITLE_ES);
-                FireBaseNotification.setContent(
-                    moscatiUserCitas.getDoctor().getName() +
-                    " " +
-                    moscatiUserCitas.getDoctor().getFirstName() +
-                    " " +
-                    moscatiUserCitas.getDoctor().getLastName() +
-                    " " +
-                    Constants.DEFAULT_CITA_ES +
-                    " " +
-                    fechahraSolicitud
-                );
-                FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
-                Map<String, String> data = new HashMap<>();
-                data.put("id", "2");
-                data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
-                data.put("status", "Crime_And_Safety");
-                FireBaseNotification.setData(data);
-                try {
-                    firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getUser().getFirebaseToken());
-                } catch (Exception e) {
-                    System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                if (moscatiUserCitasDTO.getUser().getFirebaseToken() != null) {
+                    Note FireBaseNotification = new Note();
+                    FireBaseNotification.setSubject(Constants.DEFAULT_CITA_TITLE_ES);
+                    FireBaseNotification.setContent(
+                        moscatiUserCitas.getDoctor().getName() +
+                        " " +
+                        moscatiUserCitas.getDoctor().getFirstName() +
+                        " " +
+                        moscatiUserCitas.getDoctor().getLastName() +
+                        " " +
+                        Constants.DEFAULT_CITA_ES +
+                        " " +
+                        fechahraSolicitud
+                    );
+                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                    Map<String, String> data = new HashMap<>();
+                    data.put("id", "2");
+                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                    data.put("status", "Crime_And_Safety");
+                    FireBaseNotification.setData(data);
+                    try {
+                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getUser().getFirebaseToken());
+                    } catch (Exception e) {
+                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                    }
                 }
             }
         }
@@ -241,6 +244,144 @@ public class MoscatiUserCitasService {
             " " +
             timeMedium;
         return fechahraSolicitud;
+    }
+
+    @Transactional(readOnly = true)
+    public List<MoscatiHorariosDisponiblesDTO> getHorariosDisponibles(MoscatiUserCitasDTO moscatiUserCitasDTO) {
+        List<MoscatiHorariosDisponiblesDTO> horariosList = new ArrayList<>();
+        if (moscatiUserCitasDTO.getId() == null) {
+            if (
+                this.repository.findFirstByFechaHoraSolicitudEqualsOrFechaHoraCitaEqualsAndDoctor_Id(
+                        StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud()),
+                        StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud()),
+                        moscatiUserCitasDTO.getDoctor().getId()
+                    )
+                    .orElse(null) !=
+                null
+            ) {
+                horariosList = getListHorariosDisponibles(moscatiUserCitasDTO);
+            }
+
+            ZonedDateTime fechaSolicitudFin = StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud());
+            fechaSolicitudFin = fechaSolicitudFin.plusMinutes(29);
+            fechaSolicitudFin = fechaSolicitudFin.plusSeconds(59);
+            moscatiUserCitasDTO.setFechaHoraFin(fechaSolicitudFin);
+
+            if (
+                this.repository.findAllByDoctor_IdAndFechaHoraSolicitudBetween(
+                        moscatiUserCitasDTO.getDoctor().getId(),
+                        StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud()),
+                        fechaSolicitudFin
+                    )
+                    .size() >
+                0 ||
+                this.repository.findAllByDoctor_IdAndFechaHoraFinBetween(
+                        moscatiUserCitasDTO.getDoctor().getId(),
+                        StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud()),
+                        fechaSolicitudFin
+                    )
+                    .size() >
+                0
+            ) {
+                horariosList = getListHorariosDisponibles(moscatiUserCitasDTO);
+            }
+        }
+        return horariosList;
+    }
+
+    public List<MoscatiHorariosDisponiblesDTO> getListHorariosDisponibles(MoscatiUserCitasDTO moscatiUserCitasDTO) {
+        List<MoscatiHorariosMedicosDTO> horariosMedicos =
+            this.horariosMedicosService.findAllByUserId(moscatiUserCitasDTO.getDoctor().getId());
+        ZonedDateTime fechaHoraSolicitud = StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud());
+        List<MoscatiHorariosDisponiblesDTO> horariosList = new ArrayList<>();
+
+        MoscatiHorariosMedicosDTO jornada = horariosMedicos
+            .stream()
+            .filter(dias -> dias.getDia() == fechaHoraSolicitud.getDayOfWeek().getValue())
+            .findFirst()
+            .orElse(null);
+
+        for (
+            int i = StringToZoneDateTime(jornada.getHoraInicio()).getHour();
+            i <= StringToZoneDateTime(jornada.getHoraFin()).getHour();
+            i++
+        ) {
+            ZonedDateTime fechaHora = ZonedDateTime.of(
+                LocalDate.of(fechaHoraSolicitud.getYear(), fechaHoraSolicitud.getMonth().getValue(), fechaHoraSolicitud.getDayOfMonth()),
+                LocalTime.of(
+                    i,
+                    (StringToZoneDateTime(jornada.getHoraInicio()).getMinute() > 0)
+                        ? StringToZoneDateTime(jornada.getHoraInicio()).getMinute()
+                        : 0
+                ),
+                ZoneId.systemDefault()
+            );
+
+            ZonedDateTime fechaSolicitudFin = fechaHora;
+            fechaSolicitudFin = fechaSolicitudFin.plusMinutes(29);
+            fechaSolicitudFin = fechaSolicitudFin.plusSeconds(59);
+            moscatiUserCitasDTO.setFechaHoraFin(fechaSolicitudFin);
+
+            if (
+                this.repository.findAllByDoctor_IdAndFechaHoraSolicitudBetween(
+                        moscatiUserCitasDTO.getDoctor().getId(),
+                        fechaHora,
+                        fechaSolicitudFin
+                    )
+                    .size() <=
+                0 ||
+                this.repository.findAllByDoctor_IdAndFechaHoraFinBetween(
+                        moscatiUserCitasDTO.getDoctor().getId(),
+                        fechaHora,
+                        fechaSolicitudFin
+                    )
+                    .size() <=
+                0
+            ) {
+                MoscatiHorariosDisponiblesDTO horarioDisponible = new MoscatiHorariosDisponiblesDTO();
+                horarioDisponible.setHorarioSolicitud(convertZoneDateTimeToString(fechaHora));
+                horarioDisponible.setEstatus("DISPONIBLE");
+                horariosList.add(horarioDisponible);
+            } else {
+                MoscatiHorariosDisponiblesDTO horarioDisponible = new MoscatiHorariosDisponiblesDTO();
+                horarioDisponible.setHorarioSolicitud(convertZoneDateTimeToString(fechaHora));
+                horarioDisponible.setEstatus("OCUPADO");
+                horariosList.add(horarioDisponible);
+            }
+
+            if (i < StringToZoneDateTime(jornada.getHoraFin()).getHour()) {
+                fechaHora = fechaHora.plusMinutes(30);
+                fechaSolicitudFin = fechaSolicitudFin.plusMinutes(30);
+
+                if (
+                    this.repository.findAllByDoctor_IdAndFechaHoraSolicitudBetween(
+                            moscatiUserCitasDTO.getDoctor().getId(),
+                            fechaHora,
+                            fechaSolicitudFin
+                        )
+                        .size() <=
+                    0 ||
+                    this.repository.findAllByDoctor_IdAndFechaHoraFinBetween(
+                            moscatiUserCitasDTO.getDoctor().getId(),
+                            fechaHora,
+                            fechaSolicitudFin
+                        )
+                        .size() <=
+                    0
+                ) {
+                    MoscatiHorariosDisponiblesDTO horarioDisponible = new MoscatiHorariosDisponiblesDTO();
+                    horarioDisponible.setHorarioSolicitud(convertZoneDateTimeToString(fechaHora));
+                    horarioDisponible.setEstatus("DISPONIBLE");
+                    horariosList.add(horarioDisponible);
+                } else {
+                    MoscatiHorariosDisponiblesDTO horarioDisponible = new MoscatiHorariosDisponiblesDTO();
+                    horarioDisponible.setHorarioSolicitud(convertZoneDateTimeToString(fechaHora));
+                    horarioDisponible.setEstatus("OCUPADO");
+                    horariosList.add(horarioDisponible);
+                }
+            }
+        }
+        return horariosList;
     }
 
     @Transactional
@@ -298,6 +439,19 @@ public class MoscatiUserCitasService {
             System.out.println(LocalDateTime.parse(fecha, DateTimeFormatter.ISO_DATE_TIME).atZone(timeZone));
             ZonedDateTime zdtWithZoneOffset = LocalDateTime.parse(fecha, DateTimeFormatter.ISO_DATE_TIME).atZone(timeZone);
             return zdtWithZoneOffset;
+        } else {
+            return null;
+        }
+    }
+
+    public String convertZoneDateTimeToString(ZonedDateTime fecha) {
+        if (fecha != null) {
+            ZonedDateTime utcZoned = fecha;
+            ZoneId swissZone = ZoneId.systemDefault();
+            ZonedDateTime swissZoned = utcZoned.withZoneSameInstant(swissZone);
+            LocalDateTime swissLocal = swissZoned.toLocalDateTime();
+            String finalDateTime = swissLocal.toString() + utcZoned.getOffset();
+            return finalDateTime;
         } else {
             return null;
         }

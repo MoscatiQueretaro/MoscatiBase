@@ -81,7 +81,7 @@
             <mat-card-actions>
               <div class="col-md-12" style="display: flex; justify-content: center">
                 <div>
-                  <div class="btn-new-query">
+                  <div class="btn-new-query" (click)="seleccionarMedico(medico.user)">
                     <span class="text-options-menu">Agendar cita &nbsp; <fa-icon [icon]="'video'"></fa-icon></span>
                   </div>
                 </div>

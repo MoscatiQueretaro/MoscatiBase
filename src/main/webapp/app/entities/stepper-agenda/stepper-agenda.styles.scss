@@ -220,9 +220,11 @@ textarea::-webkit-scrollbar-track {
 }
 .form-step {
   display: none;
+  width: 100%;
   transform-origin: top;
   animation: animate 0.5s;
 }
+
 .form-step-active {
   display: block;
 }

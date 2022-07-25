@@ -13,7 +13,7 @@ export class DocumentPopupService {
   constructor(private datePipe: DatePipe, private modalService: NgbModal) {}
 
   openPhoto(archivo?: FileModel, endpoint?: string): Promise<ModalType> {
-    return new Promise<ModalType>((resolve, reject) => {
+    return new Promise<ModalType>(resolve => {
       if (this.modalRef) {
         resolve(this.modalRef);
       }

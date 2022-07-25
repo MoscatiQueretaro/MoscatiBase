@@ -362,11 +362,22 @@
       </mat-card-content>
       <mat-card-footer>
         <button
+          *ngIf="!success"
           type="button"
           (click)="register()"
           [disabled]="registerForm.invalid"
           class="btn register-button"
           jhiTranslate="register.form.button"
+          data-cy="submit"
+        >
+          Register
+        </button>
+        <button
+          *ngIf="success"
+          type="button"
+          (click)="loginAccount()"
+          class="btn register-button"
+          jhiTranslate="register.form.button-succes"
           data-cy="submit"
         >
           Register

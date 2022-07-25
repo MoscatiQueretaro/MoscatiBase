@@ -42,11 +42,11 @@
         (click)="setValue(option)"
       >
         <span class="item-selected"></span>
-        <span class="item-text">{{ field ? '🩺' + option.descripcion : option }}</span>
+        <span class="item-text">{{ field ? option.descripcion : option }}</span>
       </div>
     </div>
   </div>
   <ng-template #emptyBlock>
-    <p class="text-muted text-center m-1 small">No hay elementos 😴</p>
+    <p class="text-muted text-center">No hay elementos 😴</p>
   </ng-template>
 </div>

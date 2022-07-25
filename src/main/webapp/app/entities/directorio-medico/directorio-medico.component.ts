@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
 import { DirectorioMedicoModel } from './directorio-medico.model';
 import { EspecialidadesModel } from '../catalogos/especialidades/especialidades.model';
@@ -6,6 +6,7 @@ import { PagingView } from '../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { DirectorioMedicoService } from './directorio-medico.service';
+import { MoscatiUserModel } from '../../core/auth/account.model';
 
 @Component({
   selector: 'jhi-directorio-medico',
@@ -15,6 +16,7 @@ export class DirectorioMedicoComponent extends PagingView implements OnInit {
   directorioMedicoList?: DirectorioMedicoModel[];
   loading = false;
   especialidadFilter?: EspecialidadesModel;
+  @Output() doctorSelect = new EventEmitter<MoscatiUserModel>();
   constructor(
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
@@ -58,5 +60,9 @@ export class DirectorioMedicoComponent extends PagingView implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  seleccionarMedico(doctor: MoscatiUserModel): void {
+    this.doctorSelect.emit(doctor);
   }
 }

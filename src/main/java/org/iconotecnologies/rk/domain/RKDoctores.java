@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PR")
+@Table(name = "dbo.PR")
 public class RKDoctores implements Serializable {
 
     public static final String ENTITY_NAME = "rkdoctores";

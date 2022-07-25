@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DirectorioMedicoModule } from './directorio-medico/directorio-medico.module';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { UserRouteAccessService } from '../../core/auth/user-route-access.service';
-import { PagingParamsResolver } from '../../utils/pagination/PagingParamsResolver';
+import { UserRouteAccessService } from '../../../core/auth/user-route-access.service';
+import { PagingParamsResolver } from '../../../utils/pagination/PagingParamsResolver';
 import { DetallesMedicoComponent } from './detalles-medico.component';
 
 export const DetallesMedicoRoutes: Routes = [

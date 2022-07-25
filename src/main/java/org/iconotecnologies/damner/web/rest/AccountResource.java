@@ -90,10 +90,8 @@ public class AccountResource {
             MoscatiUser.ENTITY_NAME,
             "idNull"
         );
-        return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityCreationAlert(MoscatiUser.ENTITY_NAME, null))
-            .body(userService.registerUser(moscatiUserDto));
+        MoscatiUserDTO newUser = userService.registerUser(moscatiUserDto);
+        return ResponseEntity.ok(newUser);
     }
 
     /**

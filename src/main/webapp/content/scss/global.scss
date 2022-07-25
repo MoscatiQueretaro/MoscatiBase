@@ -87,6 +87,19 @@
   .btn-new-query span {
     background: $background-main-card;
   }
+  .btn-hora-disponible {
+    color: $color-body;
+  }
+  .btn-hora-disponible span {
+    background: $background-main-card;
+  }
+
+  .btn-hora-ocupada {
+    color: $color-body;
+  }
+  .btn-hora-ocupada span {
+    background: $background-main-card;
+  }
 
   .navbar-profile-info {
     background: $background-main-card;
@@ -365,7 +378,12 @@ Generic styles
   color: #bbbbbb;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-
+.divider-service {
+  width: 100%;
+  opacity: 0.6;
+  margin: 0.175rem 0;
+  border-top: 0.15rem solid var(--bs-dark-blue-8);
+}
 .register-button {
   border-radius: 25px;
   width: 100%;
@@ -445,6 +463,75 @@ Generic styles
   text-decoration: none;
   width: 170px;
   z-index: 2;
+}
+.btn-hora-disponible:hover {
+  color: #fff;
+}
+.btn-hora-disponible {
+  background: linear-gradient(0deg, rgba(12, 101, 3, 0.8) 17%, #64e88a 100%);
+  border-radius: 1px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: block;
+  font: 1.5rem 'Oswald', Arial, sans-serif; /*18*/
+  height: 40px;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+  z-index: 2;
+}
+
+.btn-hora-ocupada {
+  background: linear-gradient(0deg, rgba(175, 18, 2, 0.8) 17%, #ec6505 100%);
+  border-radius: 1px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: block;
+  font: 1.5rem 'Oswald', Arial, sans-serif; /*18*/
+  height: 40px;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 2px;
+  position: relative;
+  cursor: not-allowed;
+  text-decoration: none;
+  width: 100%;
+  z-index: 2;
+}
+.btn-hora-ocupada span {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 1px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  text-decoration: none;
+  width: 100%;
+}
+.btn-hora-disponible span {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 1px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  text-decoration: none;
+  width: 100%;
+}
+.btn-hora-disponible:hover span {
+  background: transparent;
+  text-decoration: none;
+}
+
+.btn-hora-ocupada:hover span {
+  background: transparent;
+  text-decoration: none;
 }
 
 .btn-new-query:hover {

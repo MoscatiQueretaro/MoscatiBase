@@ -1,11 +1,13 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
 import { RegisterService } from './register.service';
 import { MoscatiUserModel } from '../../core/auth/account.model';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-register',
@@ -31,7 +33,12 @@ export class RegisterComponent implements OnInit {
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
-  constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
+  constructor(
+    private translateService: TranslateService,
+    private registerService: RegisterService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     if (this.damnerUser === undefined) {
@@ -59,14 +66,27 @@ export class RegisterComponent implements OnInit {
       this.doNotMatch = true;
     } else {
       this.damnerUser!.language = this.translateService.currentLang;
-      this.registerService.create(this.damnerUser!).subscribe(
-        () => (this.success = true),
-        response => this.processError(response)
-      );
+      this.subscribeToSaveResponse(this.registerService.create(this.damnerUser!));
     }
   }
 
+  loginAccount(): void {
+    this.router.navigate(['/login']);
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<MoscatiUserModel>>): void {
+    result.subscribe(
+      () => {
+        this.success = true;
+      },
+      response => {
+        this.processError(response);
+      }
+    );
+  }
+
   private processError(response: HttpErrorResponse): void {
+    console.warn(response);
     if (response.status === 400 && response.error.type === LOGIN_ALREADY_USED_TYPE) {
       this.errorUserExists = true;
     } else if (response.status === 400 && response.error.type === EMAIL_ALREADY_USED_TYPE) {

@@ -44,6 +44,8 @@ spring:
       enabled: false
   jpa:
     database-platform: tech.jhipster.domain.util.FixedH2Dialect
+    properties:
+      hibernate.connection.provider_disables_autocommit: false
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
@@ -106,12 +108,9 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
-
-# application:
-rkmedicalsuite:
+rk:
   datasource:
-    url: jdbc:sqlserver://192.168.3.250:1433;database=KH_SJM_PROD
+    url: jdbc:sqlserver://192.168.3.250;databaseName=KH_SJM_PROD
     username: sa
     password: B1Admin
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -123,4 +122,19 @@ rkmedicalsuite:
     max-wait-millis: 10000
   hibernate:
     dialect: org.hibernate.dialect.SQLServer2008Dialect
-    show_sql: true
+    show_sql: false
+
+moscati:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.3.225:3306/moscati
+    username: sake
+    password: UELWshgKU/fouBq@
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      default-auto-commit: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate.connection.provider_disables_autocommit: false

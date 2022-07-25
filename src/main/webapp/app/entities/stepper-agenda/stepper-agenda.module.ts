@@ -12,6 +12,10 @@ import { StepperAgendaComponent } from './stepper-agenda.component';
 
 import { LoadersModule } from '../../utils/components/loader/loaders.module';
 import { DirectorioMedicoModule } from '../directorio-medico/directorio-medico.module';
+import { HorarioCitaModule } from './horario-cita/horario-cita.module';
+import { DatepickerModule } from '../../utils/datepicker/datepicker.module';
+import { DetallesMedicoModule } from './detalles-medico/detalles-medico.module';
+import { ResumenPagoModule } from './resumen-pago/resumen-pago.module';
 
 const ROUTES = [...StepperAgendaRoutes];
 
@@ -27,6 +31,10 @@ const ROUTES = [...StepperAgendaRoutes];
     MatDividerModule,
     LoadersModule,
     DirectorioMedicoModule,
+    HorarioCitaModule,
+    DatepickerModule,
+    DetallesMedicoModule,
+    ResumenPagoModule,
   ],
   declarations: [StepperAgendaComponent],
   entryComponents: [StepperAgendaComponent],

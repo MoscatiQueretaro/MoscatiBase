@@ -11,7 +11,7 @@ export class NewImageProfilePopupService {
   constructor(private modalService: NgbModal) {}
 
   open(id?: string, userId?: number): Promise<NgbModalRef<typeof NewImageProfileFormComponent>> {
-    return new Promise<NgbModalRef<typeof NewImageProfileFormComponent>>((resolve, reject) => {
+    return new Promise<NgbModalRef<typeof NewImageProfileFormComponent>>(resolve => {
       if (this.modalRef) {
         resolve(this.modalRef);
       }

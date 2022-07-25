@@ -48,7 +48,7 @@ public class RKDoctoresResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Timed
     public ResponseEntity<List<RKDoctoresDTO>> getAll() {
         List<RKDoctoresDTO> doctores = this.service.findAll();

@@ -1,0 +1,285 @@
+<div class="form-group-datepicker form-group-calendar" #container>
+  <ng-template [ngIf]="!inline">
+    <div class="form-group-datepicker form_group-datepicker">
+      <label class="form-label-calendar">{{ placeHolderLabel }}</label>
+
+      <input
+        #inputfield
+        type="text"
+        class="form_field_calendar float-left"
+        [ngClass]="overlayVisible ? 'show-panel-input' : ''"
+        [attr.id]="inputId"
+        [attr.name]="name"
+        [attr.required]="required"
+        [(ngModel)]="inputFieldValue"
+        (focus)="onInputFocus($event)"
+        (keydown)="onInputKeydown($event)"
+        (click)="onInputClick()"
+        (blur)="onInputBlur($event)"
+        [readonly]="readonlyInput"
+        (input)="onUserInput($event)"
+        [placeholder]="placeholder || ''"
+        [disabled]="disabled"
+        [attr.tabindex]="tabindex"
+        autocomplete="off"
+      />
+      <button
+        type="button"
+        class="button-dropdown float-left"
+        (click)="onButtonClick($event, inputfield)"
+        [disabled]="disabled"
+        tabindex="-1"
+        [ngClass]="overlayVisible ? 'show-panel-button' : ''"
+      >
+        <fa-icon icon="calendar-day"></fa-icon>
+      </button>
+    </div>
+  </ng-template>
+  <div
+    [class]="panelStyleClass!"
+    [ngStyle]="panelStyle"
+    [ngClass]="{
+      'ui-datepicker-inline panel-calendar-inline': inline,
+      'panel-calendar': !inline,
+      'ui-state-disabled': disabled,
+      'ui-datepicker-timeonly': timeOnly,
+      'ui-datepicker-multiple-month': this.numberOfMonths > 1,
+      'ui-datepicker-monthpicker': view === 'month',
+      'ui-datepicker-touch-ui': touchUI
+    }"
+    [@overlayAnimation]="
+      touchUI
+        ? { value: 'visibleTouchUI', params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions } }
+        : { value: 'visible', params: { showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions } }
+    "
+    [@.disabled]="inline === true"
+    (@overlayAnimation.start)="onOverlayAnimationStart($event)"
+    (@overlayAnimation.done)="onOverlayAnimationDone($event)"
+    *ngIf="inline || overlayVisible"
+  >
+    <ng-content select="p-header"></ng-content>
+    <div class="row">
+      <div class="col-md-12"><span class="logo-img"></span><strong>Moscati</strong></div>
+      <div class="col-md-10">
+        <ng-container *ngIf="!timeOnly">
+          <div *ngFor="let month of months; let i = index">
+            <div class="calendar-header">
+              <a class="calendar-icon calendar-prev" (click)="navBackward($event)" *ngIf="i === 0">
+                <fa-icon icon="chevron-left"></fa-icon>
+              </a>
+              <a
+                class="calendar-icon calendar-next"
+                (click)="navForward($event)"
+                *ngIf="numberOfMonths === 1 ? true : i === numberOfMonths - 1"
+              >
+                <fa-icon icon="chevron-right"></fa-icon>
+              </a>
+              <div class="calendar-title">
+                <span class="month-view" *ngIf="!monthNavigator && view !== 'month'">{{ locale.monthNames[month.month] }}</span>
+                <select
+                  tabindex="-1"
+                  class="select-month"
+                  *ngIf="monthNavigator && view !== 'month' && numberOfMonths === 1"
+                  (change)="onMonthDropdownChange($event)"
+                >
+                  <option [value]="i" *ngFor="let monthName of locale.monthNames; let i = index" [selected]="i === month.month">
+                    {{ monthName }}
+                  </option>
+                </select>
+                <select
+                  tabindex="-1"
+                  class="select-year"
+                  *ngIf="yearNavigator && numberOfMonths === 1"
+                  (change)="onYearDropdownChange($event)"
+                >
+                  <option [value]="year" *ngFor="let year of yearOptions" [selected]="currentYear && year === currentYear">
+                    {{ year }}
+                  </option>
+                </select>
+                <span *ngIf="!yearNavigator">{{ view === 'month' ? currentYear : month.year }}</span>
+              </div>
+            </div>
+            <div class="calendar-container" *ngIf="view === 'date'">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngIf="showWeek">
+                      <span>{{ locale['weekHeader'] }}</span>
+                    </th>
+                    <th scope="col" *ngFor="let weekDay of weekDays; let begin = first; let end = last">
+                      <span>{{ weekDay | translate }}</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let week of month.dates; let i = index">
+                    <td *ngIf="showWeek" class="text-secondary">
+                      <span>
+                        {{ month.weekNumbers[i] }}
+                      </span>
+                    </td>
+                    <td class="day-item" *ngFor="let date of week">
+                      <div *ngIf="date.otherMonth ? showOtherMonths : true">
+                        <div
+                          class="{{ date.selectable ? 'enabled-day py-0' : 'disable-day py-0' }}"
+                          (click)="date.selectable ? onDateSelect($event, date) : null"
+                        >
+                          <div
+                            class="day-default"
+                            *ngIf="date.selectable"
+                            [ngClass]="{ 'selected-day': isSelected(date), 'today-day': date.today }"
+                            (click)="onDateSelect($event, date)"
+                            draggable="false"
+                          >
+                            <ng-container *ngIf="!dateTemplate"
+                              ><span>{{ date.day }}</span></ng-container
+                            >
+                            <ng-container *ngTemplateOutlet="dateTemplate!; context: { $implicit: date }"></ng-container>
+                          </div>
+                          <div
+                            class="text-secondary"
+                            [ngClass]="{ 'selected-day': isSelected(date), 'today-day': date.today }"
+                            *ngIf="!date.selectable"
+                          >
+                            <span
+                              ><s>{{ date.day }}</s></span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="ui-monthpicker" *ngIf="view === 'month'">
+            <a
+              tabindex="0"
+              *ngFor="let m of monthPickerValues; let i = index"
+              (click)="onMonthSelect($event, i)"
+              class="ui-monthpicker-month"
+              [ngClass]="{ 'ui-state-active': isMonthSelected(i) }"
+            >
+              {{ m }}
+            </a>
+          </div>
+        </ng-container>
+      </div>
+      <div class="col-md-2" *ngIf="showTime || timeOnly">
+        <div class="col-md-12" style="text-align: center">
+          <fa-icon style="font-size: 55px" icon="clock"></fa-icon>
+        </div>
+        <div class="col-md-12">
+          <div class="calendar-time">
+            <div class="calendar-picker">
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 0, 1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!--<span class="fa fa-chevron-up">
+                </span>-->
+                <fa-icon icon="chevron-up"></fa-icon>
+              </div>
+              <div class="text-center" style="font-size: 25px">
+                <span [ngStyle]="{ display: currentHour && currentHour < 10 ? 'inline' : 'none' }">0</span><span>{{ currentHour }}</span>
+              </div>
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 0, -1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!--<span class="fa fa-chevron-down">
+                </span>-->
+                <fa-icon icon="chevron-down"></fa-icon>
+              </div>
+            </div>
+            <div class="calendar-separator">
+              <span class="text-center">{{ timeSeparator }}</span>
+            </div>
+            <div class="calendar-picker">
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 1, 1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!-- <span class="fa fa-chevron-up"></span>-->
+                <fa-icon icon="chevron-up"></fa-icon>
+              </div>
+              <div class="text-center" style="font-size: 25px">
+                <span [ngStyle]="{ display: currentMinute && currentMinute < 10 ? 'inline' : 'none' }">0</span
+                ><span>{{ currentMinute === 0 ? '00' : currentMinute }}</span>
+              </div>
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 1, -1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!--<span class="fa fa-chevron-down"></span>-->
+                <fa-icon icon="chevron-down"></fa-icon>
+              </div>
+            </div>
+            <div class="calendar-separator" *ngIf="showSeconds">
+              <span class="text-center">{{ timeSeparator }}</span>
+            </div>
+            <div class="calendar-picker" *ngIf="showSeconds">
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 2, 1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!-- <span class="fa fa-chevron-up"></span>-->
+                <fa-icon icon="chevron-up"></fa-icon>
+              </div>
+              <div class="text-center">
+                <span [ngStyle]="{ display: currentSecond && currentSecond < 10 ? 'inline' : 'none' }">0</span
+                ><span>{{ currentSecond }}</span>
+              </div>
+              <div
+                class="text-center selectable-item"
+                tabindex="0"
+                (mousedown)="onTimePickerElementMouseDown($event, 2, -1)"
+                (mouseup)="onTimePickerElementMouseUp()"
+              >
+                <!-- <span class="fa fa-chevron-down"></span>-->
+                <fa-icon icon="chevron-down"></fa-icon>
+              </div>
+            </div>
+            <div class="calendar-picker" *ngIf="hourFormat == '12'">
+              <div class="text-center selectable-item" tabindex="0" (click)="toggleAMPM($event)">
+                <!--<span class="fa fa-chevron-up"></span>-->
+                <fa-icon icon="chevron-up"></fa-icon>
+              </div>
+              <div style="font-size: 25px" class="text-center">
+                <span>{{ pm ? 'PM' : 'AM' }}</span>
+              </div>
+              <div class="text-center selectable-item" tabindex="0" (click)="toggleAMPM($event)">
+                <!--<span class="fa fa-chevron-down"></span>-->
+                <fa-icon icon="chevron-down"></fa-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 p-2 d-flex justify-content-end" *ngIf="showButtonBar">
+      <button type="button" class="btn btn-secondary" (click)="onClearButtonClick($event)">
+        <!--<span class="fa fa-eraser"></span>-->
+        <fa-icon icon="eraser"></fa-icon>
+        <span class="d-none d-md-inline">{{ _locale.clear }}</span>
+      </button>
+      <button type="button" class="btn btn-primary ml-1" (click)="onTodayButtonClick($event)">
+        <!--                <span class="fa fa-calendar-o"></span>-->
+        <fa-icon [icon]="['far', 'calendar-alt']"></fa-icon>
+        <span class="d-none d-md-inline">{{ _locale.today }}</span>
+      </button>
+    </div>
+    <ng-content select="p-footer"></ng-content>
+  </div>
+</div>

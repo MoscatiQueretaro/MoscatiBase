@@ -13,6 +13,7 @@ eg $input-color: red;
 @import '../../app/utils/components/Loader/loaders.styles';
 @import '../../app/entities/stepper-agenda/stepper-agenda.styles';
 @import '../../app/utils/autocomplete/autocomplete.component';
+@import '../../app/utils/datepicker/datepicker.styles';
 @import '././src/main/webapp/app/layouts/navbar/navbar.component';
 
 @import 'themes/default-theme';
@@ -23,6 +24,7 @@ eg $input-color: red;
   @include navbar-styles-theme($theme);
   @include loaders-styles-theme($theme);
   @include autocomplete-styles-theme($theme);
+  @include calendar-styles-theme($theme);
 }
 @mixin custom-components-size-theme($theme) {
   @include autocomplete-size-theme($theme);

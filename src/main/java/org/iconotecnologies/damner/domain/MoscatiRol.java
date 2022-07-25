@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Table(name = "MOSCATI_ROL")
 public class MoscatiRol implements Serializable {
 
-    public static final String ENTITY_NAME = "damner-Rol";
+    public static final String ENTITY_NAME = "moscati-Rol";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

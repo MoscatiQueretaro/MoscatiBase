@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
 import { DetallesMedicoModel } from './detalles-medico.model';
-import { EspecialidadesModel } from '../catalogos/especialidades/especialidades.model';
-import { PagingView } from '../../utils/pagination/PagingView';
+import { EspecialidadesModel } from '../../catalogos/especialidades/especialidades.model';
+import { PagingView } from '../../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetallesMedicoService } from './detalles-medico.service';
+import { MoscatiUserModel } from '../../../core/auth/account.model';
 
 @Component({
   selector: 'jhi-detalles-medico',
@@ -16,7 +17,7 @@ export class DetallesMedicoComponent extends PagingView implements OnInit {
   especialidadFilter?: EspecialidadesModel;
 
   @Input()
-  doctorId?: number;
+  doctor?: MoscatiUserModel;
 
   constructor(
     protected router: Router,
@@ -31,10 +32,12 @@ export class DetallesMedicoComponent extends PagingView implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.doctorId) {
+    if (this.doctor) {
       this.loadDoctorProfile();
     }
   }
 
-  loadDoctorProfile(): void {}
+  loadDoctorProfile(): void {
+    console.warn('doctor seleccionado: ', this.doctor);
+  }
 }

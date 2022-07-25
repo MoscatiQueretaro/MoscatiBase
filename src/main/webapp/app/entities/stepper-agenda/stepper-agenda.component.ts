@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
 import { PagingView } from '../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MoscatiUserModel } from '../../core/auth/account.model';
+import { AccountService } from '../../core/auth/account.service';
+import { HorarioCitaModel } from './horario-cita/horario-cita.model';
 
 @Component({
   selector: 'jhi-stepper-agenda',
@@ -10,8 +13,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class StepperAgendaComponent extends PagingView implements OnInit {
   formStepsNum = 0;
-
-  constructor(protected router: Router, protected activatedRoute: ActivatedRoute, public eventManager: JhiEventManager) {
+  doctorSelect?: MoscatiUserModel;
+  userAccount?: MoscatiUserModel;
+  resumenCita?: HorarioCitaModel;
+  horarioDisponible = true;
+  constructor(
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute,
+    public eventManager: JhiEventManager,
+    private accountService: AccountService
+  ) {
     super(router, activatedRoute, eventManager, 'especialidad');
     this.eventManager.subscribe('medic-directory-reload', () => {
       this.ngOnInit();
@@ -36,6 +47,12 @@ export class StepperAgendaComponent extends PagingView implements OnInit {
         this.updateFormSteps();
         this.updateProgressbar();
       });
+    });
+
+    this.accountService.identity(true).subscribe(account => {
+      if (account) {
+        this.userAccount = account;
+      }
     });
   }
 
@@ -62,5 +79,20 @@ export class StepperAgendaComponent extends PagingView implements OnInit {
     if (progress !== null) {
       progress.style.width = (((progressActive.length - 1) / (progressSteps.length - 1)) * 100).toString() + '%';
     }
+  }
+
+  getDoctor(doctor: MoscatiUserModel): void {
+    this.doctorSelect = doctor;
+    this.formStepsNum++;
+    this.updateFormSteps();
+    this.updateProgressbar();
+  }
+
+  getEnabledHorary(disponibilidad: boolean): void {
+    this.horarioDisponible = disponibilidad;
+  }
+
+  getResumenCita(resume: HorarioCitaModel): void {
+    this.resumenCita = resume;
   }
 }

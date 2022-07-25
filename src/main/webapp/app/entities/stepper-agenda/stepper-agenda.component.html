@@ -13,48 +13,35 @@
       <!--END PROGRESS BAR-->
       <!--STEPS-->
       <div class="form-step form-step-active">
-        <jhi-directorio-medico> </jhi-directorio-medico>
-        <div class="btns-group justify-content-end">
-          <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
-        </div>
+        <jhi-directorio-medico (doctorSelect)="getDoctor($event)"></jhi-directorio-medico>
       </div>
       <div class="form-step">
-        <div class="input-group">
-          <label for="phone">Phone</label>
-          <input type="text" name="phone" id="phone" />
-        </div>
-        <div class="input-group">
-          <label for="">Email</label>
-          <input type="text" name="" id="" />
-        </div>
+        <jhi-detalles-medico *ngIf="doctorSelect" [doctor]="doctorSelect"></jhi-detalles-medico>
         <div class="btns-group">
           <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
           <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
         </div>
       </div>
       <div class="form-step">
-        <div class="input-group">
-          <label for="dob">Date of Birth</label>
-          <input type="date" name="dob" id="dob" />
-        </div>
-        <div class="input-group">
-          <label for="ID">National ID</label>
-          <input type="number" name="ID" id="ID" />
-        </div>
+        <jhi-horario-solicitud
+          *ngIf="doctorSelect"
+          [doctormodel]="doctorSelect"
+          [userModel]="userAccount"
+          (horarySelect)="getEnabledHorary($event)"
+          (resumenCita)="getResumenCita($event)"
+        ></jhi-horario-solicitud>
         <div class="btns-group">
           <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
-          <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
+          <button [disabled]="horarioDisponible" type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
         </div>
       </div>
       <div class="form-step">
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" required />
-        </div>
-        <div class="input-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" name="confirmPassword" id="confirmPassword" required />
-        </div>
+        <jhi-resumen-pago
+          *ngIf="doctorSelect"
+          [doctormodel]="doctorSelect"
+          [userModel]="userAccount"
+          [citaSolicitud]="resumenCita"
+        ></jhi-resumen-pago>
         <div class="btns-group">
           <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
           <button type="submit" class="btn btn-light-blue w-25">Agendar</button>

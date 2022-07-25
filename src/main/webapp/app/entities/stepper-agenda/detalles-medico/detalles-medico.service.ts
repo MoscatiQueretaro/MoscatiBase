@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_API_URL } from '../../app.constants';
-import { DamnerService } from '../../services/damner.service';
+import { SERVER_API_URL } from '../../../app.constants';
+import { DamnerService } from '../../../services/damner.service';
 import { DetallesMedicoModel } from './detalles-medico.model';
 
 @Injectable()

@@ -1,0 +1,128 @@
+<!-- Column -->
+<ng-container *ngIf="citaSolicitud">
+  <div class="col-md-12 py-4" style="padding-left: 30%; padding-right: 30%">
+    <mat-card class="main-card-login">
+      <mat-card-title style="text-align: center">
+        <h2>
+          <strong>{{ 'RESUMEN DE CITA' }}</strong>
+        </h2>
+        <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="file-invoice-dollar"></fa-icon></span>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <div class="row">
+          <div class="col-6" style="display: flex; justify-content: right">
+            <div style="width: 100px; height: 100px">
+              <jhi-single-file-template
+                *ngIf="userModel && userModel.fotoPersona"
+                class="tooltip-options-profile"
+                [file]="userModel.fotoPersona"
+                [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                [borderImageType]="'rounded'"
+                [endpoint]="'file'"
+                [delete]="false"
+              ></jhi-single-file-template>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="width: 100px; height: 100px">
+              <jhi-single-file-template
+                *ngIf="doctormodel && doctormodel.fotoPersona"
+                class="tooltip-options-profile"
+                [file]="doctormodel.fotoPersona"
+                [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                [borderImageType]="'rounded'"
+                [endpoint]="'file'"
+                [delete]="false"
+              ></jhi-single-file-template>
+            </div>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-12" style="display: flex; justify-content: center">
+            <div>
+              <div class="col-md-12">
+                <div class="text-notification-badge">
+                  <fa-icon style="font-size: 20px" icon="info-circle"></fa-icon>&nbsp;
+                  <span>
+                    {{
+                      (citaSolicitud.user ? citaSolicitud.user.name : '') +
+                        ' estas a un paso de agendar tu cita, confirma que la información sea correcta y procede al pago.'
+                    }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-12" style="padding-top: 5%; padding-left: 5%; padding-right: 5%">
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'MEDICO: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{
+                      citaSolicitud.doctor
+                        ? citaSolicitud.doctor.name + ' ' + citaSolicitud.doctor.firstName + ' ' + citaSolicitud.doctor.lastName
+                        : ''
+                    }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'PACIENTE: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{
+                      citaSolicitud.user
+                        ? citaSolicitud.user.name + ' ' + citaSolicitud.user.firstName + ' ' + citaSolicitud.user.lastName
+                        : ''
+                    }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'TIPO DE CITA: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{ citaSolicitud.tipoCita ? citaSolicitud.tipoCita.descripcion : '' }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'FECHA: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{ citaSolicitud.fechaHoraSolicitud | date: 'MMMM d, y, h:mm a ' }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'DURACION: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{ '30:00 Min.' }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+                <div class="row">
+                  <div class="col-6 text-left">
+                    <strong>{{ 'TOTAL: ' }}</strong>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span>{{ '1300$' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>

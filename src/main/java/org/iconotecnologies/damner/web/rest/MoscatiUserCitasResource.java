@@ -10,6 +10,7 @@ import org.iconotecnologies.damner.domain.MoscatiUserCitas;
 import org.iconotecnologies.damner.domain.files.PhotoUserAlbum;
 import org.iconotecnologies.damner.service.MoscatiUserCitasService;
 import org.iconotecnologies.damner.service.criteria.MoscatiUserCitasCriteria;
+import org.iconotecnologies.damner.service.dto.MoscatiHorariosDisponiblesDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.iconotecnologies.damner.web.rest.util.HeaderUtil;
@@ -77,5 +78,14 @@ public class MoscatiUserCitasResource {
             .ok()
             .headers(PaginationUtil.generatePaginationHttpHeaders(moscatiUserCitas, "/api/directoriomedico"))
             .body(moscatiUserCitas.getContent());
+    }
+
+    @PostMapping("/disponibles")
+    @Timed
+    public ResponseEntity<List<MoscatiHorariosDisponiblesDTO>> getHorariosDisponibles(
+        @RequestBody MoscatiUserCitasDTO moscatiUserCitasDTO
+    ) {
+        List<MoscatiHorariosDisponiblesDTO> horariosDisponibles = this.service.getHorariosDisponibles(moscatiUserCitasDTO);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(horariosDisponibles));
     }
 }
