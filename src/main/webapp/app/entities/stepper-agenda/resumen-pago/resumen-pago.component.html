@@ -1,6 +1,6 @@
 <!-- Column -->
 <ng-container *ngIf="citaSolicitud">
-  <div class="col-md-12 py-4" style="padding-left: 30%; padding-right: 30%">
+  <div class="col-md-12 py-4 card-payment-pading">
     <mat-card class="main-card-login">
       <mat-card-title style="text-align: center">
         <h2>
@@ -116,6 +116,18 @@
                   </div>
                   <div class="col-6 text-right">
                     <span>{{ '1300$' }}</span>
+                  </div>
+                </div>
+                <div class="py-1"><hr class="divider-service" /></div>
+                <div class="col-md-12" style="display: flex; justify-content: center">
+                  <div *ngIf="!payload">
+                    <div class="btn-new-query" (click)="stripePay()">
+                      <span class="text-options-menu">Pagar 1300$ &nbsp; <fa-icon icon="credit-card"></fa-icon></span>
+                    </div>
+                  </div>
+                  <div *ngIf="payload">
+                    <span>Cargando pago</span>
+                    <div class="spinner-border text-info" role="status"></div>
                   </div>
                 </div>
               </div>

@@ -18,7 +18,7 @@ export class ResumenPagoComponent extends PagingView implements OnInit {
   loading = false;
   especialidadFilter?: EspecialidadesModel;
   stripeResponse?: StripeResponseModel;
-
+  payload = false;
   @Input()
   doctormodel?: MoscatiUserModel;
 
@@ -49,14 +49,21 @@ export class ResumenPagoComponent extends PagingView implements OnInit {
 
   async stripePay(): Promise<void> {
     // here we create a payment object
+    this.payload = true;
     const payment = {
-      name: 'Iphone',
+      name: 'Cita Medica Virtual Hospital Moscati Queretaro',
       currency: 'mxn',
       // amount on cents *10 => to be on dollar
-      amount: 9999,
+      amount: 130000,
       quantity: '1',
       cancelUrl: 'http://localhost:9000/cancel',
-      successUrl: 'http://localhost:9000/success',
+      successUrl:
+        'http://localhost:9000/stepper-agenda/resumen-pago/stripe-pages/success?userId=' +
+        this.userModel!.id!.toString() +
+        '&doctorId=' +
+        this.doctormodel!.id!.toString() +
+        '&fechaHoraSolicitud=' +
+        this.citaSolicitud!.fechaHoraSolicitud!.toString(),
     };
 
     const stripe = await this.stripePromise;
@@ -67,10 +74,9 @@ export class ResumenPagoComponent extends PagingView implements OnInit {
         // I use stripe to redirect To Checkout page of Stripe platform
         if (res.body) {
           this.stripeResponse = res.body;
-          console.warn('redirect to checkout whit id:', this.stripeResponse.id);
           if (stripe !== null) {
             stripe.redirectToCheckout({
-              sessionId: this.stripeResponse.id,
+              sessionId: this.stripeResponse.stripeIntentId!,
             });
           }
         }

@@ -9,6 +9,7 @@ import { UserNotificationsModule } from '../../user-notifications/user-notificat
 import { DetallesMedicoComponent } from './detalles-medico.component';
 import { DetallesMedicoService } from './detalles-medico.service';
 import { LoadersModule } from '../../../utils/components/loader/loaders.module';
+import { DirectorioMedicoService } from '../../directorio-medico/directorio-medico.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { LoadersModule } from '../../../utils/components/loader/loaders.module';
   ],
   declarations: [DetallesMedicoComponent],
   entryComponents: [DetallesMedicoComponent],
-  providers: [DetallesMedicoService],
+  providers: [DetallesMedicoService, DirectorioMedicoService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [DetallesMedicoComponent],
 })

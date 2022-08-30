@@ -16,6 +16,7 @@ public class MoscatiUserCitasDTO implements Serializable {
     private MoscatiEtapaCitaDTO etapaCita;
     private String agoraChanel;
     private ZonedDateTime fechaHoraFin;
+    private MoscatiPagosStripeDTO pagosStripe;
 
     public Integer getId() {
         return id;
@@ -87,5 +88,13 @@ public class MoscatiUserCitasDTO implements Serializable {
 
     public void setFechaHoraFin(ZonedDateTime fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
+    }
+
+    public MoscatiPagosStripeDTO getPagosStripe() {
+        return pagosStripe;
+    }
+
+    public void setPagosStripe(MoscatiPagosStripeDTO pagosStripe) {
+        this.pagosStripe = pagosStripe;
     }
 }

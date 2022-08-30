@@ -9,6 +9,9 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { JhiEventManager } from 'ng-jhipster';
+import { FileModel } from '../../utils/components/file.model';
+import { SyncFilesService } from '../../utils/components/sync-files.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-navbar',
@@ -20,10 +23,12 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   openAPIEnabled?: boolean;
   version = '';
+  fileModel?: FileModel;
   account: MoscatiUserModel | null = null;
   adminItems = false;
   constructor(
     private loginService: LoginService,
+    private syncFileService: SyncFilesService,
     private translateService: TranslateService,
     private eventManager: JhiEventManager,
     private sessionStorageService: SessionStorageService,
@@ -42,6 +47,9 @@ export class NavbarComponent implements OnInit {
       this.openAPIEnabled = profileInfo.openAPIEnabled;
     });
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    if (this.isAuthenticated()) {
+      this.getImageUrl();
+    }
   }
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
@@ -79,10 +87,16 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  getImageUrl(): string {
-    return this.isAuthenticated() ? this.accountService.getImageUrl() : '';
+  getImageUrl(): void {
+    this.syncFileService.find('foto-persona', this.accountService.getImageUrl()).subscribe((res: HttpResponse<FileModel>) => {
+      if (res.body) {
+        this.fileModel = res.body;
+      }
+    });
   }
-
+  myProfile(): void {
+    this.router.navigate(['/user-profile']);
+  }
   collapseAdminItems(): void {
     this.adminItems = !this.adminItems;
   }

@@ -1,0 +1,24 @@
+<ng-container>
+  <div class="row" style="padding-top: 10%; padding-right: 10%; padding-left: 10%; text-align: center">
+    <div class="container">
+      <div class="avatar">
+        <a href="https://codepen.io/MarioDesigns/">
+          <img src="../../../content/images/moscati-logo-m.png" alt="Skytsunami" />
+        </a>
+      </div>
+    </div>
+    <div *ngIf="loading">
+      <span>Agendando Cita...</span>
+      <div class="spinner-border text-info" role="status"></div>
+    </div>
+    <ng-container *ngIf="!loading">
+      <h1>PAGO CON EXITO</h1>
+      <fa-icon style="font-size: 24px" icon="check-circle"></fa-icon>
+      <div class="col-md-12">
+        <div class="btn-new-query" (click)="goToCitas()">
+          <span class="text-options-menu">Ver agenda de citas &nbsp; <fa-icon icon="calendar-check"></fa-icon></span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

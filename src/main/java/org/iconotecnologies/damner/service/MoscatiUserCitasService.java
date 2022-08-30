@@ -247,6 +247,11 @@ public class MoscatiUserCitasService {
     }
 
     @Transactional(readOnly = true)
+    public Long countAllEvaluador(MoscatiUserCitasCriteria criteria) {
+        return repository.count(criteria.buildSpecification());
+    }
+
+    @Transactional(readOnly = true)
     public List<MoscatiHorariosDisponiblesDTO> getHorariosDisponibles(MoscatiUserCitasDTO moscatiUserCitasDTO) {
         List<MoscatiHorariosDisponiblesDTO> horariosList = new ArrayList<>();
         if (moscatiUserCitasDTO.getId() == null) {

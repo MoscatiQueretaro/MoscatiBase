@@ -1,5 +1,6 @@
 import { MoscatiUserModel } from '../../../core/auth/account.model';
 import { CatalogoModel } from '../../catalogos/catalogo.model';
+import { StripeResponseModel } from '../resumen-pago/resumen-pago.model';
 
 export class HorarioCitaModel {
   constructor(
@@ -10,7 +11,8 @@ export class HorarioCitaModel {
     public doctor?: MoscatiUserModel,
     public user?: MoscatiUserModel,
     public etapaCita?: CatalogoModel,
-    public agoraChanel?: string
+    public agoraChanel?: string,
+    public pagosStripe?: StripeResponseModel
   ) {}
 }
 

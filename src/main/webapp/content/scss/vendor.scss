@@ -12,6 +12,9 @@ eg $input-color: red;
 @import 'global';
 @import '../../app/utils/components/Loader/loaders.styles';
 @import '../../app/entities/stepper-agenda/stepper-agenda.styles';
+@import '../../app/entities/agora/join-chanel-video.styles';
+@import '../../app/entities/citas/bandejas-citas/etapa-cita.styles';
+@import 'src/main/webapp/app/entities/citas/user-citas.styles';
 @import '../../app/utils/autocomplete/autocomplete.component';
 @import '../../app/utils/datepicker/datepicker.styles';
 @import '././src/main/webapp/app/layouts/navbar/navbar.component';
@@ -25,6 +28,9 @@ eg $input-color: red;
   @include loaders-styles-theme($theme);
   @include autocomplete-styles-theme($theme);
   @include calendar-styles-theme($theme);
+  @include etapa-cita-styles-theme($theme);
+  @include user-cita-styles-theme($theme);
+  @include join-chanel-video-styles-theme($theme);
 }
 @mixin custom-components-size-theme($theme) {
   @include autocomplete-size-theme($theme);

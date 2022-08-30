@@ -32,6 +32,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { BaseCoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilesModule } from './utils/components/files.module';
 @NgModule({
   imports: [
     BrowserModule,
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       },
     }),
     MatDividerModule,
+    FilesModule,
   ],
   providers: [
     Title,

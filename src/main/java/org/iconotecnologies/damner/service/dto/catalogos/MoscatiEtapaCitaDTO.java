@@ -6,6 +6,7 @@ public class MoscatiEtapaCitaDTO implements Serializable {
 
     private Integer id;
     private String descripcion;
+    protected String estatus;
 
     public Integer getId() {
         return id;
@@ -21,5 +22,13 @@ public class MoscatiEtapaCitaDTO implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 }

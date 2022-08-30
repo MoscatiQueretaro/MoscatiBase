@@ -1,0 +1,115 @@
+<!-- Column -->
+<ng-container>
+  <h1>Citas Medicas</h1>
+  <div class="col-md-12">
+    <jhi-bandejas-etapa-cita
+      [globalParams]="filters"
+      [value]="citaEtapaSelect"
+      (citaEtapaChange)="ChangeCitaEtapaSelect($event)"
+      [disabled]="loading"
+    ></jhi-bandejas-etapa-cita>
+  </div>
+  <div class="col-md-12" *ngIf="userCitasList">
+    <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="8">
+      <div class="row" *ngIf="userCitasList.length > 0; else emptyBlock">
+        <div class="col-md-6 py-4" *ngFor="let userCitas of userCitasList">
+          <mat-card class="main-card-login" *ngIf="userCitas && userCitas.user && userCitas.doctor">
+            <mat-card-title style="text-align: left">
+              <strong>{{ 'Medico Moscati' }}</strong>
+              <span class="badge badge-danger badge-pill" style="font-size: 12px; position: absolute; top: 10px; right: 20px"
+                >Nueva cita</span
+              >
+            </mat-card-title>
+            <mat-card-subtitle style="text-align: left">
+              <div class="row">
+                <div style="width: 65px; height: 50px">
+                  <jhi-single-file-template
+                    *ngIf="userCitas.user.imageProfile"
+                    class="tooltip-options-profile"
+                    [file]="userCitas.user.fotoPersona"
+                    [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                    [borderImageType]="'rounded'"
+                    [endpoint]="'file'"
+                    [delete]="false"
+                  ></jhi-single-file-template>
+                </div>
+
+                <div style="width: 65px; height: 50px">
+                  <jhi-single-file-template
+                    *ngIf="userCitas.doctor.imageProfile"
+                    class="tooltip-options-profile"
+                    [file]="userCitas.doctor.fotoPersona"
+                    [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                    [borderImageType]="'rounded'"
+                    [endpoint]="'file'"
+                    [delete]="false"
+                  ></jhi-single-file-template>
+                </div>
+              </div>
+            </mat-card-subtitle>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-11" style="display: flex; justify-content: center; padding: 5px">
+                  <div class="text-notification-badge">
+                    <p>
+                      <span>{{ 'Hola, ' }}</span
+                      ><span>{{ userCitas.doctor.name + ' ' + userCitas.doctor.firstName + ' ' + userCitas.doctor.lastName + ' ' }}</span>
+                      <span>{{ 'mi nombre es ' }}</span
+                      ><span>{{ userCitas.user.name + ' ' + userCitas.user.firstName + ' ' + userCitas.user.lastName + '. ' }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-11" style="display: flex; justify-content: center; padding: 5px">
+                  <div class="text-notification-badge">
+                    <p>
+                      <span>{{ 'Quisiera agendar una cita ' }}</span
+                      ><span>{{ userCitas.tipoCita ? userCitas.tipoCita.descripcion + ' ' : '' }}</span>
+                      <span>{{ 'para el dia y hora ' }}</span
+                      ><span>{{ userCitas.fechaHoraSolicitud | date: 'MMMM d, y, h:mm a ' }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="col-md-12" style="display: flex; justify-content: right" *ngIf="userCitas.etapaCita">
+                <div *ngIf="userCitas.etapaCita.descripcion === 'SOLICITUD'">
+                  <button class="btn danger" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']">
+                    {{ 'Cancelar ' }}<fa-icon icon="ban"></fa-icon>
+                  </button>
+                </div>
+                <button class="btn info" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']">
+                  {{ '\n Detalles ' }}<fa-icon icon="eye"></fa-icon>
+                </button>
+                <div *ngIf="userCitas.etapaCita.descripcion === 'CITA'">
+                  <button
+                    class="btn primary"
+                    (click)="joinVideoStream(userCitas.id)"
+                    *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']"
+                  >
+                    Unirse <fa-icon icon="video"></fa-icon>
+                  </button>
+                  <button class="btn warning" *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']">
+                    Reagendar <fa-icon icon="calendar-day"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <ng-template #emptyBlock>
+        <div class="row mt-2">
+          <div class="col-12">
+            <h1 class="w-100 text-center text-muted">
+              <span style="font-size: 30px; color: #05ec47"><fa-icon icon="search"></fa-icon></span>
+            </h1>
+          </div>
+          <div class="col-12 text-center">
+            <p class="text-center 2rem">{{ 'No se encontraron resultados' }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </jhi-loaders>
+  </div>
+</ng-container>

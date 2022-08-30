@@ -76,17 +76,36 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
-          <span *ngIf="!getImageUrl()" class="black-hover">
-            <fa-icon icon="user"></fa-icon>
-            <span jhiTranslate="global.menu.account.main"> MoscatiUserModel </span>
-          </span>
-          <span *ngIf="getImageUrl()" class="black-hover">
-            <img [src]="getImageUrl()" class="nav-profile-image rounded-circle" alt="Avatar" />
-            <span jhiTranslate="global.menu.account.main"> MoscatiUserModel </span>
-          </span>
-        </a>
+        <div class="row">
+          <div class="col-auto pr-0">
+            <jhi-single-file-template
+              [file]="fileModel"
+              [imageStyleProfile]="{ height: '2.15em', width: '2.19em' }"
+              [borderImageType]="'rounded'"
+              [endpoint]="'file'"
+              [delete]="false"
+            ></jhi-single-file-template>
+          </div>
+          <div class="col-auto pl-0">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+              <span *ngIf="!fileModel" class="black-hover">
+                <fa-icon icon="user"></fa-icon>
+                <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
+              </span>
+              <span *ngIf="fileModel" class="black-hover">
+                <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
+              </span>
+            </a>
+          </div>
+        </div>
+
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+          <li *ngSwitchCase="true">
+            <a class="dropdown-item" (click)="myProfile()" id="profile">
+              <fa-icon icon="address-card" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.account.my-profile">my profile</span>
+            </a>
+          </li>
           <li *ngSwitchCase="true">
             <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()">
               <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>

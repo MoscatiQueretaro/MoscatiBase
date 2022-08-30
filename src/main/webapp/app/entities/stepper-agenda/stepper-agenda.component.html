@@ -16,7 +16,8 @@
         <jhi-directorio-medico (doctorSelect)="getDoctor($event)"></jhi-directorio-medico>
       </div>
       <div class="form-step">
-        <jhi-detalles-medico *ngIf="doctorSelect" [doctor]="doctorSelect"></jhi-detalles-medico>
+        <jhi-detalles-medico *ngIf="doctorSelect" [directorioMedico]="directorioMedicoSelect" [doctor]="doctorSelect">
+        </jhi-detalles-medico>
         <div class="btns-group">
           <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
           <button type="button" class="btn btn-light-blue btn-next w-25">Continuar</button>
@@ -44,7 +45,6 @@
         ></jhi-resumen-pago>
         <div class="btns-group">
           <button type="button" class="btn btn-light-blue btn-prev w-25">Regresar</button>
-          <button type="submit" class="btn btn-light-blue w-25">Agendar</button>
         </div>
       </div>
       <!--END STEPS-->

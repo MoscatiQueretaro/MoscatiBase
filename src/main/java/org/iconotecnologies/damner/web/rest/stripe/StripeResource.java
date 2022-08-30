@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 import org.iconotecnologies.damner.domain.MoscatiUserCitas;
 import org.iconotecnologies.damner.service.StripeService;
+import org.iconotecnologies.damner.service.dto.MoscatiPagosStripeDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
 import org.iconotecnologies.damner.service.dto.StripeResponseDTO;
 import org.iconotecnologies.damner.service.dto.stripeDTO;
@@ -34,9 +35,9 @@ public class StripeResource {
 
     @PostMapping("/create-checkout-session")
     @Timed
-    public ResponseEntity<StripeResponseDTO> create(@RequestBody stripeDTO price)
+    public ResponseEntity<MoscatiPagosStripeDTO> create(@RequestBody stripeDTO price)
         throws URISyntaxException, FirebaseMessagingException, StripeException, UnknownHostException {
-        StripeResponseDTO dto = this.stripeService.stripeBuy(price);
+        MoscatiPagosStripeDTO dto = this.stripeService.stripeBuy(price);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
     }
 }

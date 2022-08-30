@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 import org.iconotecnologies.damner.domain.MoscatiUserCitas;
 import org.iconotecnologies.damner.domain.files.PhotoUserAlbum;
+import org.iconotecnologies.damner.service.MoscatiPagosStripeService;
 import org.iconotecnologies.damner.service.MoscatiUserCitasService;
+import org.iconotecnologies.damner.service.UserService;
 import org.iconotecnologies.damner.service.criteria.MoscatiUserCitasCriteria;
 import org.iconotecnologies.damner.service.dto.MoscatiHorariosDisponiblesDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserCitasDTO;
@@ -26,9 +28,17 @@ import tech.jhipster.web.util.ResponseUtil;
 public class MoscatiUserCitasResource {
 
     private final MoscatiUserCitasService service;
+    private final UserService userService;
+    private final MoscatiPagosStripeService moscatiPagosStripeService;
 
-    public MoscatiUserCitasResource(MoscatiUserCitasService service) {
+    public MoscatiUserCitasResource(
+        MoscatiUserCitasService service,
+        UserService userService,
+        MoscatiPagosStripeService moscatiPagosStripeService
+    ) {
         this.service = service;
+        this.userService = userService;
+        this.moscatiPagosStripeService = moscatiPagosStripeService;
     }
 
     @PostMapping("")
@@ -40,6 +50,23 @@ public class MoscatiUserCitasResource {
                 "Surgió un error al momento de guardar el directorio Medico",
                 MoscatiUserCitas.ENTITY_NAME,
                 "NO DEBE EXISTIE EL ID"
+            );
+        }
+        if (
+            moscatiUserCitasDTO.getUser().getId() != null &&
+            moscatiUserCitasDTO.getDoctor().getId() != null &&
+            moscatiUserCitasDTO.getPagosStripe().getStripeKey() != null
+        ) {
+            moscatiUserCitasDTO.setUser(this.userService.getUserById(moscatiUserCitasDTO.getUser().getId()));
+            moscatiUserCitasDTO.setDoctor(this.userService.getUserById(moscatiUserCitasDTO.getDoctor().getId()));
+            moscatiUserCitasDTO.setPagosStripe(
+                this.moscatiPagosStripeService.getPagoByStripeKey(moscatiUserCitasDTO.getPagosStripe().getStripeKey())
+            );
+        } else {
+            throw new BadRequestAlertException(
+                "Surgió un error al momento de guardar la cita falta user id, o doctor id,o stripekey",
+                MoscatiUserCitas.ENTITY_NAME,
+                "Error en la cita"
             );
         }
         MoscatiUserCitasDTO dto = this.service.save(moscatiUserCitasDTO);
@@ -68,6 +95,13 @@ public class MoscatiUserCitasResource {
     public ResponseEntity<MoscatiUserCitasDTO> findAllById(@PathVariable Integer id) {
         MoscatiUserCitasDTO dto = this.service.findOneById(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
+    }
+
+    @GetMapping("/count")
+    @Timed
+    public ResponseEntity<Long> countAll(MoscatiUserCitasCriteria criteria) {
+        Long res = this.service.countAllEvaluador(criteria);
+        return ResponseEntity.ok(res != null ? res : 0L);
     }
 
     @GetMapping("")

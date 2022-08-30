@@ -14,10 +14,12 @@
   $info: map-get($theme, info);
   $warning: map-get($theme, warning);
   $danger: map-get($theme, danger);
+  $growl-color: map-get($theme, growl-color);
   $background-navbar: map-get($theme, background-navbar);
   $border: map-get($theme, border-color);
   $scrollbar-bg: map-get($theme, scrollbar-bg);
   $scrollbar-hover: map-get($theme, scrollbar-hover);
+
   .main-panel {
     background: $background-main;
     color: $color-body;
@@ -29,6 +31,15 @@
   }
   .btn-secondary {
     background: $secondary;
+  }
+
+  .btn-primary {
+    background: $primary;
+  }
+
+  .badge-danger {
+    color: rgba($growl-color, 0.9);
+    background-color: rgba($danger, 0.8);
   }
 
   .main-card {
@@ -378,6 +389,11 @@ Generic styles
   color: #bbbbbb;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
+.card-payment-pading {
+  padding-left: 30%;
+  padding-right: 30%;
+}
 .divider-service {
   width: 100%;
   opacity: 0.6;
@@ -561,10 +577,10 @@ Generic styles
   position: relative;
   background-image: linear-gradient(to right, #006175 0%, #072d73 100%);
   color: white;
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
   justify-content: left;
   padding: 10px;
@@ -935,7 +951,10 @@ entity detail page css
   .card-img-top {
     height: 300px;
   }
-
+  .card-payment-pading {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
   .pro-img {
     margin-top: -120px;
     margin-bottom: 20px;
@@ -1113,6 +1132,11 @@ ui bootstrap tweaks
   .pro-img {
     margin-top: -120px;
     margin-bottom: 20px;
+  }
+
+  .card-payment-pading {
+    padding-left: 10%;
+    padding-right: 10%;
   }
   .image-profile-size {
     width: 200px;

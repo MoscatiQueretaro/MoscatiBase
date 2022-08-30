@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+@mixin etapa-cita-styles-theme($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, secondary);
+  $growl-color: map-get($theme, growl-color);
+  $background-main-card: map-get($theme, background-main-card);
+  $info: map-get($theme, info);
+  $border: map-get($theme, border-color);
+  $input-background-focus: map-get($theme, input-background-focus);
+  $input-color: map-get($theme, input-color);
+  $color-bg-input: map-get($theme, color-bg-input);
+  $danger: map-get($theme, danger);
+  $bg-input-disabled: map-get($theme, bg-input-disabled);
+  $color-body: map-get($theme, color-body);
+
+  .button-badge {
+    background-color: $primary;
+  }
+  .btn {
+    border: 2px solid $primary;
+    color: $primary;
+  }
+}
+
+.btn {
+  padding: 5px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-badge {
+  color: white;
+}
+
+.button-badge-select {
+  background-color: white;
+}
+
+.badge-pill {
+  padding-right: 0.7em;
+  padding-left: 0.7em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border-radius: 15rem;
+}

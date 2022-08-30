@@ -23,7 +23,6 @@ export class SingleFileTemplateComponent {
   set imageStyleProfile(value: any) {
     if (value !== this.imageStyle) {
       this.imageStyle = value;
-      console.warn('image style', this.imageStyle);
     }
   }
 

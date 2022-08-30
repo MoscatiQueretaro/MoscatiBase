@@ -60,7 +60,7 @@
     <ng-content select="p-header"></ng-content>
     <div class="row">
       <div class="col-md-12"><span class="logo-img"></span><strong>Moscati</strong></div>
-      <div class="col-md-10">
+      <div class="col-md-9 py-3">
         <ng-container *ngIf="!timeOnly">
           <div *ngFor="let month of months; let i = index">
             <div class="calendar-header">
@@ -78,7 +78,7 @@
                 <span class="month-view" *ngIf="!monthNavigator && view !== 'month'">{{ locale.monthNames[month.month] }}</span>
                 <select
                   tabindex="-1"
-                  class="select-month"
+                  class="form__field"
                   *ngIf="monthNavigator && view !== 'month' && numberOfMonths === 1"
                   (change)="onMonthDropdownChange($event)"
                 >
@@ -88,7 +88,7 @@
                 </select>
                 <select
                   tabindex="-1"
-                  class="select-year"
+                  class="form__field"
                   *ngIf="yearNavigator && numberOfMonths === 1"
                   (change)="onYearDropdownChange($event)"
                 >
@@ -166,7 +166,7 @@
           </div>
         </ng-container>
       </div>
-      <div class="col-md-2" *ngIf="showTime || timeOnly">
+      <div class="col-md-3" *ngIf="showTime || timeOnly">
         <div class="col-md-12" style="text-align: center">
           <fa-icon style="font-size: 55px" icon="clock"></fa-icon>
         </div>

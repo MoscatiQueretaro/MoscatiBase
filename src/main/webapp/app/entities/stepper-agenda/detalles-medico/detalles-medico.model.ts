@@ -13,3 +13,13 @@ export class DetallesMedicoModel {
     public idioma?: string
   ) {}
 }
+
+export class HorariosMedicosModel {
+  constructor(
+    public id?: number,
+    public user?: MoscatiUserModel,
+    public horaInicio?: string | Date,
+    public horaFin?: string | Date,
+    public dia?: string
+  ) {}
+}

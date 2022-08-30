@@ -1,4 +1,29 @@
 <!-- Column -->
 <ng-container>
-  <h1>Detalles de Medico:{{ doctor!.name }}</h1>
+  <div class="row">
+    <div class="col-md-12 text-notification-badge">
+      <div class="col-md-1 pl-0 pr-0" style="display: flex; justify-content: center">
+        <div style="width: 100px; height: 100px">
+          <jhi-single-file-template
+            *ngIf="doctor && doctor.imageProfile"
+            class="tooltip-options-profile"
+            [file]="doctor.fotoPersona"
+            [imageStyleProfile]="{ height: '100%', width: '100%' }"
+            [borderImageType]="'rounded'"
+            [endpoint]="'file'"
+            [delete]="false"
+          ></jhi-single-file-template>
+        </div>
+      </div>
+      <div class="col-md-5 pl-0 pr-0" style="display: flex; justify-content: left; margin-top: 3%">
+        <h1>{{ doctor!.name + ' ' + doctor!.firstName + ' ' + doctor!.lastName }}</h1>
+      </div>
+      <div class="col-md-6 pl-0 pr-0" style="display: flex; justify-content: right">
+        <h3>{{ directorioMedico!.especialidad!.descripcion + ' ' }}</h3>
+        <span style="font-size: 30px; color: #ffffff"><fa-icon icon="stethoscope"></fa-icon></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"></div>
 </ng-container>

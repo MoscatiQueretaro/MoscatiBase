@@ -16,6 +16,9 @@ public class MoscatiEtapaCita implements Serializable {
     @Column(name = "MOSCATI_DESCRIPCION")
     protected String descripcion;
 
+    @Column(name = "MOSCATI_ESTATUS")
+    protected String estatus;
+
     public Integer getId() {
         return id;
     }
@@ -30,5 +33,13 @@ public class MoscatiEtapaCita implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 }

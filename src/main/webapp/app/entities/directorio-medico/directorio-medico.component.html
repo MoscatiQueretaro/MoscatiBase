@@ -81,7 +81,7 @@
             <mat-card-actions>
               <div class="col-md-12" style="display: flex; justify-content: center">
                 <div>
-                  <div class="btn-new-query" (click)="seleccionarMedico(medico.user)">
+                  <div class="btn-new-query" (click)="seleccionarMedico(medico)">
                     <span class="text-options-menu">Agendar cita &nbsp; <fa-icon [icon]="'video'"></fa-icon></span>
                   </div>
                 </div>
@@ -98,7 +98,7 @@
             </h1>
           </div>
           <div class="col-12 text-center">
-            <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
+            <p class="text-center" jhiTranslate="entity.empty"></p>
           </div>
         </div>
       </ng-template>

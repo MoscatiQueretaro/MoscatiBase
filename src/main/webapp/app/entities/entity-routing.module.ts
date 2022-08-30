@@ -12,6 +12,18 @@ import { RouterModule } from '@angular/router';
         path: 'stepper-agenda',
         loadChildren: () => import('./stepper-agenda/stepper-agenda.module').then(c => c.StepperAgendaModule),
       },
+      {
+        path: 'stepper-agenda/resumen-pago/stripe-pages',
+        loadChildren: () => import('./stepper-agenda/resumen-pago/stripe-pages/stripe.module').then(c => c.StripeModule),
+      },
+      {
+        path: 'citas',
+        loadChildren: () => import('./citas/user-citas.module').then(c => c.UserCitasModule),
+      },
+      {
+        path: 'agora',
+        loadChildren: () => import('./agora/join-chanel-video.module').then(c => c.JoinChanelVideoModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

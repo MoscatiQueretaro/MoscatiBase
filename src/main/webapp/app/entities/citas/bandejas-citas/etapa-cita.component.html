@@ -1,0 +1,19 @@
+<div class="row mb-2">
+  <div class="col-12" *ngIf="etapas && etapas.length">
+    <div class="btn-group d-flex flex-row">
+      <button
+        type="button"
+        class="btn flex-grow-1"
+        *ngFor="let situacion of etapas"
+        (click)="selectOne(situacion)"
+        [ngClass]="situacion.descripcion === selected ? 'button-badge-select' : 'button-badge'"
+        [disabled]="disabled"
+      >
+        <span>
+          {{ situacion.descripcion }}&nbsp;
+          <span *ngIf="situacion.cantidad" class="badge badge-danger badge-pill">{{ situacion.cantidad }}</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

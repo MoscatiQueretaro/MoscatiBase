@@ -54,6 +54,10 @@ public class MoscatiUserCitas implements Serializable {
     @Column(name = "MOSCATI_FECHA_HORA_FIN")
     private ZonedDateTime fechaHoraFin;
 
+    @JoinColumn(name = "MOSCATI_PAGOS_STRIPE_ID", updatable = false)
+    @ManyToOne
+    private MoscatiPagosStripe pagosStripe;
+
     public Integer getId() {
         return id;
     }
@@ -124,5 +128,13 @@ public class MoscatiUserCitas implements Serializable {
 
     public void setFechaHoraFin(ZonedDateTime fechaHoraFin) {
         this.fechaHoraFin = fechaHoraFin;
+    }
+
+    public MoscatiPagosStripe getPagosStripe() {
+        return pagosStripe;
+    }
+
+    public void setPagosStripe(MoscatiPagosStripe pagosStripe) {
+        this.pagosStripe = pagosStripe;
     }
 }

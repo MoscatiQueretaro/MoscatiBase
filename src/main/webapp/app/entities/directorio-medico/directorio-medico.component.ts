@@ -16,7 +16,7 @@ export class DirectorioMedicoComponent extends PagingView implements OnInit {
   directorioMedicoList?: DirectorioMedicoModel[];
   loading = false;
   especialidadFilter?: EspecialidadesModel;
-  @Output() doctorSelect = new EventEmitter<MoscatiUserModel>();
+  @Output() doctorSelect = new EventEmitter<DirectorioMedicoModel>();
   constructor(
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
@@ -62,7 +62,7 @@ export class DirectorioMedicoComponent extends PagingView implements OnInit {
     );
   }
 
-  seleccionarMedico(doctor: MoscatiUserModel): void {
+  seleccionarMedico(doctor: DirectorioMedicoModel): void {
     this.doctorSelect.emit(doctor);
   }
 }

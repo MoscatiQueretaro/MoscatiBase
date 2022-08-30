@@ -75,10 +75,16 @@ export class UserProfileComponent implements OnInit {
       }
     });
   }
+
+  goToCitas(): void {
+    this.router.navigate(['/citas']);
+  }
+
   changeButtonOptions(value: number): void {
     switch (value) {
       case 1:
         this.optionButton = 1;
+        this.goToCitas();
         break;
       case 2:
         this.optionButton = 2;

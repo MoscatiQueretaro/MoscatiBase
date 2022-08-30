@@ -6,6 +6,7 @@ package org.iconotecnologies.damner.config;
 public final class Constants {
 
     // Regex for acceptable logins
+    public static final String RANDOM_CHAR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     public static final String LOGIN_REGEX = "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$";
     public static final String serialVersionUID = "1";
     public static final String SYSTEM = "system";
@@ -34,6 +35,7 @@ public final class Constants {
     //************************************************ STRIPE TOKENS API ***************************************
     public static final String STRIPE_API_KEY =
         "sk_test_51LKPKLESu4j2SCWvaexI5YhAlLmjsa7Coee8E2YEKy7eblMVn60399be2XgKCFWIsvyW6OFFR1YnblT2edabyCaA00F0deXOks";
+    public static final String ETAPA_STRIPE_SOLICITUD = "SOLICITUD";
 
     private Constants() {}
 }
