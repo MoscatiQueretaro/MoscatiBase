@@ -10,6 +10,7 @@
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
+        "my-profile": "My Profile",
         "main": "Account",
         "settings": "Settings",
         "password": "Password",

@@ -4,7 +4,6 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { DamnerService } from '../../../services/damner.service';
 import { DetallesMedicoModel } from './detalles-medico.model';
 import { Observable } from 'rxjs';
-import { NotificationsUserModel } from '../../user-notifications/user-notifications.model';
 import { map } from 'rxjs/operators';
 type ArrayResponseType = HttpResponse<DetallesMedicoModel[]>;
 

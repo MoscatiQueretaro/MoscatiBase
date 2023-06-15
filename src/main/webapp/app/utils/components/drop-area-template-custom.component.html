@@ -30,7 +30,7 @@
       >
         <button
           type="button"
-          class="btn btn-success profile-add-photo w-100 h-100"
+          class="btn primary profile-add-photo w-100 h-100"
           style="border: 2px dashed"
           (click)="agregarArchivo()"
           [disabled]="loading || (archivos && _maxFiles && archivos.length >= _maxFiles)"
@@ -48,6 +48,7 @@
       id="file_foto"
       (change)="handleData($any($event.target).files)"
       [attr.accept]="typesString"
+      [attr.required]="required"
       #inputFile
       [hidden]="true"
       multiple

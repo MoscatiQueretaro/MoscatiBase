@@ -1,4 +1,4 @@
-<div class="row" *ngIf="notificationsUserModelList && notificationsUserModelList.length > 0">
+<div class="row" *ngIf="notificationsUserModelList">
   <div class="col-md-12">
     <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="4">
       <div *ngIf="notificationsUserModelList.length > 0; else emptyBlock">
@@ -19,8 +19,8 @@
             }}</mat-card-subtitle>
             <mat-card-content>
               <div class="row">
-                <div class="col-md-2 pl-0 pr-0" style="display: flex; justify-content: center">
-                  <div style="width: 100px; height: 100px">
+                <div class="col-auto pl-0 pr-0" style="display: flex; justify-content: center">
+                  <div style="width: 50px; height: 50px">
                     <jhi-single-file-template
                       *ngIf="notification.notificacion.autor.imageProfile"
                       class="tooltip-options-profile"
@@ -32,12 +32,12 @@
                     ></jhi-single-file-template>
                   </div>
                 </div>
-                <div class="col-md-10" style="display: flex; justify-content: center; padding: 10px">
-                  <div class="text-notification-badge">
+                <div class="col-10" style="display: flex; justify-content: left; padding: 5px">
+                  <div class="message-remote">
                     <p>
                       <span>{{ notification.notificacion.descripcion ? notification.notificacion.descripcion : '' }}</span>
                     </p>
-                    <span style="font-size: 15px; position: absolute; bottom: 0; right: 20px">{{
+                    <span style="font-size: 12px; position: absolute; bottom: 0; right: 20px">{{
                       notification.notificacion.fecha ? (notification.notificacion.fecha | date: 'MMMM d, y, h:mm a ') : ''
                     }}</span>
                   </div>
@@ -46,9 +46,13 @@
             </mat-card-content>
             <mat-card-actions>
               <div class="col-md-12" style="display: flex; justify-content: center">
-                <div style="width: 150px; height: 45px">
-                  <div [class]="'btn-new-query'"><span class="text-options-menu">Ver mas</span></div>
-                </div>
+                <button
+                  class="btn primary"
+                  (click)="navigateToCitas()"
+                  *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']"
+                >
+                  Ver mas <fa-icon icon="eye"></fa-icon>
+                </button>
               </div>
             </mat-card-actions>
           </mat-card>
@@ -58,11 +62,11 @@
         <div class="row mt-2">
           <div class="col-12">
             <h1 class="w-100 text-center text-muted">
-              <fa-icon [icon]="['far', 'frown']" size="1x"></fa-icon>
+              <fa-icon icon="globe-americas" size="1x"></fa-icon>
             </h1>
           </div>
           <div class="col-12 text-center">
-            <p class="text-center text-muted" jhiTranslate="entity.empty"></p>
+            <p class="text-center text-muted">No se encontraron notificaciones.</p>
           </div>
         </div>
       </ng-template>

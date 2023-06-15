@@ -1,0 +1,66 @@
+<h2>
+  <strong jhiTranslate="medic-details.days-card.business-days"></strong>
+</h2>
+<div class="col-md-12">
+  <button class="btn primary" *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']">
+    Agregar nuevo horario <fa-icon icon="plus-circle"></fa-icon>
+  </button>
+</div>
+<span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="clock"></fa-icon></span>
+<div class="row" *ngIf="userHorariosList">
+  <div class="col-md-12">
+    <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'table'" [buttons]="true" [rows]="4">
+      <div *ngIf="userHorariosList.length > 0; else emptyBlock">
+        <div class="table-responsive col-12">
+          <table class="table table-hover">
+            <thead>
+              <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th scope="col" jhiSortBy="descripcion">
+                  <span jhiTranslate="medic-details.days-card.day"></span> <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="faseEvaluacion">
+                  <span jhiTranslate="medic-details.days-card.start-time"></span> <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th scope="col" jhiSortBy="estatus">
+                  <span jhiTranslate="medic-details.days-card.end-time"></span> <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let horarios of userHorariosList">
+                <td>{{ horarios.dia }}</td>
+                <td>
+                  <span *ngIf="horarios.horaInicio">{{ horarios.horaInicio }}</span>
+                </td>
+                <td>
+                  <span *ngIf="horarios.horaFin">{{ horarios.horaFin }}</span>
+                </td>
+                <td class="actions">
+                  <button class="btn info" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']">
+                    Editar <fa-icon icon="edit"></fa-icon>
+                  </button>
+                  <button class="btn danger" *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']">
+                    Eliminar <fa-icon icon="trash"></fa-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #emptyBlock>
+        <div class="row mt-2">
+          <div class="col-12">
+            <h1 class="w-100 text-center text-muted">
+              <fa-icon icon="globe-americas" size="1x"></fa-icon>
+            </h1>
+          </div>
+          <div class="col-12 text-center">
+            <p class="text-center text-muted">No se encontraron notificaciones.</p>
+          </div>
+        </div>
+      </ng-template>
+    </jhi-loaders>
+  </div>
+</div>

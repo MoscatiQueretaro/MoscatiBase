@@ -1,0 +1,131 @@
+<!-- Column -->
+<ng-container>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="col-md-12">
+        <!-- Column -->
+        <div class="main-card-profile">
+          <div class="col-md-12">
+            <jhi-loaders
+              [show]="loading"
+              [showAnimation]="true"
+              [space]="true"
+              [image]="true"
+              [type]="'card-post'"
+              [buttons]="true"
+              [rows]="5"
+            >
+              <div
+                class="row"
+                style="padding-right: 10%; padding-left: 10%"
+                *ngIf="promocionesList && promocionesList.length > 0; else emptyBlock"
+              >
+                <div class="col-md-12 py-4" *ngFor="let promociones of promocionesList; let i = index">
+                  <mat-card class="main-card-login" *ngIf="promociones && promociones.foto && promociones.autor">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col-auto px-0" style="display: flex; justify-content: center">
+                          <div style="width: 50px; height: 50px">
+                            <jhi-single-file-template
+                              *ngIf="promociones.autor && promociones.autor.fotoPersona"
+                              class="tooltip-options-profile"
+                              [file]="promociones.autor.fotoPersona"
+                              [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                              [borderImageType]="'rounded'"
+                              [endpoint]="'file'"
+                              [delete]="false"
+                            ></jhi-single-file-template>
+                          </div>
+                        </div>
+                        <div class="col-auto px-0" style="font-size: 17px; text-align: center; padding: 15px">
+                          {{ promociones.autor.name + i.toString() }}
+                        </div>
+                      </div>
+                    </mat-card-title>
+                    <mat-card-subtitle style="font-size: 15px; text-align: left">
+                      {{ promociones.nombre + ' precio: ' + promociones.precio + '$' }}
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <jhi-single-file-template
+                            *ngIf="promociones.foto.id"
+                            class="tooltip-options-profile"
+                            [file]="promociones.foto"
+                            [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                            [borderImageType]="''"
+                            [endpoint]="'file'"
+                            [delete]="false"
+                          ></jhi-single-file-template>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" style="font-size: 17px; text-align: left">
+                          <div *ngIf="promociones.tipo && promociones.tipo.id === 1">{{ promociones.descripcion }}</div>
+                          <div *ngIf="promociones.tipo && promociones.tipo.id === 2" id="{{ promociones.id!.toString() }}"></div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <div class="col-md-12" style="display: flex; justify-content: right">
+                        <button
+                          class="btn info"
+                          *jhiHasAnyAuthority="[
+                            'ROLE_ADMIN',
+                            'ROLE_USER',
+                            'ROLE_DOCTOR',
+                            'ROLE_LABORATORIO',
+                            'ROLE_BENEVENTO',
+                            'ROLE_FARMACIA',
+                            'ROLE_MOSCATI',
+                            'ROLE_SANNIA'
+                          ]"
+                        >
+                          {{ '\n ver mas ' }}
+                          <fa-icon icon="eye"></fa-icon>
+                        </button>
+                        <div>
+                          <button
+                            class="btn primary"
+                            *jhiHasAnyAuthority="[
+                              'ROLE_DOCTOR',
+                              'ROLE_LABORATORIO',
+                              'ROLE_USER',
+                              'ROLE_BENEVENTO',
+                              'ROLE_FARMACIA',
+                              'ROLE_MOSCATI',
+                              'ROLE_SANNIA'
+                            ]"
+                          >
+                            Contactar
+                            <fa-icon icon="comment-alt"></fa-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-card-actions>
+                  </mat-card>
+                  <div *ngIf="promociones.tipo && promociones.tipo.id === 2">
+                    {{ this.replaceHtmlContent(promociones) }}
+                  </div>
+                </div>
+              </div>
+              <ng-template #emptyBlock>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <h1 class="w-100 text-center text-muted">
+                      <span style="font-size: 30px; color: #05ec47"><fa-icon icon="search"></fa-icon></span>
+                    </h1>
+                  </div>
+                  <div class="col-12 text-center">
+                    <p class="text-center 2rem">{{ 'No se encontraron Publicaciones nuevas' }}</p>
+                  </div>
+                </div>
+              </ng-template>
+            </jhi-loaders>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

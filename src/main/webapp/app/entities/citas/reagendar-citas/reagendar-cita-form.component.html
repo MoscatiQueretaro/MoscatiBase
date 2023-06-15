@@ -1,0 +1,27 @@
+<form name="deleteForm" (ngSubmit)="save()" novalidate>
+  <div class="modal-header">
+    <h4 class="modal-title" jhiTranslate="quotes.reschedule-appointments.title"></h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+  </div>
+  <div class="modal-body py-0">
+    <jhi-horario-solicitud
+      *ngIf="cita && cita.doctor && cita.user"
+      [doctormodel]="cita.doctor"
+      [userModel]="cita.user"
+      (horarySelect)="getEnabledHorary($event)"
+      (resumenCita)="getResumenCita($event)"
+    ></jhi-horario-solicitud>
+  </div>
+  <!-- modal-body -->
+  <div class="modal-footer">
+    <button *ngIf="!savedCita" type="button" class="btn danger" data-dismiss="modal" (click)="clear()">
+      <fa-icon [icon]="'times-circle'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+    <button *ngIf="!savedCita" id="jhionfirm-delete-prueba" type="submit" class="btn success">
+      <fa-icon [icon]="'cloud-upload-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Crear</span>
+    </button>
+    <button *ngIf="savedCita" type="button" class="btn secondary" data-dismiss="modal" (click)="clear()">
+      <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span jhiTranslate="damner-user-profile.modal-new-image.confirm">Cancel</span>
+    </button>
+  </div>
+</form>

@@ -48,7 +48,11 @@ public class MoscatiPromociones implements Serializable {
 
     @JoinColumn(name = "MOSCATI_AUTOR_ID")
     @ManyToOne
-    private MoscatiAutor autor;
+    private MoscatiUser autor;
+
+    @JoinColumn(name = "MOSCATI_TIPO_PROMOCION_ID")
+    @ManyToOne
+    private MoscatiTipoPromocion tipo;
 
     public Integer getId() {
         return id;
@@ -106,12 +110,20 @@ public class MoscatiPromociones implements Serializable {
         this.vigencia = vigencia;
     }
 
-    public MoscatiAutor getAutor() {
+    public MoscatiUser getAutor() {
         return autor;
     }
 
-    public void setAutor(MoscatiAutor autor) {
+    public void setAutor(MoscatiUser autor) {
         this.autor = autor;
+    }
+
+    public MoscatiTipoPromocion getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(MoscatiTipoPromocion tipo) {
+        this.tipo = tipo;
     }
 
     @Override
@@ -136,6 +148,8 @@ public class MoscatiPromociones implements Serializable {
             vigencia +
             ", autor=" +
             autor +
+            ", tipo=" +
+            tipo +
             '}'
         );
     }
@@ -153,12 +167,13 @@ public class MoscatiPromociones implements Serializable {
             Objects.equals(descripcion, that.descripcion) &&
             Objects.equals(foto, that.foto) &&
             Objects.equals(vigencia, that.vigencia) &&
-            Objects.equals(autor, that.autor)
+            Objects.equals(autor, that.autor) &&
+            Objects.equals(tipo, that.tipo)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, precio, descuento, descripcion, foto, vigencia, autor);
+        return Objects.hash(id, nombre, precio, descuento, descripcion, foto, vigencia, autor, tipo);
     }
 }

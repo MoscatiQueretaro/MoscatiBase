@@ -27,8 +27,8 @@ public class RKDoctoresService {
     }
 
     @Transactional(readOnly = true)
-    public RKDoctoresDTO findOneByCedula(String cedula) {
-        RKDoctores rkDoctor = this.repository.findFirstByCedula(cedula);
+    public RKDoctoresDTO findOneByProfessionalLicence(String cedula) {
+        RKDoctores rkDoctor = this.repository.findFirstByProfessionalLicence(cedula);
         return this.mapper.toDto(rkDoctor);
     }
 

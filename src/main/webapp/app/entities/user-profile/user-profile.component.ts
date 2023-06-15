@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   loading = false;
   fileFoto?: string[];
   fotografia = '';
-  optionButton = 1;
+  optionButton = 0;
   loadComponentPhoto?: boolean;
   private _theme: ThemeModel;
 
@@ -80,20 +80,26 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/citas']);
   }
 
-  changeButtonOptions(value: number): void {
+  changeButtonOptions(value: string): void {
     switch (value) {
-      case 1:
+      case 'citas':
         this.optionButton = 1;
         this.goToCitas();
         break;
-      case 2:
+      case 'mensajes':
         this.optionButton = 2;
         break;
-      case 3:
+      case 'resultados':
         this.optionButton = 3;
         break;
-      case 4:
+      case 'Medicaciones':
         this.optionButton = 4;
+        break;
+      case 'horarios':
+        this.optionButton = 5;
+        break;
+      case 'menu-benevento':
+        this.optionButton = 6;
         break;
       default:
         this.optionButton = 1;
@@ -113,5 +119,9 @@ export class UserProfileComponent implements OnInit {
         this.imagePopupService.open(undefined, this.account.id);
       }
     }
+  }
+
+  nuevaPublicacion(): void {
+    this.router.navigate(['/agregar-promocion']);
   }
 }

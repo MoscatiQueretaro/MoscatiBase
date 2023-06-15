@@ -14,6 +14,8 @@ import { JoinChanelVideoRoutes } from './join-chanel-video.routes';
 import { RouterModule } from '@angular/router';
 import { AccountService } from '../../core/auth/account.service';
 import { UserCitasService } from '../citas/user-citas.service';
+import { AlertService } from '../../core/util/alert.service';
+import { JoinChatService } from './join-chat.service';
 const ROUTES = [...JoinChanelVideoRoutes];
 
 @NgModule({
@@ -31,7 +33,7 @@ const ROUTES = [...JoinChanelVideoRoutes];
   ],
   declarations: [JoinChanelVideoComponent],
   entryComponents: [JoinChanelVideoComponent],
-  providers: [JoinChanelVideoService, AccountService, UserCitasService],
+  providers: [JoinChanelVideoService, AccountService, UserCitasService, AlertService, JoinChatService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [JoinChanelVideoComponent],
 })

@@ -36,7 +36,6 @@ export class EspecialidadesAutocompleteComponent extends AutocompleteComponent<E
 
           const todas = new EspecialidadesModel();
           temp.unshift(todas);
-
           this.principalArray = temp;
         }
         this._loading = false;

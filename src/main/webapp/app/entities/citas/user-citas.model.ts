@@ -15,7 +15,6 @@ export class UserCitasModel {
     public user?: MoscatiUserModel,
     public etapaCita?: EtapaCitaModel,
     public agoraChanel?: string,
-    public fechaHoraFin?: string | Date,
     public pagosStripe?: StripeResponseModel
   ) {}
 }

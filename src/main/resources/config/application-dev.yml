@@ -108,11 +108,12 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
+# Conexion con Rk Medical Suite
 rk:
   datasource:
-    url: jdbc:sqlserver://192.168.3.250;databaseName=KH_SJM_PROD
+    url: jdbc:sqlserver://192.168.8.80;databaseName=KH_SJM_PROD
     username: sa
-    password: B1Admin
+    password: Eb0r0920
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     pool-size: 30
     test-on-borrow: true
@@ -124,6 +125,7 @@ rk:
     dialect: org.hibernate.dialect.SQLServer2008Dialect
     show_sql: false
 
+#Conexion Base de datos MoscatiApp
 moscati:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

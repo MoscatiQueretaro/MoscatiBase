@@ -1,0 +1,89 @@
+@import '~@angular/material/theming';
+@mixin user-cita-styles-theme($theme) {
+  $primary: map-get($theme, primary);
+  $secondary: map-get($theme, secondary);
+  $growl-color: map-get($theme, growl-color);
+  $background-main-card: map-get($theme, background-main-card);
+  $success: map-get($theme, success);
+  $info: map-get($theme, info);
+  $border: map-get($theme, border-color);
+  $input-background-focus: map-get($theme, input-background-focus);
+  $input-color: map-get($theme, input-color);
+  $color-bg-input: map-get($theme, color-bg-input);
+  $danger: map-get($theme, danger);
+  $warning: map-get($theme, warning);
+  $bg-input-disabled: map-get($theme, bg-input-disabled);
+  $color-body: map-get($theme, color-body);
+
+  .primary {
+    border-color: $primary;
+    color: $color-body;
+    border-radius: 2rem;
+  }
+
+  .primary:hover {
+    background-color: $primary;
+    color: white;
+    box-shadow: 0 0 0 0.18rem rgba($primary, 0.1);
+  }
+
+  /* Green */
+  .success {
+    border-color: $success;
+    color: $success;
+    border-radius: 2rem;
+  }
+
+  .success:hover {
+    background-color: $success;
+    color: white;
+  }
+
+  /* Blue */
+  .info {
+    border-color: $info;
+    color: $info;
+    border-radius: 2rem;
+  }
+
+  .info:hover {
+    background: $info;
+    color: white;
+  }
+
+  /* Orange */
+  .warning {
+    border-color: $warning;
+    color: $warning;
+    border-radius: 2rem;
+  }
+
+  .warning:hover {
+    background: $warning;
+    color: white;
+  }
+
+  /* Red */
+  .danger {
+    border-color: $danger;
+    color: $danger;
+    border-radius: 2rem;
+  }
+
+  .danger:hover {
+    background: $danger;
+    color: white;
+  }
+
+  /* Gray */
+  .default {
+    border-color: #e7e7e7;
+    color: $color-body;
+    border-radius: 2rem;
+  }
+
+  .default:hover {
+    background: #e7e7e7;
+    color: black;
+  }
+}

@@ -13,6 +13,9 @@ import { EspecialidadesAutocompleteModule } from '../directorio-medico/autocompl
 import { EtapaCitaModule } from './bandejas-citas/etapa-cita.module';
 import { UserCitasRoutes } from './user-citas.routes';
 import { RouterModule } from '@angular/router';
+import { ReagendarCitaFormComponent } from './reagendar-citas/reagendar-cita-form.component';
+import { ReagendarCitaPopupService } from './reagendar-citas/reagendar-cita-popup.service';
+import { HorarioCitaModule } from '../stepper-agenda/horario-cita/horario-cita.module';
 const ROUTES = [...UserCitasRoutes];
 @NgModule({
   imports: [
@@ -27,10 +30,11 @@ const ROUTES = [...UserCitasRoutes];
     MatDividerModule,
     LoadersModule,
     EtapaCitaModule,
+    HorarioCitaModule,
   ],
-  declarations: [UserCitasComponent],
-  entryComponents: [UserCitasComponent],
-  providers: [UserCitasService],
+  declarations: [UserCitasComponent, ReagendarCitaFormComponent],
+  entryComponents: [UserCitasComponent, ReagendarCitaFormComponent],
+  providers: [UserCitasService, ReagendarCitaPopupService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [UserCitasComponent],
 })

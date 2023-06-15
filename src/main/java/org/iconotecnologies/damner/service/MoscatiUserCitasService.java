@@ -105,6 +105,8 @@ public class MoscatiUserCitasService {
         }
         MoscatiUserCitas moscatiUserCitas = this.repository.save(this.mapper.toEntity(moscatiUserCitasDTO));
 
+        // a partir de aquí si el cambio de estatus de la cita se guarda de manera correcta se generan las notificaciones a los usuarios
+
         MoscatiNotificationsDTO notificationautor;
         MoscatiNotificationsUserDTO notificationUser = new MoscatiNotificationsUserDTO();
         if (moscatiUserCitas.getId() != null && moscatiUserCitas.getEtapaCita().getDescripcion().equals(Constants.ETAPA_SOLICITUD)) {
@@ -136,32 +138,32 @@ public class MoscatiUserCitasService {
                 //*********************************************************************************************************
                 //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
                 //*********************************************************************************************************
-                if (moscatiUserCitasDTO.getDoctor().getFirebaseToken() != null) {
-                    Note FireBaseNotification = new Note();
-                    FireBaseNotification.setSubject(Constants.DEFAULT_SOLICITUD_CITA_TITLE_ES);
-                    FireBaseNotification.setContent(
-                        moscatiUserCitas.getUser().getName() +
-                        " " +
-                        moscatiUserCitas.getUser().getFirstName() +
-                        " " +
-                        moscatiUserCitas.getUser().getLastName() +
-                        " " +
-                        Constants.DEFAULT_SOLICITUD_CITA_ES +
-                        " " +
-                        fechahraSolicitud
-                    );
-                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
-                    Map<String, String> data = new HashMap<>();
-                    data.put("id", "2");
-                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
-                    data.put("status", "Crime_And_Safety");
-                    FireBaseNotification.setData(data);
-                    try {
-                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getDoctor().getFirebaseToken());
-                    } catch (Exception e) {
-                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
-                    }
-                }
+                //                if (moscatiUserCitasDTO.getDoctor().getFirebaseToken() != null) {
+                //                    Note FireBaseNotification = new Note();
+                //                    FireBaseNotification.setSubject(Constants.DEFAULT_SOLICITUD_CITA_TITLE_ES);
+                //                    FireBaseNotification.setContent(
+                //                        moscatiUserCitas.getUser().getName() +
+                //                        " " +
+                //                        moscatiUserCitas.getUser().getFirstName() +
+                //                        " " +
+                //                        moscatiUserCitas.getUser().getLastName() +
+                //                        " " +
+                //                        Constants.DEFAULT_SOLICITUD_CITA_ES +
+                //                        " " +
+                //                        fechahraSolicitud
+                //                    );
+                //                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                //                    Map<String, String> data = new HashMap<>();
+                //                    data.put("id", "2");
+                //                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                //                    data.put("status", "Crime_And_Safety");
+                //                    FireBaseNotification.setData(data);
+                //                    try {
+                //                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getDoctor().getFirebaseToken());
+                //                    } catch (Exception e) {
+                //                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                //                    }
+                //                }
             }
         }
 
@@ -191,36 +193,35 @@ public class MoscatiUserCitasService {
                 notificationUser.setNotificacion(notificationautor);
                 notificationUser.setVista(false);
                 this.notificationsUserService.save(notificationUser);
-
                 //*********************************************************************************************************
                 //se envia la notificación con Firebase Api para distribuirla al dispositivo asociado con el token
                 //*********************************************************************************************************
-                if (moscatiUserCitasDTO.getUser().getFirebaseToken() != null) {
-                    Note FireBaseNotification = new Note();
-                    FireBaseNotification.setSubject(Constants.DEFAULT_CITA_TITLE_ES);
-                    FireBaseNotification.setContent(
-                        moscatiUserCitas.getDoctor().getName() +
-                        " " +
-                        moscatiUserCitas.getDoctor().getFirstName() +
-                        " " +
-                        moscatiUserCitas.getDoctor().getLastName() +
-                        " " +
-                        Constants.DEFAULT_CITA_ES +
-                        " " +
-                        fechahraSolicitud
-                    );
-                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
-                    Map<String, String> data = new HashMap<>();
-                    data.put("id", "2");
-                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
-                    data.put("status", "Crime_And_Safety");
-                    FireBaseNotification.setData(data);
-                    try {
-                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getUser().getFirebaseToken());
-                    } catch (Exception e) {
-                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
-                    }
-                }
+                //                if (moscatiUserCitasDTO.getUser().getFirebaseToken() != null) {
+                //                    Note FireBaseNotification = new Note();
+                //                    FireBaseNotification.setSubject(Constants.DEFAULT_CITA_TITLE_ES);
+                //                    FireBaseNotification.setContent(
+                //                        moscatiUserCitas.getDoctor().getName() +
+                //                        " " +
+                //                        moscatiUserCitas.getDoctor().getFirstName() +
+                //                        " " +
+                //                        moscatiUserCitas.getDoctor().getLastName() +
+                //                        " " +
+                //                        Constants.DEFAULT_CITA_ES +
+                //                        " " +
+                //                        fechahraSolicitud
+                //                    );
+                //                    FireBaseNotification.setImage("https://laboratoriomoscati.xystems.com.mx/recursos/images/logo.jpg");
+                //                    Map<String, String> data = new HashMap<>();
+                //                    data.put("id", "2");
+                //                    data.put("click_action", "FLUTTER_NOTIFICATION_CLICK");
+                //                    data.put("status", "Crime_And_Safety");
+                //                    FireBaseNotification.setData(data);
+                //                    try {
+                //                        firebaseMessagingService.sendNotification(FireBaseNotification, moscatiUserCitasDTO.getUser().getFirebaseToken());
+                //                    } catch (Exception e) {
+                //                        System.out.println("a ocurrido un error con FireBase Plugin, error:" + e);
+                //                    }
+                //                }
             }
         }
 

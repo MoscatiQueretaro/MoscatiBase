@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
-import { ResumenPagoModel, StripeResponseModel } from './resumen-pago.model';
+import { StripeResponseModel } from './resumen-pago.model';
 import { EspecialidadesModel } from '../../catalogos/especialidades/especialidades.model';
 import { PagingView } from '../../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ResumenPagoService } from './resumen-pago.service';
 import { MoscatiUserModel } from '../../../core/auth/account.model';
 import { loadStripe } from '@stripe/stripe-js';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { HorarioCitaModel, HorariosDisponiblesModel } from '../horario-cita/horario-cita.model';
+import { UserCitasModel } from '../../citas/user-citas.model';
 
 @Component({
   selector: 'jhi-resumen-pago',
@@ -26,9 +26,9 @@ export class ResumenPagoComponent extends PagingView implements OnInit {
   userModel?: MoscatiUserModel;
 
   @Input()
-  citaSolicitud?: HorarioCitaModel;
+  citaSolicitud?: UserCitasModel;
 
-  stripePromise = loadStripe('pk_test_51LKPKLESu4j2SCWvs52H743rq6ubimMb18kkc37ESjtY0bgymlruFAd3yBDTv0MncVDxkrlavHJQOVhL6YMPL4nN001IWgyH8n');
+  stripePromise = loadStripe('pk_test_51MxzUtBDQa10b7roeaR45ftCquAe4qDmr0W6qtRnstsDWnyKjEgxaZJdkxQDnQk2nPWQlKzvGWxEn5JcMUSELQWK008xsaBovc');
 
   constructor(
     private http: HttpClient,

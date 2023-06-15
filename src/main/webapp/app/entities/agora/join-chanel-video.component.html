@@ -1,8 +1,10 @@
 <!-- Column -->
 <ng-container>
-  <h1>SALA VIRTUAL</h1>
-
-  <div class="row">
+  <div class="col-lg-12" style="display: flex; justify-content: center">
+    <h1 class="py-3">SALA VIRTUAL</h1>
+  </div>
+  <jhi-alert></jhi-alert>
+  <div class="row py-5">
     <div class="col-md-6">
       <div class="row">
         <div class="col-md-1 pr-0"></div>
@@ -27,9 +29,9 @@
         <div class="col-md-6" style="display: flex">
           <div class="button-group" style="margin-top: auto; margin-bottom: auto; margin-left: 2px">
             <button id="join" type="button" class="btn primary" (click)="joinChanel()">
-              Unirse a la sala <fa-icon icon="portal-enter"></fa-icon>
+              Unirse a la sala <fa-icon icon="arrow-alt-right"></fa-icon>
             </button>
-            <button id="leave" type="button" class="btn danger" (click)="joinChanel()">Leave</button>
+            <button id="leave" type="button" class="btn danger" (click)="leaveChanel()">Leave</button>
           </div>
         </div>
       </div>
@@ -75,25 +77,31 @@
       </div>
       <div class="col-md-12 video-screen" id="local-player" *ngIf="localCameraEnabled"></div>
       <div class="col-md-12" style="display: flex; justify-content: center; height: 90px">
-        <div style="margin-right: 60px">
+        <div style="margin-right: 80px">
           <div class="sonar-wrapper">
-            <div class="sonar-emitter" style="display: flex; justify-content: center">
-              <fa-icon style="position: absolute; font-size: 18px; margin: 15px; color: white" icon="video"></fa-icon>
-              <div class="sonar-wave sonar-wave1"></div>
-              <div class="sonar-wave sonar-wave2"></div>
-              <div class="sonar-wave sonar-wave3"></div>
-              <div class="sonar-wave sonar-wave4"></div>
+            <div class="sonar-emitter" style="display: flex; justify-content: center" (click)="changeCameraStatus()">
+              <fa-icon
+                style="position: absolute; font-size: 18px; margin: 15px; color: white"
+                [icon]="localCameraEnabled ? 'video' : 'video-slash'"
+              ></fa-icon>
+              <div class="sonar-wave sonar-wave1" *ngIf="localCameraEnabled"></div>
+              <div class="sonar-wave sonar-wave2" *ngIf="localCameraEnabled"></div>
+              <div class="sonar-wave sonar-wave3" *ngIf="localCameraEnabled"></div>
+              <div class="sonar-wave sonar-wave4" *ngIf="localCameraEnabled"></div>
             </div>
           </div>
         </div>
-        <div style="margin-lefth: 60px">
+        <div style="margin-lefth: 80px">
           <div class="sonar-wrapper">
-            <div class="sonar-emitter" style="display: flex; justify-content: center">
-              <fa-icon style="position: absolute; font-size: 18px; margin: 15px; color: white" icon="microphone"></fa-icon>
-              <div class="sonar-wave sonar-wave1"></div>
-              <div class="sonar-wave sonar-wave2"></div>
-              <div class="sonar-wave sonar-wave3"></div>
-              <div class="sonar-wave sonar-wave4"></div>
+            <div class="sonar-emitter" style="display: flex; justify-content: center" (click)="changeMicrophoneStatus()">
+              <fa-icon
+                style="position: absolute; font-size: 18px; margin: 15px; color: white"
+                [icon]="localMicrophoneEnabled ? 'microphone' : 'microphone-slash'"
+              ></fa-icon>
+              <div class="sonar-wave sonar-wave1" *ngIf="localMicrophoneEnabled"></div>
+              <div class="sonar-wave sonar-wave2" *ngIf="localMicrophoneEnabled"></div>
+              <div class="sonar-wave sonar-wave3" *ngIf="localMicrophoneEnabled"></div>
+              <div class="sonar-wave sonar-wave4" *ngIf="localMicrophoneEnabled"></div>
             </div>
           </div>
         </div>
@@ -115,5 +123,73 @@
       </div>
       <div class="col-md-12 video-screen" id="remote-playerlist"></div>
     </div>
+  </div>
+  <div class="col-md-12 input-container" *ngIf="userAccount">
+    <div class="chat-header">
+      <div class="row">
+        <div class="col-md-1">
+          <div style="width: 35px; height: 35px; margin: auto">
+            <jhi-single-file-template
+              *ngIf="remoteUserAccount && remoteUserAccount.fotoPersona"
+              class="tooltip-options-profile"
+              [file]="remoteUserAccount.fotoPersona"
+              [imageStyleProfile]="{ height: '100%', width: '100%' }"
+              [borderImageType]="'rounded'"
+              [endpoint]="'file'"
+              [delete]="false"
+            ></jhi-single-file-template>
+          </div>
+        </div>
+
+        <div class="col-md-auto">
+          <h5 *ngIf="remoteUserAccount">{{ remoteUserAccount.name + ' ' + remoteUserAccount.firstName }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="chat-container">
+      <div #messageContainer>
+        <div *ngFor="let message of messages">
+          <div
+            class="col-md-12"
+            [ngClass]="userAccount.id === message.remitente.id ? 'message-alignment' : 'message-alignment-remote'"
+            *ngIf="message.remitente"
+          >
+            <div class="col-1" style="display: flex" *ngIf="userAccount.id !== message.remitente.id">
+              <div style="width: 35px; height: 35px; margin: auto">
+                <jhi-single-file-template
+                  *ngIf="remoteUserAccount && remoteUserAccount.fotoPersona"
+                  class="tooltip-options-profile"
+                  [file]="remoteUserAccount.fotoPersona"
+                  [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                  [borderImageType]="'rounded'"
+                  [endpoint]="'file'"
+                  [delete]="false"
+                ></jhi-single-file-template>
+              </div>
+            </div>
+            <div [ngClass]="userAccount.id === message.remitente.id ? 'col-md-auto message' : 'col-md-auto message-remote'">
+              {{ message.mensaje }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form (submit)="sendMessage()">
+      <div class="row">
+        <div class="col-md-9">
+          <input
+            class="form__field"
+            id="messageInput"
+            name="messageInput"
+            type="text"
+            placeholder="Escribe un mensaje..."
+            [(ngModel)]="messageInput"
+          />
+        </div>
+        <div class="col-md-3" style="display: flex; margin: auto">
+          <button class="btn primary" type="submit">Enviar<fa-icon icon="paper-plane"></fa-icon></button>
+        </div>
+      </div>
+    </form>
   </div>
 </ng-container>

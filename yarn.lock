@@ -2059,6 +2059,11 @@
   "resolved" "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
   "version" "6.9.7"
 
+"@types/sockjs-client@^1.5.1":
+  "integrity" "sha512-bmZM6A1GPdjF0bcuIUC+50hZEMGkzMsiG9by6X9U+7IZFOiPtz7MJ9h05FSpPVxlj4i+TzzoG3ESo1FJlbLb6A=="
+  "resolved" "https://registry.npmjs.org/@types/sockjs-client/-/sockjs-client-1.5.1.tgz"
+  "version" "1.5.1"
+
 "@types/source-list-map@*":
   "integrity" "sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA=="
   "resolved" "https://registry.npmjs.org/@types/source-list-map/-/source-list-map-0.1.2.tgz"
@@ -2455,7 +2460,7 @@
     "clean-stack" "^2.0.0"
     "indent-string" "^4.0.0"
 
-"agora-rtc-sdk-ng@4.13.0":
+"agora-rtc-sdk-ng@^4.13.0":
   "integrity" "sha512-+ZVVPgaSbAVjTREbOtyyfhVyJ24dgvTug68kFFRDxEhSuGHqReOwS8obwJiDmH9JvYhc8CzuWWwAebWEmbupsg=="
   "resolved" "https://registry.npmjs.org/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.13.0.tgz"
   "version" "4.13.0"
@@ -2466,6 +2471,11 @@
   "integrity" "sha512-HGsr7dJ5FHeCVHTLHCUfQ6cvKVLJz9b11F/FZbSQ/IqYlGZwRdu5E6hVdWenjWyYiqmpZm+nCP9IIqXSA+BPwA=="
   "resolved" "https://registry.npmjs.org/agora-rte-extension/-/agora-rte-extension-1.1.0.tgz"
   "version" "1.1.0"
+
+"agora-rtm-sdk@^1.6.0-205":
+  "integrity" "sha512-8GqeYKQrBLin8ZgpEDY29NB6kL5mE8Kn+fslm8Du8QiHKDRWcqr1rRCNcPIysLosWP2v0WVPjAsmKqNcaED+gg=="
+  "resolved" "https://registry.npmjs.org/agora-rtm-sdk/-/agora-rtm-sdk-1.6.0-205.tgz"
+  "version" "1.6.0-205"
 
 "ajv-errors@^1.0.0":
   "integrity" "sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ=="
@@ -3639,7 +3649,7 @@
   "version" "1.0.4"
 
 "clone@^2.1.1":
-  "integrity" "sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18="
+  "integrity" "sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w=="
   "resolved" "https://registry.npmjs.org/clone/-/clone-2.1.2.tgz"
   "version" "2.1.2"
 
@@ -4310,6 +4320,13 @@
     "ms" "^2.1.1"
 
 "debug@^3.2.6":
+  "integrity" "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="
+  "resolved" "https://registry.npmjs.org/debug/-/debug-3.2.7.tgz"
+  "version" "3.2.7"
+  dependencies:
+    "ms" "^2.1.1"
+
+"debug@^3.2.7":
   "integrity" "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-3.2.7.tgz"
   "version" "3.2.7"
@@ -5017,6 +5034,11 @@
   "resolved" "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   "version" "1.8.1"
 
+"eventemitter3@^2.0.3":
+  "integrity" "sha512-jLN68Dx5kyFHaePoXWPsCGW5qdyZQtLYHkxkg02/Mz6g0kYpDx4FyP6XfArhQdlOC4b8Mv+EMxPo/8La7Tzghg=="
+  "resolved" "https://registry.npmjs.org/eventemitter3/-/eventemitter3-2.0.3.tgz"
+  "version" "2.0.3"
+
 "eventemitter3@^4.0.0", "eventemitter3@^4.0.4":
   "integrity" "sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw=="
   "resolved" "https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.7.tgz"
@@ -5032,12 +5054,10 @@
   "resolved" "https://registry.npmjs.org/events/-/events-1.1.1.tgz"
   "version" "1.1.1"
 
-"eventsource@^1.0.7":
-  "integrity" "sha512-VSJjT5oCNrFvCS6igjzPAt5hBzQ2qPBFIbJ03zLI9SE0mxwZpMw6BfJrbFHm1a141AavMEB8JHmBhWAd66PfCg=="
-  "resolved" "https://registry.npmjs.org/eventsource/-/eventsource-1.1.0.tgz"
-  "version" "1.1.0"
-  dependencies:
-    "original" "^1.0.0"
+"eventsource@^2.0.2":
+  "integrity" "sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA=="
+  "resolved" "https://registry.npmjs.org/eventsource/-/eventsource-2.0.2.tgz"
+  "version" "2.0.2"
 
 "execa@^1.0.0":
   "integrity" "sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA=="
@@ -5178,7 +5198,7 @@
     "assign-symbols" "^1.0.0"
     "is-extendable" "^1.0.1"
 
-"extend@~3.0.2":
+"extend@^3.0.2", "extend@~3.0.2":
   "integrity" "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="
   "resolved" "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz"
   "version" "3.0.2"
@@ -5221,6 +5241,11 @@
   "resolved" "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
   "version" "3.1.3"
 
+"fast-diff@1.1.2":
+  "integrity" "sha512-KaJUt+M9t1qaIteSvjc6P3RbMdXsNhK61GRftR6SNxqmhthcd9MGIi4T+o0jD8LUSpSnSKXE20nLtJ3fOHxQig=="
+  "resolved" "https://registry.npmjs.org/fast-diff/-/fast-diff-1.1.2.tgz"
+  "version" "1.1.2"
+
 "fast-glob@^3.0.3", "fast-glob@^3.1.1", "fast-glob@^3.2.5":
   "integrity" "sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q=="
   "resolved" "https://registry.npmjs.org/fast-glob/-/fast-glob-3.2.7.tgz"
@@ -5254,7 +5279,7 @@
   dependencies:
     "reusify" "^1.0.4"
 
-"faye-websocket@^0.11.3":
+"faye-websocket@^0.11.3", "faye-websocket@^0.11.4":
   "integrity" "sha512-CzbClwlXAuiRQAlUyfqPgvPoNKTckTPGfwZV4ZdAhVcP2lh9KUxJg2b5GkE7XbjKQ3YJnQ9z6D9ntLAlB+tP8g=="
   "resolved" "https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.4.tgz"
   "version" "0.11.4"
@@ -7397,11 +7422,6 @@
   "resolved" "https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz"
   "version" "5.0.1"
 
-"json3@^3.3.3":
-  "integrity" "sha512-c7/8mbUsKigAbLkD5B010BK4D9LZm7A1pNItkEwiUZRpIN66exu/e7YQWysGun+TRKaJp8MhemM+VkfWv42aCA=="
-  "resolved" "https://registry.npmjs.org/json3/-/json3-3.3.3.tgz"
-  "version" "3.3.3"
-
 "json5@^1.0.1":
   "integrity" "sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow=="
   "resolved" "https://registry.npmjs.org/json5/-/json5-1.0.1.tgz"
@@ -8318,6 +8338,13 @@
     "@scarf/scarf" "^1.1.0"
     "opencollective-postinstall" "^2.0.2"
 
+"ngx-quill@^3.6.0":
+  "integrity" "sha512-cw5JTH8Zk4qeiiFD0dGF+4KmulMnZIwWjU1qoekK/RpxDBCVn4Wv91XJrd55ZRKxjd7rXEybLhx6b56INwo6xg=="
+  "resolved" "https://registry.npmjs.org/ngx-quill/-/ngx-quill-3.6.0.tgz"
+  "version" "3.6.0"
+  dependencies:
+    "tslib" "^1.9.0"
+
 "ngx-webstorage@8.0.0":
   "integrity" "sha512-dpHgboSi6adnYpwiAQ2/PRJe8dcvSbM2qWTacTCUPVPeWlhLvTCtIl1GA9BNDiZzYuyA3dmXyqlcDl/Th9Pi2A=="
   "resolved" "https://registry.npmjs.org/ngx-webstorage/-/ngx-webstorage-8.0.0.tgz"
@@ -8748,13 +8775,6 @@
     "strip-ansi" "^6.0.0"
     "wcwidth" "^1.0.1"
 
-"original@^1.0.0":
-  "integrity" "sha512-hyBVl6iqqUOJ8FqRe+l/gS8H+kKYjrEndd5Pm1MfBtsEKA038HkkdbAl/72EAXGyonD/PFsvmVG+EvcIpliMBg=="
-  "resolved" "https://registry.npmjs.org/original/-/original-1.0.2.tgz"
-  "version" "1.0.2"
-  dependencies:
-    "url-parse" "^1.4.3"
-
 "os-locale@5.0.0":
   "integrity" "sha512-tqZcNEDAIZKBEPnHPlVDvKrp7NzgLi7jRmhKiUoa2NUmhl13FtkAGLUVR+ZsYvApBQdBfYm43A4tXXQ4IrYLBA=="
   "resolved" "https://registry.npmjs.org/os-locale/-/os-locale-5.0.0.tgz"
@@ -8921,6 +8941,11 @@
     "rimraf" "^3.0.2"
     "ssri" "^8.0.1"
     "tar" "^6.1.0"
+
+"parchment@^1.1.4":
+  "integrity" "sha512-J5FBQt/pM2inLzg4hEWmzQx/8h8D0CiDxaG3vyp9rKrQRSDgBlhjdP5jQGgosEajXPSQouXGHOmVdgo7QmJuOg=="
+  "resolved" "https://registry.npmjs.org/parchment/-/parchment-1.1.4.tgz"
+  "version" "1.1.4"
 
 "parent-module@^1.0.0":
   "integrity" "sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g=="
@@ -10034,6 +10059,27 @@
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   "version" "1.2.3"
 
+"quill-delta@^3.6.2":
+  "integrity" "sha512-wdIGBlcX13tCHOXGMVnnTVFtGRLoP0imqxM696fIPwIf5ODIYUHIvHbZcyvGlZFiFhK5XzDC2lpjbxRhnM05Tg=="
+  "resolved" "https://registry.npmjs.org/quill-delta/-/quill-delta-3.6.3.tgz"
+  "version" "3.6.3"
+  dependencies:
+    "deep-equal" "^1.0.1"
+    "extend" "^3.0.2"
+    "fast-diff" "1.1.2"
+
+"quill@^1.3.7":
+  "integrity" "sha512-hG/DVzh/TiknWtE6QmWAF/pxoZKYxfe3J/d/+ShUWkDvvkZQVTPeVmUJVu1uE6DDooC4fWTiCLh84ul89oNz5g=="
+  "resolved" "https://registry.npmjs.org/quill/-/quill-1.3.7.tgz"
+  "version" "1.3.7"
+  dependencies:
+    "clone" "^2.1.1"
+    "deep-equal" "^1.0.1"
+    "eventemitter3" "^2.0.3"
+    "extend" "^3.0.2"
+    "parchment" "^1.1.4"
+    "quill-delta" "^3.6.2"
+
 "randexp@0.5.3":
   "integrity" "sha512-U+5l2KrcMNOUPYvazA3h5ekF80FHTUG+87SEAmHZmolh1M+i/WyTCxVzmi+tidIa1tM4BSe8g2Y/D3loWDjj+w=="
   "resolved" "https://registry.npmjs.org/randexp/-/randexp-0.5.3.tgz"
@@ -11021,17 +11067,16 @@
     "socket.io-client" "2.4.0"
     "socket.io-parser" "~3.4.0"
 
-"sockjs-client@^1.5.0":
-  "integrity" "sha512-VnVAb663fosipI/m6pqRXakEOw7nvd7TUgdr3PlR/8V2I95QIdwT8L4nMxhyU8SmDBHYXU1TOElaKOmKLfYzeQ=="
-  "resolved" "https://registry.npmjs.org/sockjs-client/-/sockjs-client-1.5.1.tgz"
-  "version" "1.5.1"
+"sockjs-client@^1.4.0", "sockjs-client@^1.5.0":
+  "integrity" "sha512-2g0tjOR+fRs0amxENLi/q5TiJTqY+WXFOzb5UwXndlK6TO3U/mirZznpx6w34HVMoc3g7cY24yC/ZMIYnDlfkw=="
+  "resolved" "https://registry.npmjs.org/sockjs-client/-/sockjs-client-1.6.1.tgz"
+  "version" "1.6.1"
   dependencies:
-    "debug" "^3.2.6"
-    "eventsource" "^1.0.7"
-    "faye-websocket" "^0.11.3"
+    "debug" "^3.2.7"
+    "eventsource" "^2.0.2"
+    "faye-websocket" "^0.11.4"
     "inherits" "^2.0.4"
-    "json3" "^3.3.3"
-    "url-parse" "^1.5.1"
+    "url-parse" "^1.5.10"
 
 "sockjs@^0.3.21":
   "integrity" "sha512-DhbPFGpxjc6Z3I+uX07Id5ZO2XwYsWOrYjaSeieES78cq+JaJvVe5q/m1uvjIQhXinhIeCFRH6JgXe+mvVMyXw=="
@@ -12129,10 +12174,10 @@
   "resolved" "https://registry.npmjs.org/urix/-/urix-0.1.0.tgz"
   "version" "0.1.0"
 
-"url-parse@^1.4.3", "url-parse@^1.5.1":
-  "integrity" "sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q=="
-  "resolved" "https://registry.npmjs.org/url-parse/-/url-parse-1.5.1.tgz"
-  "version" "1.5.1"
+"url-parse@^1.5.10":
+  "integrity" "sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ=="
+  "resolved" "https://registry.npmjs.org/url-parse/-/url-parse-1.5.10.tgz"
+  "version" "1.5.10"
   dependencies:
     "querystringify" "^2.1.1"
     "requires-port" "^1.0.0"
@@ -12494,6 +12539,11 @@
   "integrity" "sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg=="
   "resolved" "https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.4.tgz"
   "version" "0.1.4"
+
+"webstomp-client@^1.2.6":
+  "integrity" "sha512-9HajO6Ki2ViEGIusLZtjM2lcO2VaQUvtXhLQQ4Cm543RLjfTCEgI3sFaiXts3TvfZgrtY/vI/+qUkm2qWD/NVg=="
+  "resolved" "https://registry.npmjs.org/webstomp-client/-/webstomp-client-1.2.6.tgz"
+  "version" "1.2.6"
 
 "whatwg-encoding@^1.0.5":
   "integrity" "sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw=="

@@ -1,14 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 import { UserCitasModel } from './user-citas.model';
-import { EspecialidadesModel } from '../catalogos/especialidades/especialidades.model';
 import { PagingView } from '../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { UserCitasService } from './user-citas.service';
 import { MoscatiUserModel } from '../../core/auth/account.model';
-import { EtapaCitaModel } from './bandejas-citas/etapa-cita.model';
 import { AccountService } from '../../core/auth/account.service';
+import { ReagendarCitaPopupService } from './reagendar-citas/reagendar-cita-popup.service';
 
 @Component({
   selector: 'jhi-user-citas',
@@ -27,25 +26,24 @@ export class UserCitasComponent extends PagingView implements OnInit {
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
     protected service: UserCitasService,
+    private reagendarPoupService: ReagendarCitaPopupService,
     private accountService: AccountService,
     public eventManager: JhiEventManager
   ) {
     super(router, activatedRoute, eventManager, 'etapaCita');
     this.citaEtapaFilter = 'SOLICITUD';
-    this.applyFilters();
-    this.accountService.identity(true).subscribe(account => {
-      if (account) {
-        this.userAccount = account;
-      }
-    });
-    if (this.userAccount) {
-      if (this.userAccount.authorities!.includes('ROLE_DOCTOR') || this.userAccount.authorities!.includes('ROLE_LABORATORIO')) {
-        this.doctorFilter = this.userAccount.id;
-      }
-      if (this.userAccount.authorities!.includes('ROLE_USER')) {
-        this.userFilter = this.userAccount.id;
-      }
+    if (this.accountService.hasAnyAuthority('ROLE_DOCTOR') || this.accountService.hasAnyAuthority('ROLE_LABORATORIO')) {
+      this.accountService.getAuthenticationState().subscribe(user => {
+        this.doctorFilter = user!.id;
+      });
     }
+    if (this.accountService.hasAnyAuthority('ROLE_USER')) {
+      this.accountService.getAuthenticationState().subscribe(user => {
+        this.userFilter = user!.id;
+      });
+    }
+    this.applyFilters();
+
     this.eventManager.subscribe('user-citas-reload', () => {
       this.ngOnInit();
       this.applyFilters();
@@ -55,10 +53,6 @@ export class UserCitasComponent extends PagingView implements OnInit {
   paramsParser(): void {
     if (this.filters['etapaCita.contains']) {
       this.citaEtapaFilter = this.filters['etapaCita.contains'];
-    }
-
-    if (this.filters['tipoCita.contains']) {
-      this.tipoCitaFilter = this.filters['tipoCita.contains'];
     }
 
     if (this.filters['doctor.contains']) {
@@ -145,5 +139,30 @@ export class UserCitasComponent extends PagingView implements OnInit {
 
   joinVideoStream(id?: number): void {
     this.router.navigate(['/agora', id]);
+  }
+
+  reagendarCita(cita: UserCitasModel): void {
+    this.reagendarPoupService.open(cita);
+  }
+
+  confirmarCita(cita: UserCitasModel): void {
+    if (cita.etapaCita) {
+      cita.etapaCita.id = 2;
+      cita.etapaCita.descripcion = 'CITA';
+    }
+    this.service.update(cita).subscribe(
+      (res: HttpResponse<UserCitasModel>) => {
+        // I use stripe to redirect To Checkout page of Stripe platform
+        if (res.body) {
+          this.updateCounts();
+          this.citaEtapaFilter = 'CITA';
+          this.applyFilters();
+          this.loading = false;
+        }
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 }

@@ -1,0 +1,56 @@
+{
+  "add-promotion": {
+    "title": "Crear nueva campaña publicitaria",
+    "form": {
+      "name": {
+        "label": "titulo publicitario",
+        "placeholder": "titulo publicitario"
+      },
+      "price": {
+        "label": "precio",
+        "placeholder": "Agrega el precio sin % de descuento"
+      },
+      "discount": {
+        "label": "descuento",
+        "placeholder": "agregar un descuento (solo números)"
+      },
+      "validity-until": {
+        "label": "vigencia hasta"
+      },
+      "image": {
+        "label": "Selecciona una imagen como portada de la publicación."
+      },
+      "save-button": "Publicar campaña"
+    },
+    "messages": {
+      "validate": {
+        "name": {
+          "required": "el titulo is requerido.",
+          "minlength": "el titulo es requerido y debe tener mas de 1 carácter.",
+          "maxlength": "el titulo debe ser menor a 150 caracteres.",
+          "pattern": "el titulo es invalido."
+        },
+        "price": {
+          "required": "el precio es requerido",
+          "minlength": "el precio es requerido y debe tener mas de un numero",
+          "pattern": "el precio es invalido"
+        },
+        "discount": {
+          "max": "el descuento debe ser menor al 100%",
+          "pattern": "Your discount is invalid."
+        },
+        "validity-until": {
+          "required": "la vigencia es requerida."
+        },
+        "description": {
+          "required": "la description es requerida.",
+          "minlength": "la description es requerida y debe contener mas de un carácter.",
+          "maxlength": "la description es requerida y debe contener menos de 10000 caracteres."
+        },
+        "photo": {
+          "required": "la foto es requerida."
+        }
+      }
+    }
+  }
+}

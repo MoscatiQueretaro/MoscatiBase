@@ -84,6 +84,9 @@ public class MoscatiUser extends AbstractAuditingEntity implements Serializable 
     @Column(name = "MOSCATI_ESTATUS")
     private String estatus;
 
+    @Column(name = "MOSCATI_PROFESSIONAL_LICENCE")
+    private String professionalLicence;
+
     public String getRole() {
         return role;
     }
@@ -218,5 +221,13 @@ public class MoscatiUser extends AbstractAuditingEntity implements Serializable 
 
     public void setActivation(String activation) {
         this.activation = activation;
+    }
+
+    public String getProfessionalLicence() {
+        return professionalLicence;
+    }
+
+    public void setProfessionalLicence(String professionalLicence) {
+        this.professionalLicence = professionalLicence;
     }
 }

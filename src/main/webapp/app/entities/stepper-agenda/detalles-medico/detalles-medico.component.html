@@ -25,5 +25,66 @@
     </div>
   </div>
 
-  <div class="row"></div>
+  <div class="row py-5">
+    <div class="col-md-6">
+      <mat-card class="main-card-login">
+        <mat-card-title style="text-align: center">
+          <h2>
+            <strong jhiTranslate="medic-details.days-card.business-days"></strong>
+          </h2>
+          <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="clock"></fa-icon></span>
+        </mat-card-title>
+        <mat-card-subtitle> </mat-card-subtitle>
+        <mat-card-content>
+          <div class="row" *ngIf="horariosMedicos && horariosMedicos.length > 0">
+            <table>
+              <thead>
+                <tr>
+                  <th>DIA</th>
+                  <th>HORA INICIO</th>
+                  <th>HORA FIN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let horarios of horariosMedicos">
+                  <td>{{ horarios.diaText! | translate }}</td>
+                  <td>{{ horarios.horaInicio | date: 'h:mm a ' }}</td>
+                  <td>{{ horarios.horaFin | date: 'h:mm a ' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-6">
+      <mat-card class="main-card-login">
+        <mat-card-title style="text-align: center">
+          <h2>
+            <strong jhiTranslate="medic-details.title">detalles</strong>
+          </h2>
+          <span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="clock"></fa-icon></span>
+        </mat-card-title>
+        <mat-card-subtitle> </mat-card-subtitle>
+        <mat-card-content *ngIf="directorioMedico">
+          <div class="col-md-auto">
+            <strong jhiTranslate="medic-details.details-card.consulting">{{
+              directorioMedico.consultorio ? directorioMedico.consultorio : ''
+            }}</strong>
+          </div>
+          <div class="col-md-auto">
+            <strong jhiTranslate="medic-details.details-card.details">{{
+              directorioMedico.detalles ? directorioMedico.detalles : ''
+            }}</strong>
+          </div>
+          <div class="col-md-auto">
+            <strong jhiTranslate="medic-details.details-card.title">{{ directorioMedico.titulo ? directorioMedico.titulo : '' }}</strong>
+          </div>
+          <div class="col-md-auto">
+            <strong jhiTranslate="medic-details.details-card.language">{{ directorioMedico.idioma ? directorioMedico.idioma : '' }}</strong>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </ng-container>

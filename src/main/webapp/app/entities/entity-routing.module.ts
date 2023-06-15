@@ -24,6 +24,14 @@ import { RouterModule } from '@angular/router';
         path: 'agora',
         loadChildren: () => import('./agora/join-chanel-video.module').then(c => c.JoinChanelVideoModule),
       },
+      {
+        path: 'promociones',
+        loadChildren: () => import('./promociones/promociones.module').then(c => c.PromocionesModule),
+      },
+      {
+        path: 'agregar-promocion',
+        loadChildren: () => import('./promociones/agregar-promocion/agregar-promocion.module').then(a => a.AgregarPromocionModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

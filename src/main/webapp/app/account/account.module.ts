@@ -10,9 +10,12 @@ import { PasswordResetInitComponent } from './password-reset/init/password-reset
 import { PasswordResetFinishComponent } from './password-reset/finish/password-reset-finish.component';
 import { SettingsComponent } from './settings/settings.component';
 import { accountState } from './account.route';
+import { MatDividerModule } from '@angular/material/divider';
+import { RkDoctoresService } from '../entities/rk-services/rk-doctores/rk-doctores.service';
+import { EspecialidadesAutocompleteModule } from '../entities/directorio-medico/autocomplete/especialidades.autocomplete.module';
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(accountState)],
+  imports: [SharedModule, RouterModule.forChild(accountState), MatDividerModule, EspecialidadesAutocompleteModule],
   declarations: [
     ActivateComponent,
     RegisterComponent,
@@ -22,5 +25,6 @@ import { accountState } from './account.route';
     PasswordResetFinishComponent,
     SettingsComponent,
   ],
+  providers: [RkDoctoresService],
 })
 export class AccountModule {}

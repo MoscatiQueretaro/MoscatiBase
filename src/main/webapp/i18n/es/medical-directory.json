@@ -1,0 +1,9 @@
+{
+  "medical-directory": {
+    "title": "directorio medico",
+    "specialty": {
+      "placeHolderLabel": "Selecciona tu especialidad",
+      "placeHolder": "Especialidades"
+    }
+  }
+}

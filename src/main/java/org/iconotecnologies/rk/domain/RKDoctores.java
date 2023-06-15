@@ -24,7 +24,10 @@ public class RKDoctores implements Serializable {
     private String lastName2;
 
     @Column(name = "Identification")
-    private String cedula;
+    private String professionalLicence;
+
+    @Column(name = "EMail")
+    private String email;
 
     public Integer getId() {
         return id;
@@ -58,11 +61,19 @@ public class RKDoctores implements Serializable {
         this.lastName2 = lastName2;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getProfessionalLicence() {
+        return professionalLicence;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setProfessionalLicence(String professionalLicence) {
+        this.professionalLicence = professionalLicence;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

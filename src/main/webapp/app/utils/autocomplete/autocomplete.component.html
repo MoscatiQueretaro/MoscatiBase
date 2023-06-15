@@ -1,5 +1,5 @@
 <div
-  [ngClass]="{ containerClass: true, 'form_group-autocomplete': !legacyStyle, 'form-group': legacyStyle }"
+  [ngClass]="placeHolderLabel ? 'form_group-autocomplete-padding' : 'form_group-autocomplete'"
   class="form-group-autocomplete"
   #container
 >
@@ -7,6 +7,7 @@
   <input
     #input
     type="text"
+    id="input-autocomplete"
     class="form_field_autocomplete float-left"
     jhiUppercase
     placeholder="{{ placeHolder }}"
@@ -29,7 +30,13 @@
     (mouseenter)="overPanel = true"
     (mouseleave)="overPanel = false"
   >
-    <fa-icon [icon]="_loading ? 'spinner' : 'caret-down'" [spin]="_loading" [transform]="{ rotate: overlayVisible ? 180 : 0 }"></fa-icon>
+    <fa-icon
+      *ngIf="typeIcon === 'caret-down'"
+      [icon]="_loading ? 'spinner' : 'caret-down'"
+      [spin]="_loading"
+      [transform]="{ rotate: overlayVisible ? 180 : 0 }"
+    ></fa-icon>
+    <fa-icon *ngIf="typeIcon === 'search'" [icon]="'search'"></fa-icon>
   </button>
   <div *ngIf="overlayVisible" class="panel-autocomplete scrollStyle" (mouseenter)="overPanel = true" (mouseleave)="overPanel = false">
     <div class="autocomplete-items" *ngIf="filteredArray.length > 0; else emptyBlock">
@@ -42,11 +49,12 @@
         (click)="setValue(option)"
       >
         <span class="item-selected"></span>
+        <fa-icon *ngIf="typeIcon === 'search'" [icon]="'search'"></fa-icon>
         <span class="item-text">{{ field ? option.descripcion : option }}</span>
       </div>
     </div>
   </div>
   <ng-template #emptyBlock>
-    <p class="text-muted text-center">No hay elementos 😴</p>
+    <p class="text-muted text-center">No hay Coincidencias de busqueda.</p>
   </ng-template>
 </div>

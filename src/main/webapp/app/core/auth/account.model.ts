@@ -1,4 +1,5 @@
 import { FileModel } from '../../utils/components/file.model';
+import { EspecialidadesModel } from '../../entities/catalogos/especialidades/especialidades.model';
 
 export class Account {
   constructor(
@@ -29,6 +30,8 @@ export class MoscatiUserModel {
     public imageProfile?: string | null,
     public fotoPersona?: FileModel | null,
     public estatus?: string | null,
-    public activation?: string | null
+    public activation?: string | null,
+    public professionalLicence?: string | null,
+    public specialty?: EspecialidadesModel | null
   ) {}
 }

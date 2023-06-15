@@ -45,6 +45,7 @@ export class AutocompleteComponent<X extends BaseEntity> implements ControlValue
   _labelLegacy?: ElementRef;
   _buttonLegacy = false;
   _legacyStyle = false;
+  @Input() typeIcon?: string;
   @Input() placeHolder?: string;
   @Input() placeHolderLabel?: string;
   @ViewChild('container', { static: false }) container?: ElementRef;

@@ -31,7 +31,7 @@
     font-weight: 700;
     color: $color-body;
     border-width: 3px;
-    border-image: linear-gradient(to right, $primary, $info);
+    border-image: linear-gradient(to right, $primary, $primary);
     border-image-slice: 1;
   }
   .form_field_autocomplete {
@@ -95,7 +95,7 @@
     &:focus-within,
     &.focused {
       .button-dropdown {
-        background: linear-gradient(to right, $info, $primary);
+        background: linear-gradient(to right, $primary, $primary);
         color: rgba($input-color, 0.6);
         border: 3px;
         &:disabled,
@@ -107,7 +107,7 @@
         background: $background-main-card;
         color: $color-body;
         border-top: 1px;
-        border-image: linear-gradient(to right, $primary, $info);
+        border-image: linear-gradient(to right, $primary, $primary);
       }
       .panel-autocomplete {
         background: $background-main-card;
@@ -144,10 +144,14 @@
   }
 }
 
-.form_group-autocomplete {
+.form_group-autocomplete-padding {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
+  width: 100%;
+}
+.form_group-autocomplete {
+  position: relative;
   width: 100%;
 }
 

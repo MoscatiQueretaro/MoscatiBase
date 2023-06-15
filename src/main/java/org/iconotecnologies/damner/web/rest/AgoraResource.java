@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import javax.ws.rs.core.Response;
 import org.iconotecnologies.damner.domain.Agora;
 import org.iconotecnologies.damner.domain.AgoraRTM;
+import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.web.rest.agora.media.RtcTokenBuilder;
 import org.iconotecnologies.damner.web.rest.agora.rtm.RtmTokenBuilder;
 import org.json.simple.JSONObject;
@@ -57,7 +58,7 @@ public class AgoraResource {
     @PostMapping("/rtm")
     @Timed
     public ResponseEntity<AgoraRTM> getRTMToken(@RequestBody AgoraRTM agoraRTM) throws Exception {
-        String userId = agoraRTM.getUserId();
+        String userId = SecurityUtils.getCurrentUserLogin().map(user -> user.getUsername()).orElse(null);
 
         if (userId == null) {
             JSONObject error = new JSONObject();
@@ -65,16 +66,14 @@ public class AgoraResource {
         }
 
         RtmTokenBuilder token = new RtmTokenBuilder();
-        String result = token.buildToken(
-            agoraRTM.getAppId(),
-            agoraRTM.getAppCertificate(),
-            userId,
-            RtmTokenBuilder.Role.Rtm_User,
-            agoraRTM.getExpireTimestamp()
-        );
-        System.out.println(result);
-        JSONObject jsondict = new JSONObject();
-        jsondict.put("message", result);
+        String result = token.buildToken(agoraRTM.appId, agoraRTM.appCertificate, userId, RtmTokenBuilder.Role.Rtm_User, 0);
+
+        if (result != null && result != "") {
+            agoraRTM.setToken(result);
+            agoraRTM.setUserId(userId);
+        }
+        System.out.print("Agora RTM token[" + result + "]fin");
+
         return ResponseEntity.ok(agoraRTM);
     }
 }

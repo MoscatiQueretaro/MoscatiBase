@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RKDoctoresRepository extends JpaRepository<RKDoctores, Integer>, JpaSpecificationExecutor<RKDoctores> {
-    RKDoctores findFirstByCedula(String cedula);
+    RKDoctores findFirstByProfessionalLicence(String cedula);
 }

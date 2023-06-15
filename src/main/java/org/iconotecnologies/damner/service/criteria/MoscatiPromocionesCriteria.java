@@ -5,6 +5,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 import org.iconotecnologies.damner.domain.MoscatiPromociones;
 import org.iconotecnologies.damner.domain.MoscatiPromociones_;
+import org.iconotecnologies.damner.domain.MoscatiUser_;
 import org.iconotecnologies.damner.domain.catalogos.MoscatiAutor;
 import org.iconotecnologies.damner.domain.catalogos.MoscatiAutor_;
 import org.iconotecnologies.damner.security.SecurityUtils;
@@ -52,9 +53,7 @@ public class MoscatiPromocionesCriteria extends AdvanceQueryService<MoscatiPromo
         }
         if (autor != null) {
             specification =
-                specification.or(
-                    buildNestedReferringEntityStringSpecification(autor, MoscatiPromociones_.autor, MoscatiAutor_.descripcion)
-                );
+                specification.or(buildNestedReferringEntityStringSpecification(autor, MoscatiPromociones_.autor, MoscatiUser_.name));
         }
 
         return specification;
@@ -87,18 +86,18 @@ public class MoscatiPromocionesCriteria extends AdvanceQueryService<MoscatiPromo
             return builder.equal(posts, "");
         };
     }
+    //    private Specification<MoscatiPromociones> autorSpecification(StringFilter autor) {
+    //        return (root, query, builder) -> {
+    //            Subquery<MoscatiAutor> moscatiAutorSubquery = query.subquery(MoscatiAutor.class);
+    //            Root<MoscatiPromociones> moscatiPromocionesRoot = moscatiAutorSubquery.from(MoscatiPromociones.class);
+    //            moscatiAutorSubquery.select(moscatiPromocionesRoot.get(MoscatiPromociones_.autor));
+    //            moscatiAutorSubquery.where(
+    //                builder.like(moscatiPromocionesRoot.get(MoscatiPromociones_.autor).get(MoscatiAutor_.descripcion), autor.getEquals())
+    //            );
+    //            return builder.equal(root.get(MoscatiPromociones_.autor).get(MoscatiAutor_.descripcion), moscatiAutorSubquery);
+    //        };
+    //    }
 
-    private Specification<MoscatiPromociones> autorSpecification(StringFilter autor) {
-        return (root, query, builder) -> {
-            Subquery<MoscatiAutor> moscatiAutorSubquery = query.subquery(MoscatiAutor.class);
-            Root<MoscatiPromociones> moscatiPromocionesRoot = moscatiAutorSubquery.from(MoscatiPromociones.class);
-            moscatiAutorSubquery.select(moscatiPromocionesRoot.get(MoscatiPromociones_.autor));
-            moscatiAutorSubquery.where(
-                builder.like(moscatiPromocionesRoot.get(MoscatiPromociones_.autor).get(MoscatiAutor_.descripcion), autor.getEquals())
-            );
-            return builder.equal(root.get(MoscatiPromociones_.autor).get(MoscatiAutor_.descripcion), moscatiAutorSubquery);
-        };
-    }
     //    private Specification<Horario> jefeSpecification() {
     //        return (root, query, builder) -> {
     //            Subquery<Evaluacion> areaSub = query.subquery(Evaluacion.class);

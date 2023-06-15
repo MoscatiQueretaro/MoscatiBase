@@ -7,6 +7,40 @@
       <div class="td-buttons" *ngIf="buttons" [ngStyle]="styleButtons"><span></span></div>
     </div>
   </div>
+
+  <div *ngIf="type === 'card-post'">
+    <div class="col-md-auto py-4" style="padding: 20px" *ngFor="let row of _rows">
+      <mat-card class="main-card-login">
+        <mat-card-title style="text-align: left">
+          <div class="col-md-12" style="width: 150px; height: 50px">
+            <div style="width: 100%; height: 40px" class="background-gradient">
+              <div class="background-animated"></div>
+            </div>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <div class="col-md-12" style="width: 300px; height: 40px">
+            <div style="width: 100%; height: 30px" class="background-gradient">
+              <div class="background-animated"></div>
+            </div>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-content>
+          <div class="col-md-12" style="width: 100%; height: 500px">
+            <div style="width: 100%; height: 500px" class="background-gradient">
+              <div class="background-animated"></div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="col-md-12" style="display: flex; justify-content: right">
+            <div class="td-buttons" *ngIf="buttons" [ngStyle]="styleButtons"><span></span></div>
+            <div class="td-buttons" *ngIf="buttons" [ngStyle]="styleButtons"><span></span></div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>
 <div class="ssc-loader-container" [@fadeInOut] *ngIf="_show && type === 'loader'" [ngStyle]="styleLoader" [ngClass]="containerClass">
   <div class="ssc-loader" *ngIf="showAnimation">

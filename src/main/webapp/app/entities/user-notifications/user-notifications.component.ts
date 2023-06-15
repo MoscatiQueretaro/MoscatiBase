@@ -4,6 +4,7 @@ import { SyncFilesService } from '../../utils/components/sync-files.service';
 import { HttpResponse } from '@angular/common/http';
 import { NotificationsUserModel } from './user-notifications.model';
 import { UserNotificationsService } from './user-notifications.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-notifications-user-list',
@@ -16,6 +17,7 @@ export class UserNotificationsComponent implements OnInit {
   userId?: number;
 
   constructor(
+    protected router: Router,
     private eventManager: JhiEventManager,
     private syncFileService: SyncFilesService,
     private userNotificationsService: UserNotificationsService
@@ -45,5 +47,9 @@ export class UserNotificationsComponent implements OnInit {
         () => (this.loading = false)
       );
     }
+  }
+
+  navigateToCitas(): void {
+    this.router.navigate(['/citas']);
   }
 }

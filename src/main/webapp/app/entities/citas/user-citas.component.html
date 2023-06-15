@@ -15,7 +15,9 @@
         <div class="col-md-6 py-4" *ngFor="let userCitas of userCitasList">
           <mat-card class="main-card-login" *ngIf="userCitas && userCitas.user && userCitas.doctor">
             <mat-card-title style="text-align: left">
-              <strong>{{ 'Medico Moscati' }}</strong>
+              <strong>{{
+                userCitas.tipoCita && userCitas.etapaCita ? userCitas.etapaCita.descripcion + ' ' + userCitas.tipoCita.descripcion : ''
+              }}</strong>
               <span class="badge badge-danger badge-pill" style="font-size: 12px; position: absolute; top: 10px; right: 20px"
                 >Nueva cita</span
               >
@@ -49,8 +51,8 @@
             </mat-card-subtitle>
             <mat-card-content>
               <div class="row">
-                <div class="col-md-11" style="display: flex; justify-content: center; padding: 5px">
-                  <div class="text-notification-badge">
+                <div class="col-md-11" style="display: flex; justify-content: center; padding: 2px">
+                  <div class="message-remote">
                     <p>
                       <span>{{ 'Hola, ' }}</span
                       ><span>{{ userCitas.doctor.name + ' ' + userCitas.doctor.firstName + ' ' + userCitas.doctor.lastName + ' ' }}</span>
@@ -59,8 +61,8 @@
                     </p>
                   </div>
                 </div>
-                <div class="col-md-11" style="display: flex; justify-content: center; padding: 5px">
-                  <div class="text-notification-badge">
+                <div class="col-md-11" style="display: flex; justify-content: center; padding: 2px">
+                  <div class="message-remote">
                     <p>
                       <span>{{ 'Quisiera agendar una cita ' }}</span
                       ><span>{{ userCitas.tipoCita ? userCitas.tipoCita.descripcion + ' ' : '' }}</span>
@@ -77,6 +79,13 @@
                   <button class="btn danger" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']">
                     {{ 'Cancelar ' }}<fa-icon icon="ban"></fa-icon>
                   </button>
+                  <button
+                    class="btn primary"
+                    (click)="confirmarCita(userCitas)"
+                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']"
+                  >
+                    {{ 'Confirmar Cita ' }}<fa-icon icon="check-circle"></fa-icon>
+                  </button>
                 </div>
                 <button class="btn info" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO']">
                   {{ '\n Detalles ' }}<fa-icon icon="eye"></fa-icon>
@@ -89,7 +98,11 @@
                   >
                     Unirse <fa-icon icon="video"></fa-icon>
                   </button>
-                  <button class="btn warning" *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']">
+                  <button
+                    class="btn warning"
+                    *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER']"
+                    (click)="reagendarCita(userCitas)"
+                  >
                     Reagendar <fa-icon icon="calendar-day"></fa-icon>
                   </button>
                 </div>

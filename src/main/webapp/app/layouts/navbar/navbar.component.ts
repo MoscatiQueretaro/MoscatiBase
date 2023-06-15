@@ -12,6 +12,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { FileModel } from '../../utils/components/file.model';
 import { SyncFilesService } from '../../utils/components/sync-files.service';
 import { HttpResponse } from '@angular/common/http';
+import { PromocionesModel } from '../../entities/promociones/promociones.model';
 
 @Component({
   selector: 'jhi-navbar',
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit {
   fileModel?: FileModel;
   account: MoscatiUserModel | null = null;
   adminItems = false;
+  promocion?: PromocionesModel;
+  busqueda?: string;
   constructor(
     private loginService: LoginService,
     private syncFileService: SyncFilesService,
@@ -36,6 +39,9 @@ export class NavbarComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router
   ) {
+    this.eventManager.subscribe('navBar-reload', () => {
+      this.ngOnInit();
+    });
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION;
     }
@@ -47,10 +53,20 @@ export class NavbarComponent implements OnInit {
       this.openAPIEnabled = profileInfo.openAPIEnabled;
     });
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    if (this.account) {
+      if (this.account.theme === 'ssc-theme') {
+        this.changeTheme(2);
+      } else {
+        this.changeTheme(1);
+      }
+    }
     if (this.isAuthenticated()) {
+      this.getImageUrl();
+    } else {
       this.getImageUrl();
     }
   }
+
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
   }
@@ -68,6 +84,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
+    this.account = null;
+    this.fileModel = undefined;
     this.collapseNavbar();
     this.loginService.logout();
     this.router.navigate(['']);
@@ -99,5 +117,21 @@ export class NavbarComponent implements OnInit {
   }
   collapseAdminItems(): void {
     this.adminItems = !this.adminItems;
+  }
+
+  search(): void {
+    const search = document.getElementById('input-autocomplete');
+    if (this.promocion) {
+      this.busqueda = search!.getAttribute('ng-reflect-model') ?? undefined;
+      this.router
+        .navigate(['promociones'], {
+          queryParams: {
+            busqueda: this.busqueda,
+          },
+        })
+        .then(() => {
+          this.eventManager.broadcast('promociones-reload');
+        });
+    }
   }
 }

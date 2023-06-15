@@ -41,10 +41,10 @@ public class RKDoctoresResource {
             .body(dto);
     }
 
-    @GetMapping("/{cedula}")
+    @GetMapping("/{professionalLicence}")
     @Timed
-    public ResponseEntity<RKDoctoresDTO> getOne(@PathVariable String cedula) {
-        RKDoctoresDTO dto = this.service.findOneByCedula(cedula);
+    public ResponseEntity<RKDoctoresDTO> getOne(@PathVariable String professionalLicence) {
+        RKDoctoresDTO dto = this.service.findOneByProfessionalLicence(professionalLicence);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
     }
 

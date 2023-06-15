@@ -5,6 +5,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import org.iconotecnologies.damner.domain.firebase.Note;
+import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,10 @@ public class FirebaseMessagingService {
 
         Message message = Message.builder().setToken(token).setNotification(notification).putAllData(note.getData()).build();
 
-        return firebaseMessaging.send(message);
+        try {
+            return firebaseMessaging.send(message);
+        } catch (Error error) {
+            throw new BadRequestAlertException("Error de FireBase al enviar Notificacion: " + error, "FireBase", "FirebaseError");
+        }
     }
 }

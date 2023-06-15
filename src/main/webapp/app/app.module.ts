@@ -33,6 +33,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { BaseCoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilesModule } from './utils/components/files.module';
+import { SearchAutocompleteModule } from './layouts/navbar/searcher/search.autocomplete.module';
+import { UserNotificationsModule } from './entities/user-notifications/user-notifications.module';
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,6 +62,8 @@ import { FilesModule } from './utils/components/files.module';
     }),
     MatDividerModule,
     FilesModule,
+    SearchAutocompleteModule,
+    UserNotificationsModule,
   ],
   providers: [
     Title,

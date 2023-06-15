@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DetallesMedicoService } from './detalles-medico.service';
 import { MoscatiUserModel } from '../../../core/auth/account.model';
 import { HttpResponse } from '@angular/common/http';
-import { UserCitasModel } from '../../citas/user-citas.model';
 import { DirectorioMedicoService } from '../../directorio-medico/directorio-medico.service';
 import { DirectorioMedicoModel } from '../../directorio-medico/directorio-medico.model';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'jhi-detalles-medico',
@@ -20,6 +21,9 @@ export class DetallesMedicoComponent extends PagingView implements OnInit {
   loading = false;
   especialidadFilter?: EspecialidadesModel;
   horariosMedicos?: HorariosMedicosModel[];
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  value = 50;
   @Input()
   doctor?: MoscatiUserModel;
 
@@ -49,7 +53,30 @@ export class DetallesMedicoComponent extends PagingView implements OnInit {
     this.service.findAllHorariosById(this.doctor!.id!).subscribe((res: HttpResponse<HorariosMedicosModel[] | null>) => {
       if (res.body) {
         this.horariosMedicos = res.body;
-        console.warn('horarios med:', this.horariosMedicos);
+
+        this.horariosMedicos.forEach(dias => {
+          if (dias.dia === 1) {
+            dias.diaText = 'calendar.days.monday';
+          }
+          if (dias.dia === 2) {
+            dias.diaText = 'calendar.days.tuesday';
+          }
+          if (dias.dia === 3) {
+            dias.diaText = 'calendar.days.wednesday';
+          }
+          if (dias.dia === 4) {
+            dias.diaText = 'calendar.days.thursday';
+          }
+          if (dias.dia === 5) {
+            dias.diaText = 'calendar.days.friday';
+          }
+          if (dias.dia === 6) {
+            dias.diaText = 'calendar.days.saturday';
+          }
+          if (dias.dia === 7) {
+            dias.diaText = 'calendar.days.sunday';
+          }
+        });
       }
     });
   }

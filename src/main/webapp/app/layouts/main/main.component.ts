@@ -11,7 +11,7 @@ import { JhiEventManager } from 'ng-jhipster';
   selector: 'jhi-main',
   templateUrl: './main.component.html',
 })
-export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
   themeSubscription: Subscription;
   theme: string;
   loading = false;
@@ -57,9 +57,6 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
-    console.warn('heelo');
-  }
   ngOnDestroy(): void {
     this.eventManager.destroy(this.themeSubscription);
   }

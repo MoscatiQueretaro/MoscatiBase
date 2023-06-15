@@ -20,6 +20,7 @@ export class HorariosMedicosModel {
     public user?: MoscatiUserModel,
     public horaInicio?: string | Date,
     public horaFin?: string | Date,
-    public dia?: string
+    public diaText?: string,
+    public dia?: number
   ) {}
 }

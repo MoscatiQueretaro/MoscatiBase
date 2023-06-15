@@ -9,8 +9,6 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserCitasService extends DamnerService<UserCitasModel> {
-  private url = SERVER_API_URL + 'api/userCitas';
-
   constructor(protected http: HttpClient) {
     super(http, 'userCitas');
   }

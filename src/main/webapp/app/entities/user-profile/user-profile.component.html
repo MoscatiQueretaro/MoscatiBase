@@ -5,7 +5,31 @@
       <!-- Column -->
       <div class="main-card-profile">
         <div class="card-img-top">
-          <div class="front-page"></div>
+          <div style="position: absolute; margin-left: 800px; margin-top: 350px">
+            <button
+              class="btn primary"
+              *jhiHasAnyAuthority="[
+                'ROLE_DOCTOR',
+                'ROLE_LABORATORIO',
+                'ROLE_USER',
+                'ROLE_BENEVENTO',
+                'ROLE_FARMACIA',
+                'ROLE_MOSCATI',
+                'ROLE_SANNIA'
+              ]"
+            >
+              Cambiar portada <fa-icon icon="images"></fa-icon>
+            </button>
+          </div>
+          <jhi-single-file-template
+            *ngIf="account!.imageProfile"
+            class="tooltip-options-profile"
+            [file]="fileModel"
+            [imageStyleProfile]="{ height: '100%', width: '100%', objectFit: 'cover' }"
+            [borderImageType]="''"
+            [endpoint]="'file'"
+            [delete]="false"
+          ></jhi-single-file-template>
         </div>
         <div class="card-body little-profile text-center">
           <div class="pro-img">
@@ -39,17 +63,17 @@
                   </div>
                 </div>
                 <div class="profile-controls">
-                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                  <button class="btn secondary" (click)="abrirPerfil()">
                     <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
                     <fa-icon [icon]="'images'"></fa-icon>
                     <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-new-photo"></span>
                   </button>
-                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                  <button class="btn secondary" (click)="abrirPerfil()">
                     <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
                     <fa-icon [icon]="'user'"></fa-icon>
                     <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-view-photo"></span>
                   </button>
-                  <button class="btn btn-secondary" (click)="abrirPerfil()">
+                  <button class="btn secondary" (click)="abrirPerfil()">
                     <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
                     <fa-icon [icon]="'cogs'"></fa-icon>
                     <span jhiTranslate="damner-user-profile.user-tooltip-menu.user-view-options"></span>
@@ -61,20 +85,33 @@
           <div class="user-details">
             <div class="row">
               <div class="col-md-12">
-                <h3 class="m-b-0" *ngIf="account">{{ account ? account.name + ' ' + account.firstName + ' ' + account.lastName : '' }}</h3>
-                <p>PACIENTE MOSCATI</p>
+                <h3 class="m-b-0" *ngIf="account">
+                  {{
+                    account
+                      ? account.name + ' ' + (account.firstName ? account.firstName : '') + ' ' + (account.lastName ? account.lastName : '')
+                      : ''
+                  }}
+                </h3>
+                <p *jhiHasAnyAuthority="['ROLE_USER']">PACIENTE MOSCATI</p>
               </div>
               <div class="col-md-12 pl-0 pr-0 pb-3" style="display: flex; justify-content: center">
-                <div (click)="nuevaCita()" [class]="'btn-new-query'">
+                <div (click)="nuevaCita()" [class]="'btn-new-query'" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
                   <span class="text-options-menu">Nueva cita &nbsp; <fa-icon icon="calendar-plus"></fa-icon></span>
+                </div>
+                <div
+                  (click)="nuevaPublicacion()"
+                  [class]="'btn-new-query'"
+                  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO', 'ROLE_BENEVENTO', 'ROLE_FARMACIA', 'ROLE_MOSCATI', 'ROLE_SANNIA']"
+                >
+                  <span class="text-options-menu">Nueva Publicación &nbsp; <fa-icon icon="plus-circle"></fa-icon></span>
                 </div>
               </div>
             </div>
           </div>
           <div class="btn-group options-group col-md-12 mr-2 pl-0 pr-0" role="group" aria-label="First group">
-            <div class="col-md-3 pl-0 pr-0">
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_SANNIA']">
               <div class="col-md-12 pl-0 pr-0">
-                <a (click)="changeButtonOptions(1)" [class]="'btn-options-menu'"
+                <a (click)="changeButtonOptions('citas')" [class]="'btn-options-menu'"
                   ><span><fa-icon [icon]="'calendar'"></fa-icon></span
                 ></a>
               </div>
@@ -82,35 +119,57 @@
                 <span>Citas</span>
               </div>
             </div>
-            <div class="col-md-3 pl-0 pr-0">
+            <div
+              class="col-md-3 pl-0 pr-0"
+              *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO', 'ROLE_BENEVENTO', 'ROLE_FARMACIA', 'ROLE_MOSCATI', 'ROLE_SANNIA']"
+            >
               <div class="col-md-12 pl-0 pr-0">
-                <a (click)="changeButtonOptions(2)" [class]="'btn-options-menu'"
+                <a (click)="changeButtonOptions('mensajes')" [class]="'btn-options-menu'"
                   ><span><fa-icon [icon]="'envelope'"></fa-icon></span
                 ></a>
               </div>
               <div class="col-md-12 text-options-menu"><span>Mensajes</span></div>
             </div>
-            <div class="col-md-3 pl-0 pr-0">
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO']">
               <div class="col-md-12 pl-0 pr-0">
-                <a (click)="changeButtonOptions(3)" [class]="'btn-options-menu'"
+                <a (click)="changeButtonOptions('resultados')" [class]="'btn-options-menu'"
                   ><span><fa-icon [icon]="'flask'"></fa-icon></span
                 ></a>
               </div>
               <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Resultados</span></div>
             </div>
-            <div class="col-md-3 pl-0 pr-0">
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO', 'ROLE_DOCTOR']">
               <div class="col-md-12 pl-0 pr-0">
-                <a (click)="changeButtonOptions(4)" [class]="'btn-options-menu'"
+                <a (click)="changeButtonOptions('medicaciones')" [class]="'btn-options-menu'"
                   ><span><fa-icon [icon]="'pills'"></fa-icon></span
                 ></a>
               </div>
               <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Medicaciones</span></div>
             </div>
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO', 'ROLE_DOCTOR', 'ROLE_SANNIA']">
+              <div class="col-md-12 pl-0 pr-0">
+                <a (click)="changeButtonOptions('horarios')" [class]="'btn-options-menu'"
+                  ><span><fa-icon icon="clock"></fa-icon></span
+                ></a>
+              </div>
+              <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Horarios</span></div>
+            </div>
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_BENEVENTO']">
+              <div class="col-md-12 pl-0 pr-0">
+                <a (click)="changeButtonOptions('menu-benevento')" [class]="'btn-options-menu'"
+                  ><span><fa-icon icon="hamburger"></fa-icon><fa-icon icon="utensils"></fa-icon></span
+                ></a>
+              </div>
+              <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Menu</span></div>
+            </div>
           </div>
           <div class="py-3"><mat-divider></mat-divider></div>
 
-          <div class="col-md-12" *ngIf="account && account.id">
+          <div class="col-md-12" *ngIf="account && account.id && optionButton === 0">
             <jhi-notifications-user-list [userId]="account.id"></jhi-notifications-user-list>
+          </div>
+          <div class="col-md-12" *ngIf="account && account.id && optionButton === 5">
+            <jhi-user-horarios-list [userId]="account.id"> </jhi-user-horarios-list>
           </div>
         </div>
       </div>

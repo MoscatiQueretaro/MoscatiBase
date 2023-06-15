@@ -12,6 +12,7 @@ import { NewImageProfileFormComponent } from './new-profile-image/new-image-prof
 import { NewImageProfileService } from './new-profile-image/new-image-profile.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { UserNotificationsModule } from '../user-notifications/user-notifications.module';
+import { UserHorariosModule } from '../user-horarios/user-horarios.module';
 
 const ROUTES = [...UserProfileRoutes];
 
@@ -25,6 +26,7 @@ const ROUTES = [...UserProfileRoutes];
     FilesModule,
     FontAwesomeModule,
     MatDividerModule,
+    UserHorariosModule,
   ],
   declarations: [UserProfileComponent, NewImageProfileFormComponent],
   entryComponents: [UserProfileComponent, NewImageProfileFormComponent],

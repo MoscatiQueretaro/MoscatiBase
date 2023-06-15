@@ -28,7 +28,7 @@
     "prodDatabaseType": "mysql",
     "buildTool": "maven",
     "serverSideOptions": [],
-    "websocket": false,
+    "websocket": "spring-websocket",
     "searchEngine": false,
     "messageBroker": false,
     "enableSwaggerCodegen": false,

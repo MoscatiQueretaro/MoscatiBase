@@ -6,7 +6,6 @@ import { PagingView } from '../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { DirectorioMedicoService } from './directorio-medico.service';
-import { MoscatiUserModel } from '../../core/auth/account.model';
 
 @Component({
   selector: 'jhi-directorio-medico',

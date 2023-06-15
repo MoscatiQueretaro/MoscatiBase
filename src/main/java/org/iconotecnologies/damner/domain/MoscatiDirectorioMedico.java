@@ -8,7 +8,7 @@ import org.iconotecnologies.damner.domain.catalogos.MoscatiEspecialidades;
  *     iCoNo Estuvo Aqui
  * ......   (\_/)
  * ......  ( '_')           coment error        \__/         \__/          \__/        \__/
- * ..../""""""""""""\======░ ▒▓▓█D *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
+ * ..../""""""""""""\======░ ▒▓▓█< *  *  *     (UwU)        (OoO)        0=_0=) !     (XnX)
  * /"""""""""""""""""""\                      //||\\       //||\\         //||\\     //||\\
  * \_@_@_@_@_@_@_@_@_@_/                       bug           bug            bug         bug
  *                                          trabajando    sorprendido      cagado     despues

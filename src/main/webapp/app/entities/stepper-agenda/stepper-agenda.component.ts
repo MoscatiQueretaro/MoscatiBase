@@ -4,8 +4,8 @@ import { PagingView } from '../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoscatiUserModel } from '../../core/auth/account.model';
 import { AccountService } from '../../core/auth/account.service';
-import { HorarioCitaModel } from './horario-cita/horario-cita.model';
 import { DirectorioMedicoModel } from '../directorio-medico/directorio-medico.model';
+import { UserCitasModel } from '../citas/user-citas.model';
 
 @Component({
   selector: 'jhi-stepper-agenda',
@@ -16,7 +16,7 @@ export class StepperAgendaComponent extends PagingView implements OnInit {
   formStepsNum = 0;
   doctorSelect?: MoscatiUserModel;
   userAccount?: MoscatiUserModel;
-  resumenCita?: HorarioCitaModel;
+  resumenCita?: UserCitasModel;
   directorioMedicoSelect?: DirectorioMedicoModel;
   horarioDisponible = true;
   constructor(
@@ -95,7 +95,7 @@ export class StepperAgendaComponent extends PagingView implements OnInit {
     this.horarioDisponible = disponibilidad;
   }
 
-  getResumenCita(resume: HorarioCitaModel): void {
+  getResumenCita(resume: UserCitasModel): void {
     this.resumenCita = resume;
   }
 }

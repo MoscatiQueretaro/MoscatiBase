@@ -2,6 +2,8 @@ package org.iconotecnologies.damner.service.dto;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import org.iconotecnologies.damner.domain.MoscatiTipoPromocion;
+import org.iconotecnologies.damner.domain.MoscatiUser;
 import org.iconotecnologies.damner.service.dto.files.FotoPersonaDTO;
 
 public class MoscatiPromocionesDTO implements Serializable {
@@ -13,7 +15,8 @@ public class MoscatiPromocionesDTO implements Serializable {
     private String descripcion;
     private FotoPersonaDTO foto;
     private ZonedDateTime vigencia;
-    private MoscatiAutorDTO autor;
+    private MoscatiUserDTO autor;
+    private MoscatiTipoPromocionDTO tipo;
 
     public Integer getId() {
         return id;
@@ -71,11 +74,19 @@ public class MoscatiPromocionesDTO implements Serializable {
         this.vigencia = vigencia;
     }
 
-    public MoscatiAutorDTO getAutor() {
+    public MoscatiUserDTO getAutor() {
         return autor;
     }
 
-    public void setAutor(MoscatiAutorDTO autor) {
+    public void setAutor(MoscatiUserDTO autor) {
         this.autor = autor;
+    }
+
+    public MoscatiTipoPromocionDTO getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(MoscatiTipoPromocionDTO tipo) {
+        this.tipo = tipo;
     }
 }

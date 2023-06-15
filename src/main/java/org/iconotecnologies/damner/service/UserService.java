@@ -9,14 +9,15 @@ import org.iconotecnologies.damner.domain.*;
 import org.iconotecnologies.damner.repository.*;
 import org.iconotecnologies.damner.security.SecurityUtils;
 import org.iconotecnologies.damner.service.dto.AdminUserDTO;
+import org.iconotecnologies.damner.service.dto.MoscatiDirectorioMedicoDTO;
 import org.iconotecnologies.damner.service.dto.MoscatiUserDTO;
 import org.iconotecnologies.damner.service.dto.UserDTO;
-import org.iconotecnologies.damner.service.dto.files.FotoPersonaDTO;
 import org.iconotecnologies.damner.service.dto.files.PhotoUserAlbumDTO;
 import org.iconotecnologies.damner.service.files.FotoPersonaService;
 import org.iconotecnologies.damner.service.files.PhotoUserAlbumService;
 import org.iconotecnologies.damner.service.mapper.MoscatiUserMapper;
 import org.iconotecnologies.damner.service.mapper.PhotoUserAlbumMapper;
+import org.iconotecnologies.damner.service.mapper.catalogos.MoscatiEspecialidadesMapper;
 import org.iconotecnologies.damner.service.mapper.files.FotoPersonaMapper;
 import org.iconotecnologies.damner.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
@@ -54,6 +55,8 @@ public class UserService {
     private final PhotoUserAlbumMapper photoUserAlbumMapper;
     private final FotoPersonaService fotoPersonaService;
     private final FotoPersonaMapper fotoPersonaMapper;
+    private final MoscatiEspecialidadesMapper moscatiEspecialidadesMapper;
+    private final MoscatiDirectorioMedicoService moscatiDirectorioMedicoService;
 
     public UserService(
         UserRepository userRepository,
@@ -68,7 +71,9 @@ public class UserService {
         PhotoUserAlbumService photoUserAlbumService,
         PhotoUserAlbumMapper photoUserAlbumMapper,
         FotoPersonaService fotoPersonaService,
-        FotoPersonaMapper fotoPersonaMapper
+        FotoPersonaMapper fotoPersonaMapper,
+        MoscatiEspecialidadesMapper moscatiEspecialidadesMapper,
+        MoscatiDirectorioMedicoService moscatiDirectorioMedicoService
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -83,6 +88,8 @@ public class UserService {
         this.photoUserAlbumMapper = photoUserAlbumMapper;
         this.fotoPersonaService = fotoPersonaService;
         this.fotoPersonaMapper = fotoPersonaMapper;
+        this.moscatiEspecialidadesMapper = moscatiEspecialidadesMapper;
+        this.moscatiDirectorioMedicoService = moscatiDirectorioMedicoService;
     }
 
     //    public Optional<User> activateRegistration(String key) {
@@ -154,6 +161,9 @@ public class UserService {
         if (moscatiUserDTO.getFirebaseToken() != null) {
             newUser.setFirebaseToken(moscatiUserDTO.getFirebaseToken());
         }
+        if (moscatiUserDTO.getProfessionalLicence() != null) {
+            newUser.setProfessionalLicence(moscatiUserDTO.getProfessionalLicence());
+        }
         newUser.setLanguage(moscatiUserDTO.getLanguage());
         // new user is not active
         newUser.setActivation(Constants.DEFAULT_ACTIVATION_STATUS);
@@ -163,11 +173,23 @@ public class UserService {
 
         if (newMoscatiUser.getId() != null) {
             MoscatiUserRol userRol = new MoscatiUserRol();
-            userRol.setDamnerUserId(newMoscatiUser.getId());
-            MoscatiRol rol = this.damnerRolRepository.findFirstByNombre(Constants.DEFAULT_USER_ROL);
-            userRol.setDamnerRol(rol);
+
+            if (moscatiUserDTO.getSpecialty() != null && moscatiUserDTO.getProfessionalLicence() != null) {
+                userRol.setDamnerUserId(newMoscatiUser.getId());
+                MoscatiRol rol = this.damnerRolRepository.findFirstByNombre(Constants.DEFAULT_MEDIC_ROL);
+                userRol.setDamnerRol(rol);
+                MoscatiDirectorioMedicoDTO nuevoMedico = new MoscatiDirectorioMedicoDTO();
+                nuevoMedico.setUser(newMoscatiUser);
+                nuevoMedico.setEspecialidad(moscatiUserDTO.getSpecialty());
+                this.moscatiDirectorioMedicoService.save(nuevoMedico);
+            } else {
+                userRol.setDamnerUserId(newMoscatiUser.getId());
+                MoscatiRol rol = this.damnerRolRepository.findFirstByNombre(Constants.DEFAULT_USER_ROL);
+                userRol.setDamnerRol(rol);
+            }
             this.damnerUserRolRepository.save(userRol);
         }
+
         return newMoscatiUser;
     }
 

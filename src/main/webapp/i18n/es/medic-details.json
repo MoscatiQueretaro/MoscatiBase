@@ -1,0 +1,17 @@
+{
+  "medic-details": {
+    "title": "detalles del medico",
+    "days-card": {
+      "business-days": "dias laborales",
+      "day": "dia",
+      "start-time": "hora inicio",
+      "end-time": "hora fin"
+    },
+    "details-card": {
+      "consulting": "consultorio:",
+      "details": "detalles:",
+      "title": "Titulo:",
+      "language": "idiomas:"
+    }
+  }
+}

@@ -40,4 +40,12 @@ public class StripeResource {
         MoscatiPagosStripeDTO dto = this.stripeService.stripeBuy(price);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
     }
+
+    @PostMapping("/create-payment-intent")
+    @Timed
+    public ResponseEntity<MoscatiPagosStripeDTO> createPaymentIntent(@RequestBody stripeDTO price)
+        throws URISyntaxException, FirebaseMessagingException, StripeException, UnknownHostException {
+        MoscatiPagosStripeDTO dto = this.stripeService.stripeBuyPaymentIntent(price);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto));
+    }
 }

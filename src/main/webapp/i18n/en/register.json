@@ -22,6 +22,13 @@
         "label": "Email",
         "placeholder": "Email"
       },
+      "collaboratingDoctor": {
+        "label": "I am a medical collaborator in Moscati."
+      },
+      "professionalLicence": {
+        "label": "Professional licence",
+        "placeholder": "Professional licence"
+      },
       "button": "Register",
       "button-succes": "Log in",
       "newpassword.label": "New password",
@@ -71,10 +78,23 @@
           "invalid": "Su correo electrónico no es válido.",
           "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
           "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"
+        },
+        "professionalLicence": {
+          "required": "Your professional licence is required.",
+          "minlength": "Your professional licence is required to be at least 8 character.",
+          "maxlength": "Your professional licence cannot be longer than 8 characters.",
+          "pattern": "Your professional licence is invalid."
+        },
+        "specialty": {
+          "required": "Your specialty is required.",
+          "minlength": "your specialty is required to be at least 1 character.",
+          "maxlength": "your specialty cannot be longer than 50 characters.",
+          "pattern": "your specialty is invalid."
         }
       },
       "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
       "error": {
+        "professionalLicenceNotExist": "<strong>Attention!</strong> this ID is not registered, for more information about the systems department of the Moscati hospital",
         "fail": "<strong>Registration failed!</strong> Please try again later.",
         "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
         "emailexists": "<strong>Email is already in use!</strong> Please choose another one."

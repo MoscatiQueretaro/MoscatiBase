@@ -1,8 +1,9 @@
 <nav class="navbar navbar-dark navbar-expand-md">
-  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+  <a class="navbar-brand logo" routerLink="/promociones" (click)="collapseNavbar()">
     <span class="logo-img"></span>
     <span jhiTranslate="global.title" class="navbar-title">Telemedicina Moscati</span>
   </a>
+
   <a
     class="navbar-toggler d-lg-none"
     href="javascript:void(0);"
@@ -22,15 +23,6 @@
     [ngSwitch]="account !== null"
   >
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
-          <span>
-            <fa-icon icon="home"></fa-icon>
-            <span jhiTranslate="global.menu.home">Home</span>
-          </span>
-        </a>
-      </li>
-
       <li ngbDropdown class="nav-item dropdown pointer bordersolid" display="dynamic" *ngIf="languages && languages.length > 1">
         <a class="nav-link dropdown-toggle black-hover" ngbDropdownToggle href="javascript:void(0);" id="themenavBarDropdown">
           <span>
@@ -71,29 +63,29 @@
       </li>
       <li
         ngbDropdown
-        class="nav-item dropdown pointer bordersolid"
+        class="nav-item dropdown pointer"
         display="dynamic"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <div class="row">
-          <div class="col-auto pr-0">
+          <div class="col-auto px-0" *ngIf="fileModel">
             <jhi-single-file-template
               [file]="fileModel"
-              [imageStyleProfile]="{ height: '2.15em', width: '2.19em' }"
+              [imageStyleProfile]="{ height: '3.15em', width: '3.19em' }"
               [borderImageType]="'rounded'"
               [endpoint]="'file'"
               [delete]="false"
             ></jhi-single-file-template>
           </div>
-          <div class="col-auto pl-0">
+          <div class="col-auto ps-0">
             <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
-              <span *ngIf="!fileModel" class="black-hover">
+              <span *ngIf="!fileModel && !account" class="black-hover">
                 <fa-icon icon="user"></fa-icon>
                 <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
               </span>
               <span *ngIf="fileModel" class="black-hover">
-                <span jhiTranslate="global.menu.account.main"> DamnerUserModel </span>
+                <span *ngIf="account"> {{ account.name }} </span>
               </span>
             </a>
           </div>
@@ -137,7 +129,7 @@
             </a>
           </li>
           <li *ngSwitchCase="true" (click)="collapseAdminItems()">
-            <a class="dropdown-item-admin" routerLinkActive="active">
+            <a class="dropdown-item-admin" routerLinkActive="active" *jhiHasAnyAuthority="['ROLE_ADMIN']">
               <fa-icon icon="users-cog" [fixedWidth]="true"></fa-icon>
               <span jhiTranslate="global.menu.admin.main">administration</span>
             </a>
@@ -180,4 +172,62 @@
       </li>
     </ul>
   </div>
+  <div
+    style="width: 500px; position: absolute; margin-top: 2px; margin-left: 530px"
+    *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER', 'ROLE_BENEVENTO', 'ROLE_FARMACIA', 'ROLE_MOSCATI', 'ROLE_SANNIA']"
+  >
+    <jhi-search-autocomplete
+      [typeIcon]="'search'"
+      [placeHolder]="'Buscar en Hospital Moscati '"
+      [(ngModel)]="promocion"
+    ></jhi-search-autocomplete>
+  </div>
+  <form (ngSubmit)="search()">
+    <div style="position: relative; margin-top: 2px; margin-left: 0">
+      <button
+        class="btn primary"
+        type="submit"
+        *jhiHasAnyAuthority="[
+          'ROLE_DOCTOR',
+          'ROLE_LABORATORIO',
+          'ROLE_USER',
+          'ROLE_BENEVENTO',
+          'ROLE_FARMACIA',
+          'ROLE_MOSCATI',
+          'ROLE_SANNIA'
+        ]"
+        (click)="search()"
+      >
+        Buscar
+        <fa-icon icon="search"></fa-icon>
+      </button>
+    </div>
+  </form>
+
+  <ul
+    class="navbar-nav ml-auto"
+    *jhiHasAnyAuthority="['ROLE_DOCTOR', 'ROLE_LABORATORIO', 'ROLE_USER', 'ROLE_BENEVENTO', 'ROLE_FARMACIA', 'ROLE_MOSCATI', 'ROLE_SANNIA']"
+  >
+    <li ngbDropdown class="nav-item dropdown" display="dynamic">
+      <a class="nav-link dropdown-toggle black-hover bell" ngbDropdownToggle href="javascript:void(0);" id="notificationDropdown">
+        <fa-icon icon="bell"></fa-icon>
+      </a>
+      <ul ngbDropdownMenu class="notification-menu" aria-labelledby="notificationDropdown">
+        <li class="text-light bg-dark">
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-12">
+              <span>Notificaciones (3)</span>
+              <a href="" class="float-right text-light"> Marcar todas como leidas</a>
+            </div>
+          </div>
+        </li>
+        <div class="notification-box" *ngIf="account && account.id">
+          <jhi-notifications-user-list [userId]="account.id"></jhi-notifications-user-list>
+        </div>
+        <div class="footer text-center">
+          <a href="">View All</a>
+        </div>
+      </ul>
+    </li>
+  </ul>
 </nav>

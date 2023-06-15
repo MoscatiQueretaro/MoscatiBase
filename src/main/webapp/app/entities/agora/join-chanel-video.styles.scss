@@ -63,6 +63,17 @@
     color: white;
   }
 
+  .light {
+    border-color: $color-body;
+    color: $color-body;
+    border-radius: 2rem;
+  }
+
+  .light:hover {
+    background: #ffffff;
+    color: black;
+  }
+
   /* Red */
   .danger {
     border-color: $danger;
@@ -155,6 +166,95 @@
 
   .sonar-wave4 {
     animation: sonarWave 3s 1.5s linear infinite;
+  }
+
+  .chat-container {
+    height: 500px;
+    width: 100%;
+    background-color: $background-main-card;
+    opacity: 95%;
+    overflow-y: scroll;
+  }
+  .message {
+    background-color: $primary;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  .message:after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent $primary transparent transparent;
+    transform: rotate(180deg);
+  }
+  .message:before {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent $primary transparent transparent;
+    transform: rotate(180deg);
+  }
+
+  .message-alignment {
+    display: flex;
+    justify-content: end;
+  }
+  .message-alignment-remote {
+    display: flex;
+    justify-content: start;
+  }
+
+  .message-remote {
+    background-image: linear-gradient(to right, #006175 0%, #072d73 100%);
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  .message-remote:after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #006175 transparent transparent;
+    transform: translateY(-50%);
+  }
+  .message-remote:before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #006175 transparent transparent;
+    transform: translateY(-50%);
+  }
+
+  .input-container {
+    background-color: $background-main-card;
+    opacity: 95%;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.1);
   }
 
   @keyframes sonarWave {

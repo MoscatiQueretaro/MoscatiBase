@@ -24,6 +24,13 @@
     background: $background-main;
     color: $color-body;
   }
+  .table {
+    color: $color-body;
+  }
+
+  .title-primary {
+    color: $primary;
+  }
 
   .navbar {
     background: $color-navbar;
@@ -93,6 +100,15 @@
   }
   .btn-options-menu span {
     background: $background-main-card;
+  }
+  .ql-stroke {
+    stroke: $color-body;
+  }
+  .ql-fill {
+    fill: $color-body;
+  }
+  .ql-picker {
+    color: $color-body;
   }
 
   .btn-new-query span {
@@ -275,6 +291,10 @@ Browser Upgrade Prompt
   padding: 0.2em 0;
 }
 
+.title-primary {
+  color: #0f2554;
+}
+
 /* ==========================================================================
 Generic styles
 ========================================================================== */
@@ -349,10 +369,10 @@ Generic styles
 
 .login-card {
   margin-bottom: 0;
-  margin-top: 4%;
+  margin-top: 2%;
   min-height: calc(100vh - 10px);
-  background: rgb(155, 34, 195);
-  background: linear-gradient(0deg, rgba(0, 37, 84, 0.8) 17%, #002554 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(0deg, #002554 17%, rgba(0, 212, 255, 1) 100%);
   color: #bbbbbb;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -360,7 +380,7 @@ Generic styles
 /* other generic styles */
 .main-card {
   margin-bottom: 0;
-  margin-top: 4%;
+  margin-top: 2%;
   min-height: calc(100vh - 10px);
   background-color: #444444;
   color: #bbbbbb;
@@ -866,7 +886,7 @@ Generic styles
 }
 
 .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  bottom: 0px;
 }
 
 .hand,
@@ -903,10 +923,11 @@ Custom alerts for notification
   .alert {
     text-overflow: ellipsis;
     pre {
-      background: none;
+      background: #0f2554;
       border: none;
       font: inherit;
-      color: inherit;
+      color: #e0e0e0;
+      z-index: 99999;
       padding: 0;
       margin: 0;
     }
@@ -969,7 +990,7 @@ entity detail page css
   }
   .main-card {
     margin-bottom: 0;
-    margin-top: 20%;
+    margin-top: 15%;
     min-height: calc(100vh - 10px);
     background-color: #444444;
     color: #bbbbbb;

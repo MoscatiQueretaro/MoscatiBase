@@ -2,10 +2,12 @@ package org.iconotecnologies.damner.domain;
 
 public class AgoraRTM {
 
-    private static String appId = "d9f3bff461c34f31b21050001ee3dd48";
-    private static String appCertificate = "3356278bc9cf42ff82063eabc308675a";
+    public static String appId = "d9f3bff461c34f31b21050001ee3dd48";
+    public static String appCertificate = "3356278bc9cf42ff82063eabc308675a";
     private String userId;
-    private int expireTimestamp = 0;
+    private int expirationTimeInSeconds = 0;
+    private String token;
+    private String channelName;
 
     public static String getAppId() {
         return appId;
@@ -31,11 +33,27 @@ public class AgoraRTM {
         this.userId = userId;
     }
 
-    public int getExpireTimestamp() {
-        return expireTimestamp;
+    public int getExpirationTimeInSeconds() {
+        return expirationTimeInSeconds;
     }
 
-    public void setExpireTimestamp(int expireTimestamp) {
-        this.expireTimestamp = expireTimestamp;
+    public void setExpirationTimeInSeconds(int expirationTimeInSeconds) {
+        this.expirationTimeInSeconds = expirationTimeInSeconds;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 }

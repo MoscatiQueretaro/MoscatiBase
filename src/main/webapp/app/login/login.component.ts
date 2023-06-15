@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private accountService: AccountService,
     private loginService: LoginService,
     private router: Router,
+    private eventManager: JhiEventManager,
     private fb: FormBuilder
   ) {}
 
@@ -53,6 +55,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.authenticationError = false;
           if (!this.router.getCurrentNavigation()) {
             // There were no routing during login (eg from navigationToStoredUrl)
+            this.eventManager.broadcast('navBar-reload');
             this.router.navigate(['/user-profile']);
           }
         },

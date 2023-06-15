@@ -8,7 +8,8 @@ public class RKDoctoresDTO implements Serializable {
     private String name;
     private String lastName;
     private String lastName2;
-    private String cedula;
+    private String professionalLicence;
+    private String email;
 
     public Integer getId() {
         return id;
@@ -42,11 +43,19 @@ public class RKDoctoresDTO implements Serializable {
         this.lastName2 = lastName2;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getProfessionalLicence() {
+        return professionalLicence;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setProfessionalLicence(String professionalLicence) {
+        this.professionalLicence = professionalLicence;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

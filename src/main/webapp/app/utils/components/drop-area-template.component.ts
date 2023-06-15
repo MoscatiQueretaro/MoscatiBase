@@ -108,6 +108,7 @@ export class DropAreaTemplate<X extends FileModel> implements OnInit, OnDestroy 
   /**
    * MOSTRAR BOTON DE WEBCAM
    */
+  @Input() required?: boolean;
 
   @Input()
   borderImage?: string;

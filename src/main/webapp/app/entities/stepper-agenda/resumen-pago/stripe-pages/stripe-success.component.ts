@@ -5,11 +5,10 @@ import { PagingView } from '../../../../utils/pagination/PagingView';
 import { AccountService } from '../../../../core/auth/account.service';
 import { HttpResponse } from '@angular/common/http';
 import { StripeResponseModel } from '../resumen-pago.model';
-import { ResumenPagoService } from '../resumen-pago.service';
 import { HorarioCitaService } from '../../horario-cita/horario-cita.service';
-import { HorarioCitaModel } from '../../horario-cita/horario-cita.model';
 import { CatalogoModel } from '../../../catalogos/catalogo.model';
 import { MoscatiUserModel } from '../../../../core/auth/account.model';
+import { UserCitasModel } from '../../../citas/user-citas.model';
 
 @Component({
   selector: 'jhi-stripe-succes',
@@ -22,7 +21,7 @@ export class StripeSuccessComponent extends PagingView implements OnInit {
   userId?: string;
   fechaHoraSolicitud?: string;
   stripeId?: string;
-  horarioCitaModel?: HorarioCitaModel;
+  horarioCitaModel?: UserCitasModel;
   loading = true;
   constructor(
     protected router: Router,
@@ -38,7 +37,7 @@ export class StripeSuccessComponent extends PagingView implements OnInit {
   }
 
   ngOnInit(): void {
-    this.horarioCitaModel = new HorarioCitaModel();
+    this.horarioCitaModel = new UserCitasModel();
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.horarioCitaModel!.doctor = new MoscatiUserModel(
@@ -83,7 +82,7 @@ export class StripeSuccessComponent extends PagingView implements OnInit {
     console.warn(this.horarioCitaModel);
 
     this.service.create(this.horarioCitaModel).subscribe(
-      (res: HttpResponse<HorarioCitaModel>) => {
+      (res: HttpResponse<UserCitasModel>) => {
         // I use stripe to redirect To Checkout page of Stripe platform
         if (res.body) {
           this.horarioCitaModel = res.body;

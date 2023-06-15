@@ -1,0 +1,271 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="col-md-12">
+      <h2 jhiTranslate="add-promotion.title"></h2>
+      <div class="py-3" style="height: 100%; width: 100%; display: flex; justify-content: center; align-content: center">
+        <mat-card class="main-card-login" style="padding-left: 50px; padding-right: 50px; padding-top: 10px; width: 90%">
+          <mat-card-title>
+            <strong *ngIf="promocion && promocion.autor && promocion.autor.name">{{ promocion.autor.name }}</strong>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="typeOfAdvertising()" />
+              <label class="form-check-label" for="flexCheckDefault" jhiTranslate="register.form.collaboratingDoctor.label"></label>
+            </div>
+          </mat-card-title>
+          <mat-card-header>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
+                  <strong>Registration failed!</strong> Please try again later.
+                </div>
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              <div class="row justify-content-center py-5">
+                <div class="col-md-12">
+                  <form name="form" role="form" [formGroup]="promocionesForm" *ngIf="!success">
+                    <div class="form__group field">
+                      <label class="form__label" for="nombre" jhiTranslate="add-promotion.form.name.label"></label>
+                      <input
+                        type="text"
+                        class="form__field"
+                        name="nombre"
+                        id="nombre"
+                        [(ngModel)]="promocion!.nombre"
+                        placeholder="{{ 'add-promotion.form.name.placeholder' | translate }}"
+                        formControlName="nombre"
+                        data-cy="nombre"
+                        #nombre
+                        required
+                      />
+
+                      <div
+                        *ngIf="
+                          promocionesForm.get('nombre')!.invalid &&
+                          (promocionesForm.get('nombre')!.dirty || promocionesForm.get('nombre')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('nombre')?.errors?.required"
+                          jhiTranslate="add-promotion.messages.validate.name.required"
+                          >Your name is required.</small
+                        >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('nombre')?.errors?.minlength"
+                          jhiTranslate="add-promotion.messages.validate.name.minlength"
+                          >Your username is required to be at least 1 character.
+                        </small>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('nombre')?.errors?.maxlength"
+                          jhiTranslate="add-promotion.messages.validate.name.maxlength"
+                          >Your username cannot be longer than 50 characters.
+                        </small>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('nombre')?.errors?.pattern"
+                          jhiTranslate="add-promotion.messages.validate.name.pattern"
+                          >Your username can only contain letters and digits.
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form__group field">
+                          <label class="form__label" for="precio" jhiTranslate="add-promotion.form.price.label"></label>
+                          <input
+                            type="text"
+                            class="form__field"
+                            name="precio"
+                            id="precio"
+                            [(ngModel)]="promocion!.precio"
+                            placeholder="{{ 'add-promotion.form.price.placeholder' | translate }}"
+                            formControlName="precio"
+                            data-cy="precio"
+                            #precio
+                          />
+
+                          <div
+                            *ngIf="
+                              promocionesForm.get('precio')!.invalid &&
+                              (promocionesForm.get('precio')!.dirty || promocionesForm.get('precio')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="promocionesForm.get('precio')?.errors?.pattern"
+                              jhiTranslate="add-promotion.messages.validate.price.pattern"
+                              >Your price can only contain numbers.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form__group field">
+                          <label class="form__label" for="descuento" jhiTranslate="add-promotion.form.discount.label"></label>
+                          <input
+                            type="text"
+                            class="form__field"
+                            name="descuento"
+                            id="descuento"
+                            [(ngModel)]="promocion!.descuento"
+                            placeholder="{{ 'add-promotion.form.discount.placeholder' | translate }}"
+                            formControlName="descuento"
+                            data-cy="descuento"
+                            #descuento
+                          />
+
+                          <div
+                            *ngIf="
+                              promocionesForm.get('descuento')!.invalid &&
+                              (promocionesForm.get('descuento')!.dirty || promocionesForm.get('descuento')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="promocionesForm.get('descuento')?.errors?.max"
+                              jhiTranslate="add-promotion.messages.validate.discount.max"
+                              >The discount must be less than 100%.
+                            </small>
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="promocionesForm.get('descuento')?.errors?.pattern"
+                              jhiTranslate="add-promotion.messages.validate.discount.pattern"
+                              >Your discount is invalid.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <jhi-date-picker
+                        id="vigencia"
+                        formControlName="vigencia"
+                        data-cy="vigencia"
+                        #vigencia
+                        name="vigencia"
+                        title="vigencia"
+                        [(ngModel)]="promocion!.vigencia"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        [dateTimeMode]="true"
+                        [hourFormat]="'12'"
+                        [stepMinute]="30"
+                        [defaultDate]="defaultDateTime"
+                        [readonlyInput]="true"
+                        [yearRange]="now.getFullYear() + ':' + (now.getFullYear() + 10)"
+                        [minDate]="now"
+                        [placeHolderLabel]="'add-promotion.form.validity-until.label' | translate"
+                      >
+                      </jhi-date-picker>
+                      <div
+                        *ngIf="
+                          promocionesForm.get('vigencia')!.invalid &&
+                          (promocionesForm.get('vigencia')!.dirty || promocionesForm.get('vigencia')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('vigencia')?.errors?.required"
+                          jhiTranslate="add-promotion.messages.validate.validity-until.required"
+                          >Your validity until is required.</small
+                        >
+                      </div>
+                    </div>
+                    <div class="row py-5">
+                      <span jhiTranslate="add-promotion.form.image.label"></span>
+                      <div class="col-md-12 py-3">
+                        <div style="width: 350px; height: 350px; margin: 0 auto">
+                          <div>
+                            <jhi-file-drop-area-custom
+                              id="foto"
+                              name="foto"
+                              title="foto"
+                              [required]="true"
+                              [images]="true"
+                              [endpoint]="'foto-persona'"
+                              [maxFileSize]="20"
+                              [imageStyle]="{ height: '350px', width: '350px' }"
+                              [addFile]="true"
+                              [view]="true"
+                              [borderImage]="''"
+                              [hideName]="true"
+                              [delete]="true"
+                              [saved]="savedPhotho"
+                              [filesId]="fileFoto && fileFoto.length ? fileFoto : []"
+                              [maxFiles]="1"
+                              (filesIdChange)="getFiles($event)"
+                            ></jhi-file-drop-area-custom>
+                            <div *ngIf="fileFoto === null">
+                              <small class="form-text text-danger" jhiTranslate="add-promotion.messages.validate.photo.required"
+                                >Your photo is required.</small
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 py-3">
+                      <quill-editor
+                        id="descripcion"
+                        formControlName="descripcion"
+                        data-cy="descripcion"
+                        #descripcion
+                        name="descripcion"
+                        title="descripcion"
+                        [placeholder]="'Contenido de la publicidad'"
+                        [style]="{ height: '600px' }"
+                        [title]="'Descripcion de la publicidad.'"
+                        [(ngModel)]="promocion!.descripcion"
+                        name="first"
+                      ></quill-editor>
+                      <div
+                        *ngIf="
+                          promocionesForm.get('descripcion')!.invalid &&
+                          (promocionesForm.get('descripcion')!.dirty || promocionesForm.get('descripcion')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('descripcion')?.errors?.required"
+                          jhiTranslate="add-promotion.messages.validate.description.required"
+                          >Your validity until is required.</small
+                        >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('descripcion')?.errors?.minlength"
+                          jhiTranslate="add-promotion.messages.validate.description.minlength"
+                          >Your username is required to be at least 1 character.
+                        </small>
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="promocionesForm.get('descripcion')?.errors?.maxlength"
+                          jhiTranslate="add-promotion.messages.validate.description.maxlength"
+                          >Your username cannot be longer than 50 characters.
+                        </small>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-footer class="pb-5" style="display: flex; justify-content: center">
+            <button [disabled]="promocionesForm.invalid" *ngIf="!success" (click)="save()" class="btn primary">
+              {{ 'add-promotion.form.save-button' | translate }}
+              <fa-icon icon="globe-americas"></fa-icon>
+            </button>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+      <!-- Column -->
+    </div>
+  </div>
+</div>

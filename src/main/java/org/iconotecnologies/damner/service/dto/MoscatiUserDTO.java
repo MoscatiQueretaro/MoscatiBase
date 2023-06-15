@@ -2,6 +2,8 @@ package org.iconotecnologies.damner.service.dto;
 
 import java.io.Serializable;
 import java.util.Set;
+import org.iconotecnologies.damner.domain.catalogos.MoscatiEspecialidades;
+import org.iconotecnologies.damner.service.dto.catalogos.MoscatiEspecialidadesDTO;
 import org.iconotecnologies.damner.service.dto.files.FotoPersonaDTO;
 
 public class MoscatiUserDTO implements Serializable {
@@ -26,8 +28,8 @@ public class MoscatiUserDTO implements Serializable {
     private String activation;
     private FotoPersonaDTO fotoPersona;
     private String tipo;
-    private String cedula;
-    private String especialidad;
+    private String professionalLicence;
+    private MoscatiEspecialidadesDTO specialty;
 
     public String getRole() {
         return role;
@@ -173,19 +175,19 @@ public class MoscatiUserDTO implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getProfessionalLicence() {
+        return professionalLicence;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setProfessionalLicence(String professionalLicence) {
+        this.professionalLicence = professionalLicence;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public MoscatiEspecialidadesDTO getSpecialty() {
+        return specialty;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setSpecialty(MoscatiEspecialidadesDTO specialty) {
+        this.specialty = specialty;
     }
 }

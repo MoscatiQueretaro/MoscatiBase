@@ -1,8 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DamnerService } from '../../services/damner.service';
 import { AgoraModel } from './join-chanel-video.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { MoscatiUserModel } from '../../core/auth/account.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -6,7 +6,7 @@
   <div class="modal-body py-0">
     <div class="row">
       <div class="col-md-12">
-        <div style="width: 350px; height: 300px; margin: 0 auto">
+        <div style="width: 350px; height: 350px; margin: 0 auto">
           <div>
             <jhi-file-drop-area-custom
               title="fotografia"
@@ -14,7 +14,7 @@
               [images]="true"
               [endpoint]="'foto-persona'"
               [maxFileSize]="20"
-              [imageStyle]="{ height: '16.95em', width: '16.99em' }"
+              [imageStyle]="{ height: '19.95em', width: '19.99em' }"
               [addFile]="true"
               [view]="true"
               [borderImage]="'rounded'"
@@ -42,13 +42,13 @@
   </div>
   <!-- modal-body -->
   <div class="modal-footer">
-    <button *ngIf="!savedPhotho" type="button" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="clear()">
+    <button *ngIf="!savedPhotho" type="button" class="btn danger" data-dismiss="modal" (click)="clear()">
       <fa-icon [icon]="'times-circle'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
     </button>
-    <button *ngIf="!savedPhotho" id="jhionfirm-delete-prueba" type="submit" class="btn btn-fill btn-success">
+    <button *ngIf="!savedPhotho" id="jhionfirm-delete-prueba" type="submit" class="btn success">
       <fa-icon [icon]="'cloud-upload-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Crear</span>
     </button>
-    <button *ngIf="savedPhotho" type="button" class="btn btn-fill btn-secondary" data-dismiss="modal" (click)="clear()">
+    <button *ngIf="savedPhotho" type="button" class="btn secondary" data-dismiss="modal" (click)="clear()">
       <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span jhiTranslate="damner-user-profile.modal-new-image.confirm">Cancel</span>
     </button>
   </div>

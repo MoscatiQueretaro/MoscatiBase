@@ -30,6 +30,14 @@
                 <strong>Login name already registered!</strong> Please choose another one.
               </div>
 
+              <div
+                class="alert alert-danger"
+                *ngIf="professionalLicenceNotExist"
+                jhiTranslate="register.messages.error.professionalLicenceNotExist"
+              >
+                <strong>Atention!</strong> Please choose another one.
+              </div>
+
               <div class="alert alert-danger" *ngIf="errorEmailExists" jhiTranslate="register.messages.error.emailexists">
                 <strong>Email is already in use!</strong> Please choose another one.
               </div>
@@ -40,9 +48,109 @@
             </div>
           </div>
 
-          <div class="row justify-content-center">
+          <div class="row justify-content-center py-5">
             <div class="col-md-12">
               <form name="form" role="form" [formGroup]="registerForm" *ngIf="!success">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="cedulaView()" />
+                  <label class="form-check-label" for="flexCheckDefault" jhiTranslate="register.form.collaboratingDoctor.label"></label>
+                </div>
+
+                <div class="form__group field" *ngIf="medicCollaborator">
+                  <label class="form__label" for="username" jhiTranslate="register.form.professionalLicence.label"></label>
+                  <input
+                    type="text"
+                    class="form__field"
+                    name="professionalLicence"
+                    id="professionalLicence"
+                    [(ngModel)]="damnerUser!.professionalLicence"
+                    (ngModelChange)="validateProfessionalLicence()"
+                    placeholder="{{ 'register.form.professionalLicence.placeholder' | translate }}"
+                    formControlName="professionalLicence"
+                    data-cy="professionalLicence"
+                    #professionalLicence
+                    required
+                  />
+
+                  <div
+                    *ngIf="
+                      registerForm.get('professionalLicence')!.invalid &&
+                      (registerForm.get('professionalLicence')!.dirty || registerForm.get('professionalLicence')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('professionalLicence')?.errors?.required"
+                      jhiTranslate="register.messages.validate.professionalLicence.required"
+                      >Your professional licence is required.</small
+                    >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('professionalLicence')?.errors?.minlength"
+                      jhiTranslate="register.messages.validate.professionalLicence.minlength"
+                      >Your professional licence is required to be at least 1 character.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('professionalLicence')?.errors?.maxlength"
+                      jhiTranslate="register.messages.validate.professionalLicence.maxlength"
+                      >Your professional licence cannot be longer than 8 characters.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('professionalLicence')?.errors?.pattern"
+                      jhiTranslate="register.messages.validate.professionalLicence.pattern"
+                      >Your professional licence can only contain letters and digits.
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="medicCollaborator">
+                  <jhi-especialidades-autocomplete
+                    name="specialty"
+                    formControlName="specialty"
+                    id="specialty"
+                    [placeHolder]="'medical-directory.specialty.placeHolder' | translate"
+                    [placeHolderLabel]="'medical-directory.specialty.placeHolderLabel' | translate"
+                    [typeIcon]="'caret-down'"
+                    [(ngModel)]="damnerUser!.specialty"
+                    #specialty
+                    required
+                  ></jhi-especialidades-autocomplete>
+                  <div
+                    *ngIf="
+                      registerForm.get('specialty')!.invalid &&
+                      (registerForm.get('specialty')!.dirty || registerForm.get('specialty')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('specialty')?.errors?.required"
+                      jhiTranslate="register.messages.validate.specialty.required"
+                      >Your specialty is required.</small
+                    >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('specialty')?.errors?.minlength"
+                      jhiTranslate="register.messages.validate.specialty.minlength"
+                      >Your specialty is required to be at least 1 character.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('specialty')?.errors?.maxlength"
+                      jhiTranslate="register.messages.validate.specialty.maxlength"
+                      >Your specialty cannot be longer than 50 characters.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="registerForm.get('specialty')?.errors?.pattern"
+                      jhiTranslate="register.messages.validate.specialty.pattern"
+                      >Your specialty can only contain letters and digits.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="py-3"><mat-divider></mat-divider></div>
+
                 <div class="form__group field">
                   <label class="form__label" for="username" jhiTranslate="register.form.name.label"></label>
                   <input

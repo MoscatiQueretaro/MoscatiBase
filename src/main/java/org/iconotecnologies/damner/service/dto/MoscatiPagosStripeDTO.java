@@ -6,6 +6,7 @@ public class MoscatiPagosStripeDTO implements Serializable {
 
     protected Integer id;
     private String stripeIntentId;
+    private String clientSecret;
     private String stripeKey;
     private Integer stripeTotal;
     private String stripeDescripcion;
@@ -25,6 +26,14 @@ public class MoscatiPagosStripeDTO implements Serializable {
 
     public void setStripeIntentId(String stripeIntentId) {
         this.stripeIntentId = stripeIntentId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     public String getStripeKey() {

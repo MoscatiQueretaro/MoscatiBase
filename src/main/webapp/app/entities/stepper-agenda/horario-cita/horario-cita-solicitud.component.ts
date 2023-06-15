@@ -1,19 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { JhiEventManager } from 'ng-jhipster';
-import { HorarioCitaModel, HorariosDisponiblesModel } from './horario-cita.model';
+import { HorariosDisponiblesModel } from './horario-cita.model';
 import { PagingView } from '../../../utils/pagination/PagingView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HorarioCitaService } from './horario-cita.service';
 import { MoscatiUserModel } from '../../../core/auth/account.model';
 import { CatalogoModel } from '../../catalogos/catalogo.model';
 import { HttpResponse } from '@angular/common/http';
+import { UserCitasModel } from '../../citas/user-citas.model';
 
 @Component({
   selector: 'jhi-horario-solicitud',
   templateUrl: './horario-cita-solicitud.component.html',
 })
 export class HorarioCitaSolicitudComponent extends PagingView implements OnInit {
-  horarioCitaSolicitud?: HorarioCitaModel;
+  horarioCitaSolicitud?: UserCitasModel;
   horariosList?: HorariosDisponiblesModel[];
   loading = false;
   fechaHora?: string | Date;
@@ -28,7 +29,7 @@ export class HorarioCitaSolicitudComponent extends PagingView implements OnInit 
 
   @Output() horarySelect = new EventEmitter<boolean>();
 
-  @Output() resumenCita = new EventEmitter<HorarioCitaModel>();
+  @Output() resumenCita = new EventEmitter<UserCitasModel>();
 
   constructor(
     protected router: Router,
@@ -43,7 +44,7 @@ export class HorarioCitaSolicitudComponent extends PagingView implements OnInit 
   }
 
   ngOnInit(): void {
-    this.horarioCitaSolicitud = new HorarioCitaModel();
+    this.horarioCitaSolicitud = new UserCitasModel();
     if (this.doctormodel && this.userModel) {
       this.horarioCitaSolicitud.doctor = this.doctormodel;
       this.horarioCitaSolicitud.user = this.userModel;
@@ -68,10 +69,10 @@ export class HorarioCitaSolicitudComponent extends PagingView implements OnInit 
       const fecha = new Date(this.fechaHora);
       const fechaformat =
         fecha.getFullYear().toString() +
-        '-0' +
-        (fecha.getMonth() + 1).toString() +
         '-' +
-        fecha.getDate().toString() +
+        (fecha.getMonth() + 1 < 10 ? '0' + (fecha.getMonth() + 1).toString() : (fecha.getMonth() + 1).toString()) +
+        '-' +
+        (fecha.getDate() < 10 ? '0' + fecha.getDate().toString() : fecha.getDate().toString()) +
         ' ' +
         (fecha.getHours() < 10 ? '0' + fecha.getHours().toString() : fecha.getHours().toString()) +
         ':' +
@@ -88,7 +89,7 @@ export class HorarioCitaSolicitudComponent extends PagingView implements OnInit 
               this.horarySelect.emit(true);
             } else {
               this.horarySelect.emit(false);
-              this.resumenCita.emit(this.horarioCitaSolicitud);
+              this.resumenCita.emit(this.horarioCitaSolicitud); //si el horario se encuentra disponible, se devuelve
             }
           }
           this.loading = false;

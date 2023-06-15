@@ -10,6 +10,7 @@ import { DetallesMedicoComponent } from './detalles-medico.component';
 import { DetallesMedicoService } from './detalles-medico.service';
 import { LoadersModule } from '../../../utils/components/loader/loaders.module';
 import { DirectorioMedicoService } from '../../directorio-medico/directorio-medico.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { DirectorioMedicoService } from '../../directorio-medico/directorio-medi
     UserNotificationsModule,
     CommonModule,
     FilesModule,
+    MatProgressSpinnerModule,
     FontAwesomeModule,
     MatDividerModule,
     LoadersModule,

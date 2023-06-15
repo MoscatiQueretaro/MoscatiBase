@@ -1,0 +1,56 @@
+{
+  "add-promotion": {
+    "title": "Create new campaign",
+    "form": {
+      "name": {
+        "label": "advertising title",
+        "placeholder": "advertising title"
+      },
+      "price": {
+        "label": "price",
+        "placeholder": "Add the price without % discount"
+      },
+      "discount": {
+        "label": "discount",
+        "placeholder": "Add the discount"
+      },
+      "validity-until": {
+        "label": "validity until"
+      },
+      "image": {
+        "label": "Select an image as the cover of the publication."
+      },
+      "save-button": "publish campaign"
+    },
+    "messages": {
+      "validate": {
+        "name": {
+          "required": "Your title is required.",
+          "minlength": "Your title is required to be at least 1 character.",
+          "maxlength": "Your title cannot be longer than 150 characters.",
+          "pattern": "Your title is invalid."
+        },
+        "price": {
+          "required": "Your price is required.",
+          "minlength": "Your price is required to be at least 1 number.",
+          "pattern": "Your price can only contain numbers."
+        },
+        "discount": {
+          "max": "The discount must be less than 100%",
+          "pattern": "Your discount is invalid."
+        },
+        "validity-until": {
+          "required": "validity until is required."
+        },
+        "description": {
+          "required": "Your description is required.",
+          "minlength": "Your description is required to be at least 1 character.",
+          "maxlength": "Your description cannot be longer than 10000 characters."
+        },
+        "photo": {
+          "required": "Your photo is required."
+        }
+      }
+    }
+  }
+}

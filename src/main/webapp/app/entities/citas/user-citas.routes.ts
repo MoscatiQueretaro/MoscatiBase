@@ -12,7 +12,7 @@ export const UserCitasRoutes: Routes = [
     },
     data: {
       pageTitle: 'user-profile.home.title',
-      authorities: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR'],
+      authorities: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_DOCTOR', 'ROLE_LABORATORIO'],
     },
     canActivate: [UserRouteAccessService],
   },
