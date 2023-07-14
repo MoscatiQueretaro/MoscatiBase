@@ -42,7 +42,7 @@ public class DamnerApp {
     }
 
     /**
-     * Clase Inicial de Damner.
+     * Clase Inicial de MoscatiBase.
      * <p>
      * Los perfiles de spring fueron configurados con el argumento: --spring.profiles.active=your-active-profile
      * <p>
@@ -73,7 +73,9 @@ public class DamnerApp {
 
     /**
      * El metodo Main es el que se ejecutara primero al inicio de la clase.
-     *
+     * el comando para ejecutar backend java es el siguiente ./mvnw
+     * se ejecuta en consola BACKEND sobre el directirio C:\Users\Desarrollo 02\IdeaProjects\MoscatiBase>
+     * el servicio de API's se ejecutaran en el puerto 8080
      * aqui basicamente la aplicacion designa entre que perfil de compilacion se le a especificado ejecutarse
      */
     public static void main(String[] args) {

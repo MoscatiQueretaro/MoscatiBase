@@ -47,4 +47,9 @@ public class MoscatiArticulosService {
     public Page<MoscatiArticulosDTO> getAll(MoscatiArticulosCriteria criteria, Pageable pageable) {
         return this.moscatiArticulosRepository.findAll(criteria.buildSpecification(), pageable).map(moscatiArticulosMapper::toDto);
     }
+
+    @Transactional(readOnly = true)
+    public MoscatiArticulosDTO findArticuloById(Integer id) {
+        return this.moscatiArticulosMapper.toDto(this.moscatiArticulosRepository.getOne(id));
+    }
 }

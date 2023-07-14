@@ -1,4 +1,4 @@
-<div class="image-container d-flex flex-column rounded" *ngIf="file" [style]="imageStyle">
+<div class="image-container rounded" *ngIf="file" [style]="imageStyle">
   <div class="buttons-container" *ngIf="!file.loading">
     <!--        <button type="button" *ngIf="view && showViewButton()" class="button-view" (click)="verArchivo()"-->
     <!--        >-->
@@ -8,7 +8,8 @@
     <!--        >-->
     <!--        <fa-icon icon="download"></fa-icon>-->
     <!--        </button>-->
-    <button type="button" *ngIf="delete" class="button-delete" (click)="removeFile()">
+    <button type="button" *ngIf="delete" class="btn primary" (click)="removeFile()">
+      Actualizar imagen
       <fa-icon icon="sync-alt"></fa-icon>
     </button>
   </div>

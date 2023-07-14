@@ -61,6 +61,7 @@
   .main-card-login {
     background: $background-main-card;
     color: $color-body;
+    border-radius: 12px;
   }
   .form__field {
     color: $color-body;
@@ -652,19 +653,15 @@ Generic styles
     line-height: 1;
   }
   .buttons-container {
-    position: absolute;
-    display: none;
+    margin: auto;
+    display: block;
 
     button {
-      border: 0;
-      border-radius: 100%;
-      outline: none;
-      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 0 1px 0 1px;
-      font-size: 90%;
+      font-size: 95%;
     }
   }
 
@@ -686,7 +683,6 @@ Generic styles
 }
 
 .buttons-container {
-  position: absolute;
   top: 1px;
   display: none;
 }
@@ -712,13 +708,12 @@ Generic styles
 .button-delete {
   width: 50px;
   height: 50px;
-  position: absolute;
   border: 0;
   border-radius: 100%;
   cursor: pointer;
   display: none;
   outline: none;
-  margin-left: 10%;
+  margin: 0;
   color: white;
 }
 .button-view {

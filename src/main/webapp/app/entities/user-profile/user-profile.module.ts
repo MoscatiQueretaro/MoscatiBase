@@ -13,6 +13,7 @@ import { NewImageProfileService } from './new-profile-image/new-image-profile.se
 import { MatDividerModule } from '@angular/material/divider';
 import { UserNotificationsModule } from '../user-notifications/user-notifications.module';
 import { UserHorariosModule } from '../user-horarios/user-horarios.module';
+import { UserMenuArticulosModule } from '../user-menu-articulos/user-menu-articulos.module';
 
 const ROUTES = [...UserProfileRoutes];
 
@@ -27,6 +28,7 @@ const ROUTES = [...UserProfileRoutes];
     FontAwesomeModule,
     MatDividerModule,
     UserHorariosModule,
+    UserMenuArticulosModule,
   ],
   declarations: [UserProfileComponent, NewImageProfileFormComponent],
   entryComponents: [UserProfileComponent, NewImageProfileFormComponent],

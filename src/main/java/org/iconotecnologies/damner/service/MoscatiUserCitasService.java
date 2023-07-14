@@ -51,9 +51,20 @@ public class MoscatiUserCitasService {
         this.horariosMedicosService = horariosMedicosService;
     }
 
+    /**
+     * Metodo para guardar y cambiar estatus de la cita.
+     */
     @Transactional
     public MoscatiUserCitasDTO save(MoscatiUserCitasDTO moscatiUserCitasDTO) throws FirebaseMessagingException {
+        /**
+         * se verifica que el id sea nulo y que la etapa venga como SOLICITUD.
+         */
         if (moscatiUserCitasDTO.getId() == null && moscatiUserCitasDTO.getEtapaCita().getDescripcion().equals(Constants.ETAPA_SOLICITUD)) {
+            /**
+             * se valida primero que no exista una cita en el dia y hora de la solicitud, si existe algun registro se lanza un error en consola.
+             * validacion de fecha y hora con logica == cunado la fecha, la hora y los minutos son exactamente iguales
+             *
+             */
             if (
                 this.repository.findFirstByFechaHoraSolicitudEqualsOrFechaHoraCitaEqualsAndDoctor_Id(
                         StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud()),
@@ -69,7 +80,11 @@ public class MoscatiUserCitasService {
                     "moscatiUserCitasError"
                 );
             }
-
+            /**
+             * se crea una variable auxiliar "fechaSolicitudFin" la cual toma la fecha y hora de la solicitud y le suma 29 minutos con 59 segundos
+             * para validar que no exista cita que este agendada y su duracion de 30 min no se encuentre dentro de ese horario
+             * recordemos que si una solicitud de cita se quiere para X:00 hora se estima que termine a las X:30 am./pm. min.
+             */
             ZonedDateTime fechaSolicitudFin = StringToZoneDateTime(moscatiUserCitasDTO.getFechaHoraSolicitud());
             fechaSolicitudFin = fechaSolicitudFin.plusMinutes(29);
             fechaSolicitudFin = fechaSolicitudFin.plusSeconds(59);

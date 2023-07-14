@@ -171,6 +171,9 @@
           <div class="col-md-12" *ngIf="account && account.id && optionButton === 5">
             <jhi-user-horarios-list [userId]="account.id"> </jhi-user-horarios-list>
           </div>
+          <div class="col-md-12" *jhiHasAnyAuthority="['ROLE_BENEVENTO']">
+            <jhi-user-menu-articulos-list *ngIf="account && account.id && optionButton === 6"> </jhi-user-menu-articulos-list>
+          </div>
         </div>
       </div>
     </div>

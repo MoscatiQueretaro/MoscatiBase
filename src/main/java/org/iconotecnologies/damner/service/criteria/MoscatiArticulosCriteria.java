@@ -52,7 +52,9 @@ public class MoscatiArticulosCriteria extends AdvanceQueryService<MoscatiArticul
     private Specification<MoscatiArticulos> roleSpecification() {
         Specification<MoscatiArticulos> specification = Specification.where(null);
         if (SecurityUtils.isCurrentUserInRole("ROLE_BENEVENTO")) {
-            this.autor.setContains("BENEVENTO");
+            autor = new StringFilter();
+            autor.setContains("BENEVENTO");
+            System.out.println(autor.getContains());
             // retorna consulta con filtros dependiendo de el rol de medico y diferentes especificaciones.
 
         }

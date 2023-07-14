@@ -1,0 +1,86 @@
+<h2>
+  <strong>Menú</strong>
+</h2>
+<div class="col-md-12">
+  <button class="btn primary" (click)="createArticulo()" *jhiHasAnyAuthority="['ROLE_BENEVENTO', 'ROLE_ADMIN']">
+    Agregar nuevo <fa-icon icon="plus-circle"></fa-icon>
+  </button>
+</div>
+<span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="clock"></fa-icon></span>
+<ng-container>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Column -->
+      <div class="col-md-12">
+        <jhi-loaders [show]="loading" [showAnimation]="true" [space]="true" [image]="true" [type]="'card-post'" [buttons]="true" [rows]="5">
+          <div
+            class="row"
+            style="padding-right: 5%; padding-left: 5%"
+            *ngIf="menuArticulosList && menuArticulosList.length > 0; else emptyBlock"
+          >
+            <div class="col-md-3 py-4" *ngFor="let articuloMenu of menuArticulosList; let i = index">
+              <mat-card class="main-card-login" *ngIf="articuloMenu && articuloMenu.foto && articuloMenu.autor">
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <jhi-single-file-template
+                        *ngIf="articuloMenu.foto.id"
+                        class="tooltip-options-profile"
+                        [file]="articuloMenu.foto"
+                        [imageStyleProfile]="{ height: '100%', width: '100%' }"
+                        [borderImageType]="''"
+                        [endpoint]="'file'"
+                        [delete]="false"
+                      ></jhi-single-file-template>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12" style="font-size: 15px; text-align: left">
+                      <strong>{{ articuloMenu.nombre }}</strong>
+                    </div>
+                    <div class="col-md-12" style="font-size: 12px; text-align: left">
+                      <span style="opacity: 0.6">{{ articuloMenu.descripcion | lowercase }}</span>
+                    </div>
+                    <div class="col-md-12" style="font-size: 15px; text-align: left">
+                      <strong> {{ articuloMenu.precio + ' $' }}</strong>
+                    </div>
+                  </div>
+                </mat-card-content>
+                <mat-card-actions>
+                  <div class="col-md-12" style="display: flex; justify-content: right">
+                    <button class="btn danger" *jhiHasAnyAuthority="['ROLE_BENEVENTO', 'ROLE_ADMIN']">
+                      {{ '\n eliminar ' }}
+                      <fa-icon icon="trash"></fa-icon>
+                    </button>
+                    <div>
+                      <button
+                        class="btn info"
+                        (click)="updateArticulo(articuloMenu)"
+                        *jhiHasAnyAuthority="['ROLE_BENEVENTO', 'ROLE_ADMIN']"
+                      >
+                        {{ '\n editar ' }}
+                        <fa-icon icon="pen-alt"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+          <ng-template #emptyBlock>
+            <div class="row mt-2">
+              <div class="col-12">
+                <h1 class="w-100 text-center text-muted">
+                  <span style="font-size: 30px; color: #05ec47"><fa-icon icon="search"></fa-icon></span>
+                </h1>
+              </div>
+              <div class="col-12 text-center">
+                <p class="text-center 2rem">{{ 'No se encontraron articulos nuevos en el menu' }}</p>
+              </div>
+            </div>
+          </ng-template>
+        </jhi-loaders>
+      </div>
+    </div>
+  </div>
+</ng-container>

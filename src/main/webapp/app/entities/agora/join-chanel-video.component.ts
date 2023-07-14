@@ -39,7 +39,7 @@ export class JoinChanelVideoComponent extends PagingView implements OnInit {
   localMicrophoneTrack?: IMicrophoneAudioTrack;
 
   options = {
-    appid: 'd9f3bff461c34f31b21050001ee3dd48',
+    appid: '859951576d59444e9fe1831a74a9c1a3',
     channel: '',
     uid: 0,
     token: '',

@@ -12,7 +12,7 @@ public class MoscatiArticulos implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "MOSCATI_NOMBRE")
+    @Column(name = "MOSCATI_NOMBRE_ARTICULO")
     private String nombre;
 
     @Column(name = "MOSCATI_DESCRIPCION")

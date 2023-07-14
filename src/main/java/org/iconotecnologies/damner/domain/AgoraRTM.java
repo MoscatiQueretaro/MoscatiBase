@@ -2,8 +2,8 @@ package org.iconotecnologies.damner.domain;
 
 public class AgoraRTM {
 
-    public static String appId = "d9f3bff461c34f31b21050001ee3dd48";
-    public static String appCertificate = "3356278bc9cf42ff82063eabc308675a";
+    public static String appId = "859951576d59444e9fe1831a74a9c1a3";
+    public static String appCertificate = "d53fad321b804232bd9310c8398cd1bb";
     private String userId;
     private int expirationTimeInSeconds = 0;
     private String token;
