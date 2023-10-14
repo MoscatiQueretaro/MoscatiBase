@@ -138,6 +138,14 @@
               </div>
               <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Resultados</span></div>
             </div>
+            <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_FARMACIA', 'ROLE_ADMIN']">
+              <div class="col-md-12 pl-0 pr-0">
+                <a (click)="changeButtonOptions('medicamentos')" [class]="'btn-options-menu'"
+                  ><span><fa-icon [icon]="'pills'"></fa-icon></span
+                ></a>
+              </div>
+              <div class="col-md-12 pl-0 pr-0 text-options-menu"><span>Medicamentos</span></div>
+            </div>
             <div class="col-md-3 pl-0 pr-0" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_LABORATORIO', 'ROLE_DOCTOR']">
               <div class="col-md-12 pl-0 pr-0">
                 <a (click)="changeButtonOptions('medicaciones')" [class]="'btn-options-menu'"
@@ -173,6 +181,9 @@
           </div>
           <div class="col-md-12" *jhiHasAnyAuthority="['ROLE_BENEVENTO']">
             <jhi-user-menu-articulos-list *ngIf="account && account.id && optionButton === 6"> </jhi-user-menu-articulos-list>
+          </div>
+          <div class="col-md-12" *jhiHasAnyAuthority="['ROLE_FARMACIA']">
+            <jhi-farmacia-medicamentos-list *ngIf="optionButton === 7"></jhi-farmacia-medicamentos-list>
           </div>
         </div>
       </div>

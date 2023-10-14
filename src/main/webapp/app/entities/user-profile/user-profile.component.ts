@@ -101,6 +101,9 @@ export class UserProfileComponent implements OnInit {
       case 'menu-benevento':
         this.optionButton = 6;
         break;
+      case 'medicamentos':
+        this.optionButton = 7;
+        break;
       default:
         this.optionButton = 1;
     }

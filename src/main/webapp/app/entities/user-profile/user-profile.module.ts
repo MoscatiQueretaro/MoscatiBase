@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { UserNotificationsModule } from '../user-notifications/user-notifications.module';
 import { UserHorariosModule } from '../user-horarios/user-horarios.module';
 import { UserMenuArticulosModule } from '../user-menu-articulos/user-menu-articulos.module';
+import { FarmaciaMedicamentosModule } from '../farmacia-medicamentos/farmacia-medicamentos.module';
 
 const ROUTES = [...UserProfileRoutes];
 
@@ -29,6 +30,7 @@ const ROUTES = [...UserProfileRoutes];
     MatDividerModule,
     UserHorariosModule,
     UserMenuArticulosModule,
+    FarmaciaMedicamentosModule,
   ],
   declarations: [UserProfileComponent, NewImageProfileFormComponent],
   entryComponents: [UserProfileComponent, NewImageProfileFormComponent],

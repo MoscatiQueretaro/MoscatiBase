@@ -102,6 +102,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/websocket/chat").permitAll()
             .antMatchers("/websocket/**").permitAll()
             .antMatchers("/api/mensaje").permitAll()
+            .antMatchers("api/promociones").permitAll()
             .antMatchers("/api/especialidades").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()

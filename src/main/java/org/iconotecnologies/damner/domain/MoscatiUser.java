@@ -37,7 +37,7 @@ public class MoscatiUser extends AbstractAuditingEntity implements Serializable 
     private Long id;
 
     @Column(name = "MOSCATI_NICKNAME")
-    @Size(min = 1, max = 150)
+    @Size(min = 1, max = 70)
     private String nickName;
 
     @Column(name = "MOSCATI_EMAIL")

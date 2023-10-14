@@ -1,0 +1,48 @@
+<h2>
+  <strong>Medicamentos</strong>
+</h2>
+<div class="col-md-12">
+  <button class="btn primary" *jhiHasAnyAuthority="['ROLE_FARMACIA', 'ROLE_ADMIN']">
+    Agregar nuevo <fa-icon icon="plus-circle"></fa-icon>
+  </button>
+</div>
+<span style="font-size: 18px; position: absolute; top: 10px; right: 20px"><fa-icon icon="clock"></fa-icon></span>
+<ng-container>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Column -->
+      <div class="col-md-12">
+        <jhi-loaders [show]="loading" [showAnimation]="true" [image]="false" [type]="'table'" [buttons]="true" [rows]="3">
+          <div class="row" style="padding-right: 5%; padding-left: 5%" *ngIf="farmaciaList && farmaciaList.length > 0; else emptyBlock">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>DESCRIPCION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let medicamento of farmaciaList">
+                  <td>{{ medicamento.id }}</td>
+                  <td>{{ medicamento.descripcion }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #emptyBlock>
+            <div class="row mt-2">
+              <div class="col-12">
+                <h1 class="w-100 text-center text-muted">
+                  <span style="font-size: 30px; color: #05ec47"><fa-icon icon="search"></fa-icon></span>
+                </h1>
+              </div>
+              <div class="col-12 text-center">
+                <p class="text-center 2rem">{{ 'No se encontraron articulos nuevos en el menu' }}</p>
+              </div>
+            </div>
+          </ng-template>
+        </jhi-loaders>
+      </div>
+    </div>
+  </div>
+</ng-container>
